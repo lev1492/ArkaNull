@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 
+import com.example.android.arkanull.ui.login.LoginActivity;
+
 public class Menu extends AppCompatActivity {
 
     @Override
@@ -15,7 +17,7 @@ public class Menu extends AppCompatActivity {
     }
 
     public void openAccount(View view){
-        Intent intent = new Intent(this , Account.class);
+        Intent intent = new Intent(this , LoginActivity.class);
         startActivity(intent);
     }
     public void gioca(View view){

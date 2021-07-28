@@ -9,25 +9,32 @@
         android:roundIcon="@drawable/redball"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Impostazioni"
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+        <activity
+            android:name=".Impostazioni"
             android:parentActivityName=".Menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu" />
         </activity>
-        <activity android:name=".Classifica"
-            android:parentActivityName=".Menu">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Menu" />
-            </activity>
-        <activity android:name=".Gioca"
+        <activity
+            android:name=".Classifica"
             android:parentActivityName=".Menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu" />
         </activity>
-        <activity android:name=".Account"
+        <activity
+            android:name=".Gioca"
+            android:parentActivityName=".Menu">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Menu" />
+        </activity>
+        <activity
+            android:name=".Account"
             android:parentActivityName=".Menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -42,6 +49,5 @@
         </activity>
         <activity android:name=".MainActivity" />
     </application>
-
 
 </manifest>

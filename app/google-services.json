@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "46349975982",
+    "project_id": "arkanull",
+    "storage_bucket": "arkanull.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46349975982:android:73c13a7892000f5a75883f",
+        "android_client_info": {
+          "package_name": "com.example.android.arkanull"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46349975982-bn2pu29orkbtij4to53a2b6magj5slds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB09ehwEfLWlrPBIeZBYbYDdRgc2S_DPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46349975982-bn2pu29orkbtij4to53a2b6magj5slds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

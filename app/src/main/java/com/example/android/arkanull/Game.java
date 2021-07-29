@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
-
+//ciao
 public class Game extends View implements SensorEventListener, View.OnTouchListener {
 
     private Bitmap pozadie;

@@ -6,5 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".Account">
 
-
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="228dp" />
 </android.support.constraint.ConstraintLayout>

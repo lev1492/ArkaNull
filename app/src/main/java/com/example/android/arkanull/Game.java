@@ -12,6 +12,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,6 +31,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private Display display;
     private Point size;
     private Paint paint;
+    private int screenX;
 
     private Ball lopticka;
     private ArrayList<Brick> zoznam;
@@ -48,6 +50,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private boolean start;
     private boolean gameOver;
     private Context context;
+    boolean paused = true;
 
     public Game(Context context, int lifes, int score) {
         super(context);
@@ -86,6 +89,39 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         vygenerujBricks(context);
         this.setOnTouchListener(this);
 
+
+    }
+
+    // The SurfaceView class implements onTouchListener
+    // So we can override this method and detect screen touches.
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        screenX = size.x;
+        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+
+            // Player has touched the screen
+            case MotionEvent.ACTION_DOWN:
+
+                paused = false;
+
+                if(motionEvent.getX() > screenX / 2){
+                    Log.d("VALORE" , "SCREEN  " + screenX/2);
+                    Log.d("VALORE" , "MOTIONEVENT   " +  motionEvent.getX());
+                    paddle.setMovementState(paddle.RIGHT);
+                }
+                else{
+                    paddle.setMovementState(paddle.LEFT);
+                }
+
+                break;
+
+            // Player has removed finger from screen
+            case MotionEvent.ACTION_UP:
+
+                paddle.setMovementState(paddle.STOPPED);
+                break;
+        }
+        return true;
     }
 
     // naplni zoznam tehlickami

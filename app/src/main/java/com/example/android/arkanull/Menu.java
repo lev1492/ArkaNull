@@ -25,7 +25,7 @@ public class Menu extends AppCompatActivity {
         startActivity(intent);
     }
     public void gioca(View view){
-        Intent intent = new Intent(this , Gioca.class);
+        Intent intent = new Intent(this , MainActivity.class);
         startActivity(intent);
     }
 

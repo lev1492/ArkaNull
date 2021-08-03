@@ -18,13 +18,14 @@ import android.view.View;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
-//ciao
+
 public class Game extends View implements SensorEventListener, View.OnTouchListener {
 
     private Bitmap pozadie;
     private Bitmap redBall;
     private Bitmap roztiahnuty;
     private Bitmap paddle_p;
+    private Bitmap pwrUp;
 
     private Display display;
     private Point size;
@@ -32,7 +33,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     private Ball lopticka;
     private ArrayList<Brick> zoznam;
+    private ArrayList<PowerUp> pList;
     private Paddle paddle;
+    private PowerUp pUp;
 
     private RectF r;
 
@@ -69,10 +72,15 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         // vytvori bitmap pre lopticku a pádlo
         redBall = BitmapFactory.decodeResource(getResources(), R.drawable.redball);
         paddle_p = BitmapFactory.decodeResource(getResources(), R.drawable.paddle);
+        pwrUp = BitmapFactory.decodeResource(getResources(), R.drawable.pwrup);
 
         // vytvorí novú lopticku, pádlo, a zoznam tehliciek
         lopticka = new Ball(size.x / 2, size.y - 480);
         paddle = new Paddle(size.x / 2, size.y - 400);
+        pUp = new PowerUp(size.x / 2, size.y - 1500);
+
+
+
         zoznam = new ArrayList<Brick>();
 
         vygenerujBricks(context);
@@ -99,15 +107,22 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     protected void onDraw(Canvas canvas) {
-        // vytvori pozadie iba raz
+        // creates a background only once
         if (roztiahnuty == null) {
             roztiahnuty = Bitmap.createScaledBitmap(pozadie, size.x, size.y, false);
         }
         canvas.drawBitmap(roztiahnuty, 0, 0, paint);
 
-        // vykresli lopticku
+        // draw the ball
         paint.setColor(Color.RED);
         canvas.drawBitmap(redBall, lopticka.getX(), lopticka.getY(), paint);
+
+        //Disegna power up (temporaneo)
+        if(!pwrUp.isRecycled()){
+            paint.setColor(Color.BLUE);
+            canvas.drawBitmap(pwrUp, pUp.getX(), pUp.getY(), paint );
+        }
+
 
         // vykresli padlo
         paint.setColor(Color.WHITE);
@@ -165,6 +180,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
+    int p = 0;
     // kazdy krok kontroluje ci nedoslo ku kolizii, k prehre alebo k vyhre atd
     public void update() {
         if (start) {
@@ -173,13 +189,33 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             lopticka.NarazPaddle(paddle.getX(), paddle.getY());
             for (int i = 0; i < zoznam.size(); i++) {
                 Brick b = zoznam.get(i);
-                if (lopticka.NarazBrick(b.getX(), b.getY())) {
+                if(p != 0) {
+                    if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
+                        zoznam.remove(i);
+                        score = score + 80;
+
+                    }
+                    p--;
+                }
+                else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
                     zoznam.remove(i);
                     score = score + 80;
                 }
             }
             lopticka.pohni();
+            if(!(pwrUp.isRecycled())){
+                updatePwrUp();
+            }
         }
+    }
+
+    public void updatePwrUp(){
+        pUp.fall();
+        if(pUp.touchPaddle(paddle.getX(),paddle.getY())){
+            pwrUp.recycle();
+            p = 5000;
+        }
+
     }
 
     public void zastavSnimanie() {

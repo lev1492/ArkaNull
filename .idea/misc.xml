@@ -8,6 +8,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/pietr/OneDrive/Documenti/GitHub/ArkaNull/app/src/main/res/layout/activity_classifica.xml" value="0.15416666666666667" />
+        <entry key="..\:/Users/pietr/OneDrive/Documenti/GitHub/ArkaNull/app/src/main/res/layout/activity_gioca.xml" value="0.4" />
+        <entry key="..\:/Users/pietr/OneDrive/Documenti/GitHub/ArkaNull/app/src/main/res/layout/activity_livelli.xml" value="0.15416666666666667" />
+        <entry key="..\:/Users/pietr/OneDrive/Documenti/GitHub/ArkaNull/app/src/main/res/layout/activity_login.xml" value="0.15416666666666667" />
         <entry key="..\:/Users/pietr/OneDrive/Documenti/GitHub/ArkaNull/app/src/main/res/layout/activity_menu.xml" value="0.12360688956433637" />
       </map>
     </option>

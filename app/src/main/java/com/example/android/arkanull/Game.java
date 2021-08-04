@@ -1,5 +1,6 @@
 package com.example.android.arkanull;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +16,7 @@ import android.hardware.SensorManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -27,7 +29,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private Bitmap roztiahnuty;
     private Bitmap paddle_p;
     private Bitmap pwrUp;
-
+    private Point point;
     private Display display;
     private Point size;
     private Paint paint;
@@ -92,11 +94,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     }
 
-    // The SurfaceView class implements onTouchListener
-    // So we can override this method and detect screen touches.
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        screenX = size.x;
+        point = new Point();
+        display.getSize(point);
+        screenX = point.x;
+
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
 
             // Player has touched the screen
@@ -105,12 +108,14 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 paused = false;
 
                 if(motionEvent.getX() > screenX / 2){
-                    Log.d("VALORE" , "SCREEN  " + screenX/2);
-                    Log.d("VALORE" , "MOTIONEVENT   " +  motionEvent.getX());
                     paddle.setMovementState(paddle.RIGHT);
+                    paddle.setX(paddle.getX() + 50);
+
                 }
                 else{
                     paddle.setMovementState(paddle.LEFT);
+                    paddle.setX(paddle.getX() - 50);
+
                 }
 
                 break;

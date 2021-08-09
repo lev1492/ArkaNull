@@ -1,11 +1,10 @@
 package com.example.android.arkanull;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.android.arkanull.ui.login.LoginActivity;
 
 
 public class Gioca extends AppCompatActivity {

@@ -274,17 +274,34 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             Brick b = zoznam.get(i);
             if(p != 0 ) {
                 if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
-                    zoznam.remove(i);
-                    score = score + 80;
+                    if(b.getHp() == 0){
+                        zoznam.remove(i);
+                        score = score + 80;
+                    }
+                    else{
+                        zoznam.remove(i);
+                        score = score + 100;
+                    }
 
                 }
                 p--;
             }
+
+
             else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
-                zoznam.remove(i);
-                score = score + 80;
+                if(b.getHp() == 0){
+                    zoznam.remove(i);
+                    score = score + 80;
+                }
+                else{
+                    b.hit();
+                    score = score + 20;
+                }
+
             }
         }
+
+
         lopticka.pohni();
         if(!(pwrUp.isRecycled())){
             updatePwrUp();

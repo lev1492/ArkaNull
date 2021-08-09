@@ -30,7 +30,7 @@ public class PowerUp{
         return false;
     }
 
-    // If the ball collides with the fall, it will change direction
+    // Check if the power up touches the paddle
     protected boolean touchPaddle(float xPaddle, float yPaddle) {
         if (isClose(xPaddle, yPaddle, getX(), getY())) return true;
         return false;

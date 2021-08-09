@@ -49,14 +49,18 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private int lifes;
     private int score;
     private int level;
+    private int mode;
+
     private boolean start;
     private boolean gameOver;
     private Context context;
     boolean paused = true;
 
-    public Game(Context context, int lifes, int score) {
+
+    public Game(Context context, int lifes, int score, int g_Mode) {
         super(context);
         paint = new Paint();
+        mode = g_Mode;
 
         // nastavi context, zivoty, skore a level
         this.context = context;
@@ -159,7 +163,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         canvas.drawBitmap(redBall, lopticka.getX(), lopticka.getY(), paint);
 
         //Disegna power up (temporaneo)
-        if(!pwrUp.isRecycled()){
+        if(!pwrUp.isRecycled() && mode == 1){
             paint.setColor(Color.BLUE);
             canvas.drawBitmap(pwrUp, pUp.getX(), pUp.getY(), paint );
         }
@@ -193,15 +197,17 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     // skontroluje či sa lopticka nedotkla okraju
-    private void skontrolujOkraje() {
+    private void skontrolujOkraje(boolean b) {
         if (lopticka.getX() + lopticka.getxRychlost() >= size.x - 60) {
             lopticka.zmenSmer("prava");
         } else if (lopticka.getX() + lopticka.getxRychlost() <= 0) {
             lopticka.zmenSmer("lava");
         } else if (lopticka.getY() + lopticka.getyRychlost() <= 150) {
             lopticka.zmenSmer("hore");
-        } else if (lopticka.getY() + lopticka.getyRychlost() >= size.y - 200) {
+        } else if (lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == false) {
             skontrolujZivoty();
+        } else if(lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == true) {
+            lopticka.zmenSmer();
         }
     }
 
@@ -225,28 +231,63 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     // kazdy krok kontroluje ci nedoslo ku kolizii, k prehre alebo k vyhre atd
     public void update() {
         if (start) {
-            vyhra();
-            skontrolujOkraje();
-            lopticka.NarazPaddle(paddle.getX(), paddle.getY());
-            for (int i = 0; i < zoznam.size(); i++) {
-                Brick b = zoznam.get(i);
-                if(p != 0) {
-                    if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
-                        zoznam.remove(i);
-                        score = score + 80;
+            switch(mode){
+                case 0:
+                    classic();
 
-                    }
-                    p--;
-                }
-                else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
+                case 1:
+                    arkanull();
+
+                case 2:
+                    //ROGUE
+
+            }
+        }
+    }
+
+    public void classic(){
+        vyhra();
+        skontrolujOkraje(false);
+        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+        for (int i = 0; i < zoznam.size(); i++) {
+            Brick b = zoznam.get(i);
+                if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
                     zoznam.remove(i);
                     score = score + 80;
+
                 }
+        }
+        lopticka.pohni();
+    }
+
+    public void arkanull(){
+        vyhra();
+        if(p != 0){
+            skontrolujOkraje(true);
+        }
+        else{
+            skontrolujOkraje(false);
+        }
+
+        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+        for (int i = 0; i < zoznam.size(); i++) {
+            Brick b = zoznam.get(i);
+            if(p != 0 ) {
+                if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
+                    zoznam.remove(i);
+                    score = score + 80;
+
+                }
+                p--;
             }
-            lopticka.pohni();
-            if(!(pwrUp.isRecycled())){
-                updatePwrUp();
+            else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
+                zoznam.remove(i);
+                score = score + 80;
             }
+        }
+        lopticka.pohni();
+        if(!(pwrUp.isRecycled())){
+            updatePwrUp();
         }
     }
 

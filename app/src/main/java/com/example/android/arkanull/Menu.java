@@ -14,7 +14,7 @@ public class Menu extends AppCompatActivity {
     }
 
     public void openAccount(View view){
-        Intent intent = new Intent(this , Account.class);
+        Intent intent = new Intent(this , Login.class);
         startActivity(intent);
     }
     public void gioca(View view){

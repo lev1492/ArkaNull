@@ -5,14 +5,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 
-public class PowerUp{
+public class PowerUp extends View{
     private Bitmap pwrUp;
     private float x;
     private float y;
+    private boolean spawned;
 
-    public PowerUp( float x, float y){
-        this.x = x;
-        this.y = y;
+    public PowerUp( Context context){
+        super(context);
+        this.spawned = false;
 
 
     }
@@ -36,6 +37,21 @@ public class PowerUp{
         return false;
     }
 
+    protected boolean touchLimit(float limitX, float limitY) {
+        if (isClose(limitX,limitY, getX(), getY())) return true;
+        return false;
+    }
+
+
+    public void spawn(float x, float y){
+        this.pwrUp = BitmapFactory.decodeResource(getResources(), R.drawable.pwrup);
+        this.x = x;
+        this.y = y;
+        this.spawned = true;
+    }
+
+    public boolean getSpawned(){return spawned;}
+    public Bitmap pwrUp(){return pwrUp;}
 
     public void fall(){
         y = y + 10;
@@ -44,6 +60,8 @@ public class PowerUp{
     public float getX() {
         return x;
     }
+
+    public void setSpawned(boolean b){this.spawned = b;}
 
 
     public void setX(float x) {

@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game extends View implements SensorEventListener, View.OnTouchListener {
 
@@ -55,6 +56,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private boolean gameOver;
     private Context context;
     boolean paused = true;
+    private Random rand = new Random();
 
 
     public Game(Context context, int lifes, int score, int g_Mode) {
@@ -62,31 +64,31 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         paint = new Paint();
         mode = g_Mode;
 
-        // nastavi context, zivoty, skore a level
+        // set context, lives, scores and levels
         this.context = context;
         this.lifes = lifes;
         this.score = score;
         level = 0;
 
-        // start a gameOver na zistenie ci hra stoji a ci je hráč neprehral
+        // start a gameOver to find out if the game is stopped and if the player has lost it
         start = false;
         gameOver = false;
 
-        // vytvorí akcelerometer a SensorManager
+        // creates accelerometer and SensorManager
         sManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         nacitajPozadie(context);
 
-        // vytvori bitmap pre lopticku a pádlo
+        // create a bitmap for the ball and paddle
         redBall = BitmapFactory.decodeResource(getResources(), R.drawable.redball);
         paddle_p = BitmapFactory.decodeResource(getResources(), R.drawable.paddle);
-        pwrUp = BitmapFactory.decodeResource(getResources(), R.drawable.pwrup);
+        //pwrUp = BitmapFactory.decodeResource(getResources(), R.drawable.pwrup);
 
-        // vytvorí novú lopticku, pádlo, a zoznam tehliciek
-        lopticka = new Ball(size.x / 2, size.y - 480);
+        // create a new ball, paddle, and list of bricks
+        lopticka = new Ball(size.x / 2, size.y - 480 );
         paddle = new Paddle(size.x / 2, size.y - 400);
-        pUp = new PowerUp(size.x / 2, size.y - 1500);
+        pUp = new PowerUp(context);
 
 
 
@@ -163,10 +165,15 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         canvas.drawBitmap(redBall, lopticka.getX(), lopticka.getY(), paint);
 
         //Disegna power up (temporaneo)
+        if(pUp.getSpawned() && mode == 1 && !pUp.getPwrUp().isRecycled()){
+            paint.setColor(Color.BLUE);
+            canvas.drawBitmap(pUp.getPwrUp(), pUp.getX(), pUp.getY(), paint );
+        }
+        /*
         if(!pwrUp.isRecycled() && mode == 1){
             paint.setColor(Color.BLUE);
             canvas.drawBitmap(pwrUp, pUp.getX(), pUp.getY(), paint );
-        }
+        } */
 
 
         // vykresli padlo
@@ -213,7 +220,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     // skontroluje stav hry. či ma životy alebo či hra konči
     private void skontrolujZivoty() {
-        if (lifes == 1) {
+        if (lifes == 1 ) {
             gameOver = true;
             start = false;
             invalidate();
@@ -227,7 +234,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
-    int p = 0;
+    int timer = 0;
     // kazdy krok kontroluje ci nedoslo ku kolizii, k prehre alebo k vyhre atd
     public void update() {
         if (start) {
@@ -262,7 +269,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     public void arkanull(){
         vyhra();
-        if(p != 0){
+        if(timer != 0){
             skontrolujOkraje(true);
         }
         else{
@@ -275,7 +282,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             if(b.getType() == 2){
                 b.move(size);
             }
-            if(p != 0 ) {
+            if(timer != 0 ) {
                 if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
                     if(b.getHp() == 0){
                         zoznam.remove(i);
@@ -287,13 +294,18 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     }
 
                 }
-                p--;
+                timer--;
             }
 
 
             else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
                 if(b.getHp() == 0){
+                    if(rand.nextInt(10) == 0){
+                        pUp = new PowerUp(context);
+                        pUp.spawn(b.getX(), b.getY());
+                    }
                     zoznam.remove(i);
+
                     score = score + 80;
                 }
                 else{
@@ -306,16 +318,24 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
 
         lopticka.pohni();
-        if(!(pwrUp.isRecycled())){
-            updatePwrUp();
+        if(pUp.getPwrUp() != null){
+            if(!(pUp.getPwrUp().isRecycled())){
+                updatePwrUp();
+            }
         }
+
     }
 
     public void updatePwrUp(){
         pUp.fall();
         if(pUp.touchPaddle(paddle.getX(),paddle.getY())){
-            pwrUp.recycle();
-            p = 5000;
+            pUp.getPwrUp().recycle();
+            timer = 3000;
+            pUp.setSpawned(false);
+        }
+        if(pUp.touchLimit(pUp.getX(), size.y)){
+            pUp.getPwrUp().recycle();
+            pUp.setSpawned(false);
         }
 
     }
@@ -373,6 +393,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     // zisti ci hrac vyhral alebo nie
     private void vyhra() {
         if (zoznam.isEmpty()) {
+            if(pUp.getSpawned()){
+                pUp.pwrUp().recycle();
+                pUp.setSpawned(false);
+            }
+            timer = 0;
             ++level;
             resetLevel();
             lopticka.zvysRychlost(level);

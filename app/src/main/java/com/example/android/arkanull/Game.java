@@ -272,6 +272,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka.NarazPaddle(paddle.getX(), paddle.getY());
         for (int i = 0; i < zoznam.size(); i++) {
             Brick b = zoznam.get(i);
+            if(b.getType() == 2){
+                b.move(size);
+            }
             if(p != 0 ) {
                 if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
                     if(b.getHp() == 0){

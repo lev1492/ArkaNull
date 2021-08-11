@@ -15,8 +15,13 @@ public class MainActivity extends AppCompatActivity {
 
     //Classic is the original game without modifications
     private static final int CLASSIC = 0;
+
     //Arkanull is the main game, with power-ups and different levels
     private static final int ARKANULL = 1;
+
+    private final int EASY = 0;
+    private final int NORMAL = 1;
+    private final int HARD = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // vytvori novu hru
-        game = new Game(this, 3, 0, ARKANULL);
+        game = new Game(this, 3, 0, ARKANULL, NORMAL);
         setContentView(game);
 
         // vytvori handler a thread

@@ -16,33 +16,35 @@ public class Brick extends View {
     private int type;
     boolean moving_Right = true;
 
-    public Brick(Context context, float x, float y) {
+    public Brick(Context context, float x, float y, int d) {
         super(context);
         this.x = x;
         this.y = y;
-        brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_aqua);
-        skin();
+        skin(d);
     }
 
     // priradi random obrazok tehlicke
 
-    private void skin() {
-        int a = (int) (Math.random() * 3);
-        switch (a) {
+    private void skin(int d) {
+        switch (d) {
             case 0:
-                brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_aqua);
+                this.brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_aqua);
                 this.hp = 0;
                 this.type = 0;
                 break;
             case 1:
-                brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_red);
+                this.brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_blue);
                 this.hp = 1;
                 this.type = 1;
                 break;
             case 2:
-                brick = brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_yellow);
-                this.hp = 0;
+                this.brick = brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_red);
+                this.hp = 2;
                 this.type = 2;
+            case 3:
+               this.brick = brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_yellow);
+                this.hp = 0;
+                this.type = 3;
         }
     }
 
@@ -71,8 +73,15 @@ public class Brick extends View {
     public int getType(){return type;}
 
     public void hit(){
-            this.brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_aqua);
-            this.hp--;
+        this.hp--;
+        switch(this.hp){
+            case 0:
+                brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_aqua);
+                break;
+            case 1:
+                brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_blue);
+                break;
+        }
 
     }
 

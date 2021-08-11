@@ -52,15 +52,22 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private int level;
     private int mode;
 
+
     private boolean start;
     private boolean gameOver;
     private Context context;
     boolean paused = true;
     private Random rand = new Random();
 
+    private final int EASY = 0;
+    private final int NORMAL = 1;
+    private final int HARD = 2;
+    private int difficulty;
 
-    public Game(Context context, int lifes, int score, int g_Mode) {
+
+    public Game(Context context, int lifes, int score, int g_Mode, int diff) {
         super(context);
+        difficulty = diff;
         paint = new Paint();
         mode = g_Mode;
 
@@ -94,7 +101,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
         zoznam = new ArrayList<Brick>();
 
-        vygenerujBricks(context);
+        vygenerujBricks(context, difficulty);
         this.setOnTouchListener(this);
 
 
@@ -136,11 +143,111 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     // naplni zoznam tehlickami
-    private void vygenerujBricks(Context context) {
+    private void vygenerujBricks(Context context, int difficulty) {
+        switch(difficulty){
+            case EASY:
+                generateEasy(context);
+                break;
+            case NORMAL:
+                generateNormal(context);
+                break;
+            case HARD:
+                generateHard(context);
+                break;
+        }
+    }
+
+    private void generateEasy(Context context){
+        int b = 0;
+
+        if(level == 2 || level == 3){
+            b = 1;
+        }
+
+        for (int i = 3; i < 7; i++) {
+
+            if( i == 5 && level > 3 && (b + 1) < 4){
+                b++;
+            }
+
+            if( i == 6 && level > 2 && (b + 1 ) < 4){
+                b++;
+            }
+
+
+            for (int j = 1; j < 6; j++) {
+                zoznam.add(new Brick(context, j * 150, i * 100, b));
+            }
+
+        }
+    }
+
+    private void generateNormal(Context context){
+        int b = 0;
+
+        if(level == 2){
+            b = 1;
+        }
+
+        for (int i = 3; i < 7; i++) {
+
+            if( i == 5 && level > 3 && (b + 1) < 4){
+                b++;
+            }
+
+            if( i == 6 && level > 2 && (b + 1 ) < 4){
+                b++;
+            }
+            if(i == 3 && level > 0 && (b + 1) < 4){
+                b++;
+            }
+
+
+
+
+            for (int j = 1; j < 6; j++) {
+                zoznam.add(new Brick(context, j * 150, i * 100, b));
+            }
+
+            if(i == 3 && level > 0 && (b - 1) >= 0){
+                b--;
+            }
+
+        }
+    }
+
+    private void generateHard(Context context){
+        int b = 1;
+
+        if(level == 3){
+            b = 2 ;
+        }
+
+        for (int i = 3; i < 7; i++) {
+
+            if( i == 5 && level > 3 && (b + 1) < 4){
+                b++;
+            }
+
+            if( i == 6 && level > 2 && (b + 1 ) < 4){
+                b++;
+            }
+
+
+            for (int j = 1; j < 6; j++) {
+                zoznam.add(new Brick(context, j * 150, i * 100, b));
+            }
+
+        }
+    }
+
+    private void generateEndless(Context context){
+        int b = rand.nextInt();
         for (int i = 3; i < 7; i++) {
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100));
+                zoznam.add(new Brick(context, j * 150, i * 100, b));
             }
+
         }
     }
 
@@ -268,6 +375,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     public void arkanull(){
+
         vyhra();
         if(timer != 0){
             skontrolujOkraje(true);
@@ -279,7 +387,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka.NarazPaddle(paddle.getX(), paddle.getY());
         for (int i = 0; i < zoznam.size(); i++) {
             Brick b = zoznam.get(i);
-            if(b.getType() == 2){
+            if(b.getType() == 3){
                 b.move(size);
             }
             if(timer != 0 ) {
@@ -372,6 +480,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         if (gameOver == true && start == false) {
             score = 0;
             lifes = 3;
+            level = 0;
             resetLevel();
             gameOver = false;
 
@@ -387,7 +496,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka.setY(size.y - 480);
         lopticka.vytvorRychlost();
         zoznam = new ArrayList<Brick>();
-        vygenerujBricks(context);
+        vygenerujBricks(context, difficulty);
     }
 
     // zisti ci hrac vyhral alebo nie

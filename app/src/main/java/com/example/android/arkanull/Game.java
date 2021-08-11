@@ -39,8 +39,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private Ball lopticka;
     private ArrayList<Brick> zoznam;
     private ArrayList<PowerUp> pList;
+    private ArrayList<Heart> bossLife;
     private Paddle paddle;
     private PowerUp pUp;
+    private Bossfight boss;
+    private boolean vulnerable;
 
     private RectF r;
 
@@ -96,10 +99,29 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka = new Ball(size.x / 2, size.y - 480 );
         paddle = new Paddle(size.x / 2, size.y - 400);
         pUp = new PowerUp(context);
+        boss = new Bossfight(context, size.x / 2 - 300, size.y - 1900);
+
 
 
 
         zoznam = new ArrayList<Brick>();
+
+
+        bossLife = new ArrayList<Heart>();
+        phase = 0;
+        for(int i = 0; i < 3 ; i++) {
+            switch (i) {
+                case 0:
+                    bossLife.add(new Heart(context, size.x / 2 - 500, size.y - 1800));
+                    break;
+                case 1:
+                    bossLife.add(new Heart(context, size.x / 2 - 130, size.y - 1300));
+                    break;
+                case 2:
+                    bossLife.add(new Heart(context, size.x / 2 + 250, size.y - 1800));
+                    break;
+            }
+        }
 
         vygenerujBricks(context, difficulty);
         this.setOnTouchListener(this);
@@ -144,7 +166,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     // naplni zoznam tehlickami
     private void vygenerujBricks(Context context, int difficulty) {
-        if(level > 5){
+
+        if(level == 0){
+            bossfight(context);
+        }
+        else if(level > 5){
             generateEndless(context);
         }
         else{
@@ -160,7 +186,69 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     break;
             }
         }
+    }
 
+
+    private int phase;
+    private void changePhase(){
+        for (int i = 3; i < 5; i++) {
+            for (int j = 1; j < 6; j++) {
+                zoznam.add(new Brick(context, j * 150, i * 250, phase));
+            }
+        }
+        phase++;
+    }
+
+    private void bossfight(Context context){
+        if(phase == 0){
+            changePhase();
+        }
+        bossWon();
+        vulnerable = isVulnerable();
+
+        if(vulnerable){
+            for(int i = 0; i < bossLife.size(); i++){
+                Heart d = bossLife.get(i);
+                if(d.isHit(lopticka.getX(),lopticka.getY())){
+                    bossLife.remove(i);
+                    changePhase();
+                    vulnerable = false;
+                }
+            }
+        }
+        skontrolujOkraje(false);
+        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+        for (int i = 0; i < zoznam.size(); i++) {
+            Brick b = zoznam.get(i);
+            if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
+                if(b.getHp() == 0){
+                    zoznam.remove(i);
+                    score = score + 80;
+                }
+                else{
+                    b.hit();
+                    score = score + 20;
+                }
+            }
+        }
+        lopticka.pohni();
+    }
+
+    private boolean isVulnerable(){
+        if(zoznam.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    private void bossWon(){
+        if(bossLife.isEmpty()){
+            score = score + 5000;
+            ++level;
+            resetLevel();
+            lopticka.zvysRychlost(level);
+            start = false;
+        }
     }
 
     private void generateEasy(Context context){
@@ -207,9 +295,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             if(i == 3 && level > 0 && (b + 1) < 4){
                 b++;
             }
-
-
-
 
             for (int j = 1; j < 6; j++) {
                 zoznam.add(new Brick(context, j * 150, i * 100, b));
@@ -283,19 +368,26 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             paint.setColor(Color.BLUE);
             canvas.drawBitmap(pUp.getPwrUp(), pUp.getX(), pUp.getY(), paint );
         }
-        /*
-        if(!pwrUp.isRecycled() && mode == 1){
+
+        if(level == 0){
             paint.setColor(Color.BLUE);
-            canvas.drawBitmap(pwrUp, pUp.getX(), pUp.getY(), paint );
-        } */
+            canvas.drawBitmap(boss.getBoss(), boss.getX(), boss.getY(), paint );
+            if(vulnerable){
+                for (int i = 0; i < bossLife.size(); i++) {
+                    Heart b = bossLife.get(i);
+                    //r = new RectF(b.getX(), b.getY(), b.getX() + 100, b.getY() + 80); //pixel width
+                    canvas.drawBitmap(b.getHeart(), b.getX(), b.getY(), paint);
+                }
+            }
+        }
 
 
-        // vykresli padlo
+        // draw paddle
         paint.setColor(Color.WHITE);
         r = new RectF(paddle.getX(), paddle.getY(), paddle.getX() + 200, paddle.getY() + 40);
         canvas.drawBitmap(paddle_p, null, r, paint);
 
-        // vykresli tehlicky
+        //draw bricks
         paint.setColor(Color.GREEN);
         for (int i = 0; i < zoznam.size(); i++) {
             Brick b = zoznam.get(i);
@@ -352,16 +444,21 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     // kazdy krok kontroluje ci nedoslo ku kolizii, k prehre alebo k vyhre atd
     public void update() {
         if (start) {
-            switch(mode){
-                case 0:
-                    classic();
+            if(level == 0){
+                bossfight(context);
+            }
+            else{
+                switch(mode){
+                    case 0:
+                        classic();
 
-                case 1:
-                    arkanull();
+                    case 1:
+                        arkanull();
 
-                case 2:
-                    //ROGUE
+                    case 2:
+                        //ROGUE
 
+                }
             }
         }
     }
@@ -415,7 +512,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
             else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
                 if(b.getHp() == 0){
-                    if(rand.nextInt(10) == 0 && !pUp.getSpawned()){
+                    if(rand.nextInt(10 + (2 * difficulty)) == 0 && !pUp.getSpawned()){
                         pUp = new PowerUp(context);
                         pUp.spawn(b.getX(), b.getY());
                     }

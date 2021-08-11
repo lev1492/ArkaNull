@@ -30,11 +30,17 @@ import java.util.List;
 
 public class Login extends AppCompatActivity {
 
+
+
     // variable for Firebase Auth
     private static FirebaseAuth mFirebaseAuth;
-
     // declaring a const int value which we
     // will be using in Firebase auth.
+
+    public static FirebaseAuth getmFirebaseAuth() {
+        return mFirebaseAuth;
+    }
+
     public static final int RC_SIGN_IN = 1;
 
     // creating an auth listener for our Firebase auth
@@ -77,8 +83,6 @@ public class Login extends AppCompatActivity {
                 // below line is used for getting current user which is
                 // authenticated previously.
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                //Toast.makeText( Login.this, user.getDisplayName(), Toast.LENGTH_SHORT).show();
                 // checking if the user
                 // is null or not.
                 if (user != null) {
@@ -86,7 +90,7 @@ public class Login extends AppCompatActivity {
                     // redirect our user to next screen which is our home screen.
                     // we are redirecting to new screen via an intent.
                     Intent i = new Intent(Login.this, Menu.class);
-
+                    i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getEmail() );
                     startActivity(i);
                     // we are calling finish method to kill or
                     // mainactivity which is displaying our login ui.
@@ -130,33 +134,13 @@ public class Login extends AppCompatActivity {
             }
         };
 
-       /* mFirebaseAuth.signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    private static final String TAG = "Login";
-
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInAnonymously:success");
-                            FirebaseUser user = mFirebaseAuth.getCurrentUser();
-                            Intent i = new Intent(Login.this, Menu.class);
-                            startActivity(i);
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInAnonymously:failure", task.getException());
-                            Toast.makeText(Login.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
-
     }
 
     public static void logOut () {
+        Log.d("Login", "onAuthStateChanged:" + mFirebaseAuth.getCurrentUser().getEmail());
         mFirebaseAuth.signOut();
     }
+
     @Override
     protected void onResume() {
         super.onResume();

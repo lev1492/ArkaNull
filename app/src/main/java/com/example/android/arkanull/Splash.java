@@ -14,7 +14,7 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
-        Intent intent = new Intent(this , Menu.class);
+        Intent intent = new Intent(this , Login.class);
         final Handler handler  = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
@@ -22,6 +22,6 @@ public class Splash extends AppCompatActivity {
                 startActivity(intent);
             }
         };
-        handler.postDelayed(runnable , 3000);
+        handler.postDelayed(runnable , 1000);
     }
 }

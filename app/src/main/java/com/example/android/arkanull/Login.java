@@ -4,13 +4,24 @@ package com.example.android.arkanull;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.activity.result.IntentSenderRequest;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ComponentActivity;
 
 import com.example.android.arkanull.MainActivity;
 import com.example.android.arkanull.R;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.AuthUI.IdpConfig.AnonymousBuilder;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -20,7 +31,7 @@ import java.util.List;
 public class Login extends AppCompatActivity {
 
     // variable for Firebase Auth
-    private FirebaseAuth mFirebaseAuth;
+    private static FirebaseAuth mFirebaseAuth;
 
     // declaring a const int value which we
     // will be using in Firebase auth.
@@ -44,7 +55,11 @@ public class Login extends AppCompatActivity {
 
             // below line is used for adding phone
             // authentication builder in our app.
-            new AuthUI.IdpConfig.PhoneBuilder().build());
+            new AuthUI.IdpConfig.PhoneBuilder().build(),
+
+            // below line is used for gest
+            // authentication builder in our app.
+            new AuthUI.IdpConfig.AnonymousBuilder().build());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,18 +82,21 @@ public class Login extends AppCompatActivity {
                 // authenticated previously.
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
+                //Toast.makeText( Login.this, user.getDisplayName(), Toast.LENGTH_SHORT).show();
                 // checking if the user
                 // is null or not.
                 if (user != null) {
                     // if the user is already authenticated then we will
                     // redirect our user to next screen which is our home screen.
                     // we are redirecting to new screen via an intent.
-                    Intent i = new Intent(Login.this, MainActivity.class);
+                    Intent i = new Intent(Login.this, Menu.class);
+
                     startActivity(i);
                     // we are calling finish method to kill or
                     // mainactivity which is displaying our login ui.
                     finish();
                 } else {
+
                     // this method is called when our
                     // user is not authenticated previously.
                     startActivityForResult(
@@ -110,11 +128,39 @@ public class Login extends AppCompatActivity {
                             // integer which is declared above.
                             RC_SIGN_IN
                     );
+
                 }
+
             }
         };
+
+       /* mFirebaseAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    private static final String TAG = "Login";
+
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+                            FirebaseUser user = mFirebaseAuth.getCurrentUser();
+                            Intent i = new Intent(Login.this, Menu.class);
+                            startActivity(i);
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });*/
+
     }
 
+    public static void logOut () {
+        mFirebaseAuth.signOut();
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -130,4 +176,5 @@ public class Login extends AppCompatActivity {
         // listener method on stop.
         mFirebaseAuth.removeAuthStateListener(mAuthStateListner);
     }
+
 }

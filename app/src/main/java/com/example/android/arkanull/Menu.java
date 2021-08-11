@@ -1,9 +1,13 @@
 package com.example.android.arkanull;
 
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Menu extends AppCompatActivity {
 
@@ -30,5 +34,11 @@ public class Menu extends AppCompatActivity {
     public void impostazioni(View view){
         Intent intent = new Intent(this , Impostazioni.class);
         startActivity(intent);
+    }
+    public void logOut (View view) {
+        Login.logOut();
+        Intent intent = new Intent(this , Splash.class);
+        startActivity(intent);
+
     }
 }

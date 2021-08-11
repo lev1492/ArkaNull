@@ -12,53 +12,77 @@
         android:roundIcon="@drawable/redball"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".Login"
-            android:exported="true" />
+            android:exported="true"
+            android:label="Login"
+            android:parentActivityName=".Splash"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Splash" />
+
         <activity
             android:name=".Punteggi"
+            android:label="Punteggi"
             android:exported="true" />
+
         <activity
             android:name=".Multiplayer"
+            android:label="Multiplayer"
             android:exported="true" />
+
         <activity
             android:name=".Carriera"
+            android:label="Carriera"
             android:exported="true" />
+
         <activity
             android:name=".Livelli"
+            android:label="Livelli"
             android:exported="true" />
+
         <activity
             android:name=".Menu"
             android:configChanges="orientation|screenSize"
             android:label="Menu" />
+
         <activity
             android:name=".Impostazioni"
+            android:label="Impostazioni"
             android:parentActivityName=".Menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu" />
         </activity>
+
         <activity
             android:name=".Classifica"
+            android:label="Classifica"
             android:parentActivityName=".Menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu" />
         </activity>
+
         <activity
             android:name=".Gioca"
+            android:label="Gioca"
             android:parentActivityName=".Menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu" />
         </activity>
+
         <activity
             android:name=".Account"
+            android:label="Account"
             android:parentActivityName=".Menu">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu" />
         </activity>
+
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,6 +90,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity" />
     </application>
 

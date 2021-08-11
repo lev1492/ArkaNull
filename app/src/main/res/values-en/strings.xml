@@ -5,4 +5,6 @@
     <string name="gioca">Play</string>
     <string name="classifica">Ranking</string>
     <string name="impostazioni">Settings</string>
+    <string name="logout">Logout</string>
+
 </resources>

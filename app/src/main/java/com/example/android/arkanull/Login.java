@@ -53,10 +53,6 @@ public class Login extends AppCompatActivity {
             // authentication builder in our app.
             new AuthUI.IdpConfig.GoogleBuilder().build(),
 
-            // below line is used for adding phone
-            // authentication builder in our app.
-            new AuthUI.IdpConfig.PhoneBuilder().build(),
-
             // below line is used for gest
             // authentication builder in our app.
             new AuthUI.IdpConfig.AnonymousBuilder().build());

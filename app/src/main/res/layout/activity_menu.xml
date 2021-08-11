@@ -8,29 +8,15 @@
     >
 
     <Button
-        android:id="@+id/openAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:onClick="openAccount"
-        android:text="@string/account"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <Button
         android:id="@+id/gioca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="216dp"
         android:onClick="gioca"
         android:text="@string/gioca"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openAccount"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
@@ -64,9 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="296dp"
         android:layout_marginEnd="27dp"
-        android:text="@string/logout"
         android:onClick="logOut"
-        app:layout_constraintBottom_toBottomOf="@+id/openAccount"
+        android:text="@string/logout"
+        app:layout_constraintBottom_toTopOf="@+id/gioca"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,14 +62,12 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="33dp"
-        android:layout_marginEnd="193dp"
         android:text="NOME UTENTE"
-        app:layout_constraintBottom_toBottomOf="@+id/openAccount"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintBottom_toTopOf="@+id/gioca"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197" />
+        app:layout_constraintVertical_bias="0.384" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

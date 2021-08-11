@@ -16,11 +16,7 @@
         <activity
             android:name=".Login"
             android:exported="true"
-            android:label="Login"
-            android:parentActivityName=".Splash"/>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Splash" />
+            android:label="Login"/>
 
         <activity
             android:name=".Punteggi"

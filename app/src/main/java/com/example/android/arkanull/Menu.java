@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -17,10 +18,6 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
-    public void openAccount(View view){
-        Intent intent = new Intent(this , Login.class);
-        startActivity(intent);
-    }
     public void gioca(View view){
         Intent intent = new Intent(this , MainActivity.class);
         startActivity(intent);
@@ -37,8 +34,9 @@ public class Menu extends AppCompatActivity {
     }
     public void logOut (View view) {
         Login.logOut();
-        Intent intent = new Intent(this , Splash.class);
+        Intent intent = new Intent(this , Login.class);
         startActivity(intent);
+        Toast.makeText( view.getContext(), "Logout effettuato con successo", Toast.LENGTH_SHORT).show();
 
     }
 }

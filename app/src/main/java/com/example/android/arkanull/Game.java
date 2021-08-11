@@ -144,17 +144,23 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     // naplni zoznam tehlickami
     private void vygenerujBricks(Context context, int difficulty) {
-        switch(difficulty){
-            case EASY:
-                generateEasy(context);
-                break;
-            case NORMAL:
-                generateNormal(context);
-                break;
-            case HARD:
-                generateHard(context);
-                break;
+        if(level > 5){
+            generateEndless(context);
         }
+        else{
+            switch(difficulty){
+                case EASY:
+                    generateEasy(context);
+                    break;
+                case NORMAL:
+                    generateNormal(context);
+                    break;
+                case HARD:
+                    generateHard(context);
+                    break;
+            }
+        }
+
     }
 
     private void generateEasy(Context context){
@@ -242,8 +248,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     private void generateEndless(Context context){
-        int b = rand.nextInt();
+        int b;
         for (int i = 3; i < 7; i++) {
+            b = rand.nextInt(2) + difficulty;
             for (int j = 1; j < 6; j++) {
                 zoznam.add(new Brick(context, j * 150, i * 100, b));
             }
@@ -408,7 +415,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
             else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
                 if(b.getHp() == 0){
-                    if(rand.nextInt(10) == 0){
+                    if(rand.nextInt(10) == 0 && !pUp.getSpawned()){
                         pUp = new PowerUp(context);
                         pUp.spawn(b.getX(), b.getY());
                     }

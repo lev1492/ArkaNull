@@ -51,6 +51,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     private SensorManager sManager;
     private Sensor accelerometer;
+    private int STATE = -1;
+    private int NO_INPUT = 0;
+    private int ACCELEROMETER_INPUT = 1;
+    private int TOUCH_INPUT = 2;
 
     private int lifes;
     private int score;
@@ -96,9 +100,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         start = false;
         gameOver = false;
 
-        // creates accelerometer and SensorManager
-        sManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        // TODO scelta dell'input  working in progress
+        STATE = ACCELEROMETER_INPUT;
+        STATE = TOUCH_INPUT;
+
+        if (STATE == ACCELEROMETER_INPUT) {
+            accelerometerInput(context);
+        }
 
         nacitajPozadie(context);
 
@@ -138,6 +146,26 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             vygenerujBricks(context, difficulty);
         }
         this.setOnTouchListener(this);
+
+    }
+
+    private boolean accelerometerInput(Context context) {
+        // creates accelerometer and SensorManager
+        this.sManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        this.accelerometer = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        return true;
+    }
+
+    public void zastavSnimanie() {
+        if(STATE == ACCELEROMETER_INPUT){
+            sManager.unregisterListener(this);
+        }
+    }
+
+    public void spustiSnimanie() {
+        if(STATE == ACCELEROMETER_INPUT) {
+            sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+        }
     }
 
     @Override
@@ -145,34 +173,68 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         point = new Point();
         display.getSize(point);
         screenX = point.x;
+        if (STATE == TOUCH_INPUT) {
+            switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
 
-        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+                // Player has touched the screen
+                case MotionEvent.ACTION_DOWN:
 
-            // Player has touched the screen
-            case MotionEvent.ACTION_DOWN:
+                    paused = false;
 
-                paused = false;
+                    if (motionEvent.getX() > screenX / 2) {
+                        paddle.setMovementState(paddle.RIGHT);
+                        paddle.setX(paddle.getX() + 100);
 
-                if(motionEvent.getX() > screenX / 2){
-                    paddle.setMovementState(paddle.RIGHT);
-                    paddle.setX(paddle.getX() + 100);
+                    } else {
+                        paddle.setMovementState(paddle.LEFT);
+                        paddle.setX(paddle.getX() - 100);
 
-                }
-                else{
-                    paddle.setMovementState(paddle.LEFT);
-                    paddle.setX(paddle.getX() - 100);
+                    }
 
-                }
+                    break;
 
-                break;
+                // Player has removed finger from screen
+                case MotionEvent.ACTION_UP:
 
-            // Player has removed finger from screen
-            case MotionEvent.ACTION_UP:
-
-                paddle.setMovementState(paddle.STOPPED);
-                break;
+                    paddle.setMovementState(paddle.STOPPED);
+                    break;
+            }
         }
         return true;
+    }
+
+    // zmena akcelerometera
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            paddle.setX(paddle.getX() - event.values[0] - event.values[0]);
+
+            if (paddle.getX() + event.values[0] > size.x - 240) {
+                paddle.setX(size.x - 240);
+            } else if (paddle.getX() - event.values[0] <= 20) {
+                paddle.setX(20);
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    // sluzi na pozastavenie hry v pripade novej hry
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (gameOver == true && start == false) {
+            score = 0;
+            lifes = 3;
+            level = 0;
+            resetLevel();
+            gameOver = false;
+
+        } else {
+            start = true;
+        }
+        return false;
     }
 
     /**
@@ -339,7 +401,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
             }
 
-            if(i == 3 && level > 0 && (b - 1) >= 0){
+            if(i == 3 && level > 0 && (brick_Type - 1) >= 0){
                 brick_Type--;
             }
 
@@ -610,48 +672,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             pUp.setSpawned(false);
         }
 
-    }
-
-    public void zastavSnimanie() {
-        sManager.unregisterListener(this);
-    }
-
-    public void spustiSnimanie() {
-        sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
-    }
-
-    // zmena akcelerometera
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            paddle.setX(paddle.getX() - event.values[0] - event.values[0]);
-
-            if (paddle.getX() + event.values[0] > size.x - 240) {
-                paddle.setX(size.x - 240);
-            } else if (paddle.getX() - event.values[0] <= 20) {
-                paddle.setX(20);
-            }
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
-
-    // sluzi na pozastavenie hry v pripade novej hry
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        if (gameOver == true && start == false) {
-            score = 0;
-            lifes = 3;
-            level = 0;
-            resetLevel();
-            gameOver = false;
-
-        } else {
-            start = true;
-        }
-        return false;
     }
 
     /**

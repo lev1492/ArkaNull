@@ -16,17 +16,17 @@ public class GiocaActivity extends AppCompatActivity {
     }
 
     public void openLivelli(View view){
-        Intent intent = new Intent(this , LivelliActivity.class);
+        Intent intent = new Intent(this , MainActivity.class);
         startActivity(intent);
     }
 
     public void openCarriera(View view){
-        Intent intent = new Intent(this , CarrieraActivity.class);
+        Intent intent = new Intent(this , MainActivity.class);
         startActivity(intent);
     }
 
     public void openMultiPlayer(View view){
-        Intent intent = new Intent(this , MultiplayerActivity.class);
+        Intent intent = new Intent(this , MainActivity.class);
         startActivity(intent);
     }
 }

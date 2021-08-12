@@ -28,11 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     public static FirebaseAuth getmFirebaseAuth() {
         return mFirebaseAuth;
     }
-/*
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference mDatabase = database.getReference();
-    mDatabase.child("users").child(userId).child("username").setValue(name);
-*/
+
     public static final int RC_SIGN_IN = 1;
 
     // creating an auth listener for our Firebase auth

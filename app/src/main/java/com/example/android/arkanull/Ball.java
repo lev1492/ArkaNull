@@ -86,6 +86,8 @@ public class Ball {
         return d < 80;
     }
 
+
+
     // If the ball collides with the fall, it will change direction
     protected void NarazPaddle(float xPaddle, float yPaddle) {
         if (jeBlizko(xPaddle, yPaddle, getX(), getY())) zmenSmer();

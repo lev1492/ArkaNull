@@ -144,12 +144,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
                 if(motionEvent.getX() > screenX / 2){
                     paddle.setMovementState(paddle.RIGHT);
-                    paddle.setX(paddle.getX() + 50);
+                    paddle.setX(paddle.getX() + 100);
 
                 }
                 else{
                     paddle.setMovementState(paddle.LEFT);
-                    paddle.setX(paddle.getX() - 50);
+                    paddle.setX(paddle.getX() - 100);
 
                 }
 
@@ -167,7 +167,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     // naplni zoznam tehlickami
     private void vygenerujBricks(Context context, int difficulty) {
 
-        if(level == 0){
+        if(level == 2){
             bossfight(context);
         }
         else if(level > 5){
@@ -191,12 +191,14 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     private int phase;
     private void changePhase(){
-        for (int i = 3; i < 5; i++) {
-            for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 250, phase));
+        if(phase < 4){
+            for (int i = 3; i < 5; i++) {
+                for (int j = 1; j < 6; j++) {
+                    zoznam.add(new Brick(context, j * 150, i * 250, phase + 1));
+                }
             }
+            phase++;
         }
-        phase++;
     }
 
     private void bossfight(Context context){
@@ -210,9 +212,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             for(int i = 0; i < bossLife.size(); i++){
                 Heart d = bossLife.get(i);
                 if(d.isHit(lopticka.getX(),lopticka.getY())){
+                    lopticka.zmenSmer();
                     bossLife.remove(i);
-                    changePhase();
                     vulnerable = false;
+                    if(phase < 3){
+                        changePhase();
+                    }
                 }
             }
         }
@@ -220,6 +225,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka.NarazPaddle(paddle.getX(), paddle.getY());
         for (int i = 0; i < zoznam.size(); i++) {
             Brick b = zoznam.get(i);
+            if(b.getType() == 3){
+                b.move(size);
+            }
             if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
                 if(b.getHp() == 0){
                     zoznam.remove(i);

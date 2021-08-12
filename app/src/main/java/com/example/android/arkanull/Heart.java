@@ -20,8 +20,8 @@ public class Heart extends View {
     }
 
     private boolean isClose(float ax, float ay, float bx, float by) {
-        bx += 12;
-        by += 11;
+        bx += 150;
+        by += 150;
         if ((Math.sqrt(Math.pow((ax + 50) - bx, 2) + Math.pow(ay - by, 2))) < 80) {
             return true;
         } else if ((Math.sqrt(Math.pow((ax + 100) - bx, 2) + Math.pow(ay - by, 2))) < 60) {

@@ -65,7 +65,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private final int EASY = 0;
     private final int NORMAL = 1;
     private final int HARD = 2;
+    private final int BOSS_LVL = 1;
     private int difficulty;
+    private boolean bss;
 
 
     public Game(Context context, int lifes, int score, int g_Mode, int diff) {
@@ -122,11 +124,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     break;
             }
         }
-
-        vygenerujBricks(context, difficulty);
+        if(level != BOSS_LVL){
+            vygenerujBricks(context, difficulty);
+        }
         this.setOnTouchListener(this);
-
-
     }
 
     @Override
@@ -166,11 +167,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     // naplni zoznam tehlickami
     private void vygenerujBricks(Context context, int difficulty) {
-
-        if(level == 2){
-            bossfight(context);
-        }
-        else if(level > 5){
+        if(level > 5){
             generateEndless(context);
         }
         else{
@@ -377,13 +374,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             canvas.drawBitmap(pUp.getPwrUp(), pUp.getX(), pUp.getY(), paint );
         }
 
-        if(level == 0){
+        if(level == 1){
             paint.setColor(Color.BLUE);
             canvas.drawBitmap(boss.getBoss(), boss.getX(), boss.getY(), paint );
             if(vulnerable){
                 for (int i = 0; i < bossLife.size(); i++) {
                     Heart b = bossLife.get(i);
-                    //r = new RectF(b.getX(), b.getY(), b.getX() + 100, b.getY() + 80); //pixel width
                     canvas.drawBitmap(b.getHeart(), b.getX(), b.getY(), paint);
                 }
             }
@@ -451,11 +447,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     int timer = 0;
     // kazdy krok kontroluje ci nedoslo ku kolizii, k prehre alebo k vyhre atd
     public void update() {
-        if (start) {
-            if(level == 0){
-                bossfight(context);
-            }
-            else{
+        if(level == BOSS_LVL){
+            bossfight(context);
+        }
+        else if (start) {
                 switch(mode){
                     case 0:
                         classic();
@@ -466,7 +461,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     case 2:
                         //ROGUE
 
-                }
+
             }
         }
     }
@@ -487,64 +482,55 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     public void arkanull(){
-
-        vyhra();
-        if(timer != 0){
-            skontrolujOkraje(true);
-        }
-        else{
-            skontrolujOkraje(false);
-        }
-
-        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
-        for (int i = 0; i < zoznam.size(); i++) {
-            Brick b = zoznam.get(i);
-            if(b.getType() == 3){
-                b.move(size);
+            vyhra();
+            if(timer != 0){
+                skontrolujOkraje(true);
             }
-            if(timer != 0 ) {
-                if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
-                    if(b.getHp() == 0){
+            else{
+                skontrolujOkraje(false);
+            }
+
+            lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+            for (int i = 0; i < zoznam.size(); i++) {
+                Brick b = zoznam.get(i);
+                if (b.getType() == 3) {
+                    b.move(size);
+                }
+                if (timer != 0) {
+                    if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
+                        if (b.getHp() == 0) {
+                            zoznam.remove(i);
+                            score = score + 80;
+                        } else {
+                            zoznam.remove(i);
+                            score = score + 100;
+                        }
+
+                    }
+                    timer--;
+                } else if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
+                    if (b.getHp() == 0) {
+                        if (rand.nextInt(10 + (2 * difficulty)) == 0 && !pUp.getSpawned()) {
+                            pUp = new PowerUp(context);
+                            pUp.spawn(b.getX(), b.getY());
+                        }
                         zoznam.remove(i);
+
                         score = score + 80;
-                    }
-                    else{
-                        zoznam.remove(i);
-                        score = score + 100;
+                    } else {
+                        b.hit();
+                        score = score + 20;
                     }
 
                 }
-                timer--;
             }
-
-
-            else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
-                if(b.getHp() == 0){
-                    if(rand.nextInt(10 + (2 * difficulty)) == 0 && !pUp.getSpawned()){
-                        pUp = new PowerUp(context);
-                        pUp.spawn(b.getX(), b.getY());
-                    }
-                    zoznam.remove(i);
-
-                    score = score + 80;
+            lopticka.pohni();
+            if(pUp.getPwrUp() != null){
+                if(!(pUp.getPwrUp().isRecycled())){
+                    updatePwrUp();
                 }
-                else{
-                    b.hit();
-                    score = score + 20;
-                }
-
             }
         }
-
-
-        lopticka.pohni();
-        if(pUp.getPwrUp() != null){
-            if(!(pUp.getPwrUp().isRecycled())){
-                updatePwrUp();
-            }
-        }
-
-    }
 
     public void updatePwrUp(){
         pUp.fall();

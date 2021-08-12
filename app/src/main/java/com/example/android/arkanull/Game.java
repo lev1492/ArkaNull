@@ -23,6 +23,8 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+
 public class Game extends View implements SensorEventListener, View.OnTouchListener {
 
     private Bitmap pozadie;
@@ -67,9 +69,17 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private final int HARD = 2;
     private final int BOSS_LVL = 1;
     private int difficulty;
-    private boolean bss;
+    private int phase;
 
 
+    /**
+     *
+     * @param context Context is needed for passing it to classes that extends View (Brick, PowerUp,Hearts..)
+     * @param lifes The current lifes of the player
+     * @param score The current score of the player
+     * @param g_Mode Indicates the game mode selected
+     * @param diff Indicates the difficulty selected
+     */
     public Game(Context context, int lifes, int score, int g_Mode, int diff) {
         super(context);
         difficulty = diff;
@@ -165,7 +175,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         return true;
     }
 
-    // naplni zoznam tehlickami
+    /**
+     * This method spawn bricks according to the level reached and the difficulty selected
+     * @param context
+     * @param difficulty
+     */
     private void vygenerujBricks(Context context, int difficulty) {
         if(level > 5){
             generateEndless(context);
@@ -185,8 +199,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
-
-    private int phase;
+    /**
+     * This method creates bricks according to how many lifes the boss has left
+     */
     private void changePhase(){
         if(phase < 4){
             for (int i = 3; i < 5; i++) {
@@ -198,6 +213,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
+    /**
+     * This class generates the bossfight
+     * @param context
+     */
     private void bossfight(Context context){
         if(phase == 0){
             changePhase();
@@ -239,6 +258,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka.pohni();
     }
 
+    /**
+     * This method returns true if the bricks on the screens during the bossfight gets all destroyed
+     * @return
+     */
     private boolean isVulnerable(){
         if(zoznam.isEmpty()){
             return true;
@@ -246,6 +269,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         return false;
     }
 
+    /**
+     * If the arrayList containing the hearts of the boss is empty load the next level and raise the score
+     */
     private void bossWon(){
         if(bossLife.isEmpty()){
             score = score + 5000;
@@ -256,93 +282,109 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
+    /**
+     * Generates bricks for a new level if the difficulty is set to EASY
+     * @param context
+     */
     private void generateEasy(Context context){
-        int b = 0;
+        int brick_Type = 0;
 
         if(level == 2 || level == 3){
-            b = 1;
+            brick_Type = 1;
         }
 
         for (int i = 3; i < 7; i++) {
 
-            if( i == 5 && level > 3 && (b + 1) < 4){
-                b++;
+            if( i == 5 && level > 3 && (brick_Type + 1) < 4){
+                brick_Type++;
             }
 
-            if( i == 6 && level > 2 && (b + 1 ) < 4){
-                b++;
+            if( i == 6 && level > 2 && (brick_Type + 1 ) < 4){
+                brick_Type++;
             }
 
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100, b));
+                zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
             }
 
         }
     }
 
+    /**
+     * Generates bricks for a new level if the difficulty is set to NORMAL
+     * @param context
+     */
     private void generateNormal(Context context){
-        int b = 0;
+        int brick_Type = 0;
 
         if(level == 2){
-            b = 1;
+            brick_Type = 1;
         }
 
         for (int i = 3; i < 7; i++) {
 
-            if( i == 5 && level > 3 && (b + 1) < 4){
-                b++;
+            if( i == 5 && level > 3 && (brick_Type + 1) < 4){
+                brick_Type++;
             }
 
-            if( i == 6 && level > 2 && (b + 1 ) < 4){
-                b++;
+            if( i == 6 && level > 2 && (brick_Type + 1 ) < 4){
+                brick_Type++;
             }
-            if(i == 3 && level > 0 && (b + 1) < 4){
-                b++;
+            if(i == 3 && level > 0 && (brick_Type + 1) < 4){
+                brick_Type++;
             }
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100, b));
+                zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
             }
 
             if(i == 3 && level > 0 && (b - 1) >= 0){
-                b--;
+                brick_Type--;
             }
 
         }
     }
 
+    /**
+     * Generates bricks for a new level if the difficulty is set to HARD
+     * @param context
+     */
     private void generateHard(Context context){
-        int b = 1;
+        int brick_Type = 1;
 
         if(level == 3){
-            b = 2 ;
+            brick_Type = 2 ;
         }
 
         for (int i = 3; i < 7; i++) {
 
-            if( i == 5 && level > 3 && (b + 1) < 4){
-                b++;
+            if( i == 5 && level > 3 && (brick_Type + 1) < 4){
+                brick_Type++;
             }
 
-            if( i == 6 && level > 2 && (b + 1 ) < 4){
-                b++;
+            if( i == 6 && level > 2 && (brick_Type + 1 ) < 4){
+                brick_Type++;
             }
 
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100, b));
+                zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
             }
 
         }
     }
 
+    /**
+     * Generates random bricks according to the difficulty
+     * @param context
+     */
     private void generateEndless(Context context){
-        int b;
+        int brick_Type;
         for (int i = 3; i < 7; i++) {
-            b = rand.nextInt(2) + difficulty;
+            brick_Type = rand.nextInt(2) + difficulty;
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100, b));
+                zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
             }
 
         }
@@ -374,7 +416,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             canvas.drawBitmap(pUp.getPwrUp(), pUp.getX(), pUp.getY(), paint );
         }
 
-        if(level == 1){
+        if(level == BOSS_LVL){
             paint.setColor(Color.BLUE);
             canvas.drawBitmap(boss.getBoss(), boss.getX(), boss.getY(), paint );
             if(vulnerable){
@@ -444,12 +486,16 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
+    //This variable serves as timer for the power-up effects
     int timer = 0;
+
     // kazdy krok kontroluje ci nedoslo ku kolizii, k prehre alebo k vyhre atd
     public void update() {
+
         if(level == BOSS_LVL){
             bossfight(context);
         }
+
         else if (start) {
                 switch(mode){
                     case 0:
@@ -466,6 +512,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
+    /**
+     * The classic game modes has no power ups or bricks with different effects
+     */
     public void classic(){
         vyhra();
         skontrolujOkraje(false);
@@ -481,6 +530,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka.pohni();
     }
 
+    /**
+     * This mode has power ups and the bricks have hp or move according to their type
+     */
     public void arkanull(){
             vyhra();
             if(timer != 0){

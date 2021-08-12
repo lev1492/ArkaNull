@@ -535,6 +535,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      */
     public void arkanull(){
             vyhra();
+
+            //If the timer is different than 0, then the power up is in effect and by passing true we make the ball bounce even if it falls
             if(timer != 0){
                 skontrolujOkraje(true);
             }
@@ -543,11 +545,17 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             }
 
             lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+
+            //This for cycle detects collision with the bricks
             for (int i = 0; i < zoznam.size(); i++) {
                 Brick b = zoznam.get(i);
+
+                //If the brick is the specified type, it moves
                 if (b.getType() == 3) {
                     b.move(size);
                 }
+
+                //The power up is in effect, by passing true to NarazBrick we don't make the ball bounce off bricks and it pierce through every type of them
                 if (timer != 0) {
                     if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
                         if (b.getHp() == 0) {
@@ -560,7 +568,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
                     }
                     timer--;
-                } else if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
+                }
+                //If the power up is not in effect, by passing false to .NazarBrick we make the ball bounce off bricks and the bricks also have hit points before getting destroyed
+                else if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
                     if (b.getHp() == 0) {
                         if (rand.nextInt(10 + (2 * difficulty)) == 0 && !pUp.getSpawned()) {
                             pUp = new PowerUp(context);
@@ -584,6 +594,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             }
         }
 
+    /**
+     * If a power-ups spawns, it follow those instruction to fall and detect collision with the paddle (grants power up)
+     * or the pit (there is no effect)
+     */
     public void updatePwrUp(){
         pUp.fall();
         if(pUp.touchPaddle(paddle.getX(),paddle.getY())){
@@ -640,7 +654,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         return false;
     }
 
-    // nastavi hru na zaciatok
+    /**
+     * Reset the level with new bricks
+     */
     private void resetLevel() {
         lopticka.setX(size.x / 2);
         lopticka.setY(size.y - 480);
@@ -649,7 +665,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         vygenerujBricks(context, difficulty);
     }
 
-    // zisti ci hrac vyhral alebo nie
+    /**
+     * If you destroyed every brick in a level, this method destroys power-ups created and reset the timer, then
+     * it loads the next level
+     */
     private void vyhra() {
         if (zoznam.isEmpty()) {
             if(pUp.getSpawned()){

@@ -1,18 +1,13 @@
 package com.example.android.arkanull;
 
-import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
 
-
-public class Account extends AppCompatActivity {
+public class LivelliActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account);
-
+        setContentView(R.layout.activity_livelli);
     }
 }
-
-
-

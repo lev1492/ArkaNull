@@ -3,12 +3,11 @@ package com.example.android.arkanull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-//classe che apre le impostazioni del telefono
-public class Impostazioni extends AppCompatActivity {
+public class MultiplayerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_impostazioni);
+        setContentView(R.layout.activity_multiplayer);
     }
 }

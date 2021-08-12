@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Message;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
         game.spustiSnimanie();
     }
 
-    public void account(View view){
 
-    }
 
 }

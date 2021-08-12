@@ -2,17 +2,13 @@ package com.example.android.arkanull;
 
 import android.content.Intent;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-public class Menu extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
 
     @Override
@@ -26,31 +22,27 @@ public class Menu extends AppCompatActivity {
             nomeUtente = "Ospite";
         }
         titolo.setText(nomeUtente);
-        /*
-            TODO il campo email è temporaneo, è da sostituire con nomeUtente
-             cosa che verrà fatta dopo avere implementata la registrazione dell'utente
-         */
 
     }
 
 
     public void gioca(View view){
-        Intent intent = new Intent(this , MainActivity.class);
+        Intent intent = new Intent(this , GiocaActivity.class);
         startActivity(intent);
     }
 
     public void classifica(View view){
-        Intent intent = new Intent(this , Classifica.class);
+        Intent intent = new Intent(this , ClassificaActivity.class);
         startActivity(intent);
     }
 
     public void impostazioni(View view){
-        Intent intent = new Intent(this , Impostazioni.class);
+        Intent intent = new Intent(this , ImpostazioniActivity.class);
         startActivity(intent);
     }
     public void logOut (View view) {
-        Login.logOut();
-        Intent intent = new Intent(this , Login.class);
+        LoginActivity.logOut();
+        Intent intent = new Intent(this , LoginActivity.class);
         startActivity(intent);
         Toast.makeText( view.getContext(), "Logout effettuato con successo", Toast.LENGTH_SHORT).show();
 

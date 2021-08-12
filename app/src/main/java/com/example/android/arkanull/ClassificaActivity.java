@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 
-public class Classifica extends AppCompatActivity {
+public class ClassificaActivity extends AppCompatActivity {
 
 
     @Override
@@ -16,7 +16,7 @@ public class Classifica extends AppCompatActivity {
     }
 
     public void openPunteggi(View view){
-        Intent intent = new Intent(this , Punteggi.class);
+        Intent intent = new Intent(this , PunteggiActivity.class);
         startActivity(intent);
     }
 }

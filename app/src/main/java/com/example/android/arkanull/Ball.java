@@ -93,15 +93,23 @@ public class Ball {
         if (jeBlizko(xPaddle, yPaddle, getX(), getY())) zmenSmer();
     }
 
-    // If the ball collides with a brick, it will change direction
-    protected boolean NarazBrick(float xBrick, float yBrick, boolean b) {
-        if(!b) {
+    /**
+     * Returns true when detects a collision with a brick
+     * If the ball collides with a brick while there isn't a power up effect, it will change direction
+     * If the ball collides with a brick while there is a power up effect, it will NOT change direction
+     * @param xBrick position x of the brick
+     * @param yBrick position y of the brick
+     * @param powerUp boolean that indicates if the power up is in effect
+     * @return
+     */
+    protected boolean NarazBrick(float xBrick, float yBrick, boolean powerUp) {
+        if(!powerUp) {
             if (jeBlizkoBrick(xBrick, yBrick, getX(), getY())) {
                 zmenSmer();
                 return true;
             }
         }
-        else if(b){
+        else if(powerUp){
             if (jeBlizkoBrick(xBrick, yBrick, getX(), getY())) {
 
                 return true;

@@ -19,6 +19,14 @@ public class Heart extends View {
 
     }
 
+    /**
+     * Checks if the heart is close to the coordinates given
+     * @param ax x object 1
+     * @param ay y object 1
+     * @param bx x object 2
+     * @param by y object 2
+     * @return
+     */
     private boolean isClose(float ax, float ay, float bx, float by) {
         bx += 150;
         by += 150;
@@ -32,6 +40,12 @@ public class Heart extends View {
         return false;
     }
 
+    /**
+     * If the ball is close to the heart, returns true
+     * @param ballX x coordinate of the ball
+     * @param ballY y coordinate of the ball
+     * @return
+     */
     public boolean isHit(float ballX, float ballY){
         if(isClose(ballX, ballY, this.x, this.y)){
             return true;

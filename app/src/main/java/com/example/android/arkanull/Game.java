@@ -200,7 +200,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     /**
-     * This method creates bricks according to how many lifes the boss has left
+     * This method creates bricks according to how many hearts the boss has left
      */
     private void changePhase(){
         if(phase < 4){
@@ -400,17 +400,17 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     protected void onDraw(Canvas canvas) {
-        // creates a background only once
+        //Creates a background only once
         if (roztiahnuty == null) {
             roztiahnuty = Bitmap.createScaledBitmap(pozadie, size.x, size.y, false);
         }
         canvas.drawBitmap(roztiahnuty, 0, 0, paint);
 
-        // draw the ball
+        //Draw the ball
         paint.setColor(Color.RED);
         canvas.drawBitmap(redBall, lopticka.getX(), lopticka.getY(), paint);
 
-        //Disegna power up (temporaneo)
+        //Draw power ups
         if(pUp.getSpawned() && mode == 1 && !pUp.getPwrUp().isRecycled()){
             paint.setColor(Color.BLUE);
             canvas.drawBitmap(pUp.getPwrUp(), pUp.getX(), pUp.getY(), paint );
@@ -455,7 +455,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
-    // skontroluje či sa lopticka nedotkla okraju
+    /**
+     * check that the ball has not touched the edge of the screen, if the parameter is set to true, it will
+     * bounce even if it touches the bottom edge
+     * @param b
+     */
     private void skontrolujOkraje(boolean b) {
         if (lopticka.getX() + lopticka.getxRychlost() >= size.x - 60) {
             lopticka.zmenSmer("prava");
@@ -470,7 +474,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
-    // skontroluje stav hry. či ma životy alebo či hra konči
+    //If the ball falls, it lower the lifes of the player or sets the game over if the player ran out of lifes
     private void skontrolujZivoty() {
         if (lifes == 1 ) {
             gameOver = true;
@@ -489,7 +493,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     //This variable serves as timer for the power-up effects
     int timer = 0;
 
-    // kazdy krok kontroluje ci nedoslo ku kolizii, k prehre alebo k vyhre atd
+    //This method gets called continuously, it organize the screen according to level and game mode
     public void update() {
 
         if(level == BOSS_LVL){
@@ -503,11 +507,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
                     case 1:
                         arkanull();
-
-                    case 2:
-                        //ROGUE
-
-
             }
         }
     }
@@ -569,6 +568,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     }
                     timer--;
                 }
+
                 //If the power up is not in effect, by passing false to .NazarBrick we make the ball bounce off bricks and the bricks also have hit points before getting destroyed
                 else if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
                     if (b.getHp() == 0) {

@@ -58,6 +58,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private int level;
     private int mode;
 
+    //This variable serves as timer for the power-up effects
+    int timer = 0;
 
     private boolean start;
     private boolean gameOver;
@@ -91,7 +93,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         this.context = context;
         this.lifes = lifes;
         this.score = score;
-        level = 0;
+        level = BOSS_LVL;
 
         // start a gameOver to find out if the game is stopped and if the player has lost it
         start = false;
@@ -111,18 +113,14 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         paddle_p = BitmapFactory.decodeResource(getResources(), R.drawable.paddle);
         //pwrUp = BitmapFactory.decodeResource(getResources(), R.drawable.pwrup);
 
-        // create a new ball, paddle, and list of bricks
+        // create a new ball, paddle, power up and list of bricks
         lopticka = new Ball(size.x / 2, size.y - 480 );
         paddle = new Paddle(size.x / 2, size.y - 400);
         pUp = new PowerUp(context);
         boss = new Bossfight(context, size.x / 2 - 300, size.y - 1900);
-
-
-
-
         zoznam = new ArrayList<Brick>();
 
-
+        //Creates an array with hearts for the bossfight
         bossLife = new ArrayList<Heart>();
         phase = 0;
         for(int i = 0; i < 3 ; i++) {
@@ -138,6 +136,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     break;
             }
         }
+        //If the level isn't the boss one, generates bricks
         if(level != BOSS_LVL){
             vygenerujBricks(context, difficulty);
         }
@@ -239,20 +238,22 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * @param difficulty
      */
     private void vygenerujBricks(Context context, int difficulty) {
-        if(level > 5){
-            generateEndless(context);
-        }
-        else{
-            switch(difficulty){
-                case EASY:
-                    generateEasy(context);
-                    break;
-                case NORMAL:
-                    generateNormal(context);
-                    break;
-                case HARD:
-                    generateHard(context);
-                    break;
+        if (level != BOSS_LVL) {
+
+            if (level > 5) {
+                generateEndless(context);
+            } else {
+                switch (difficulty) {
+                    case EASY:
+                        generateEasy(context);
+                        break;
+                    case NORMAL:
+                        generateNormal(context);
+                        break;
+                    case HARD:
+                        generateHard(context);
+                        break;
+                }
             }
         }
     }
@@ -262,17 +263,18 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      */
     private void changePhase(){
         if(phase < 4){
+            phase++;
             for (int i = 3; i < 5; i++) {
                 for (int j = 1; j < 6; j++) {
-                    zoznam.add(new Brick(context, j * 150, i * 250, phase + 1));
+                    zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 + 200, phase));
                 }
             }
-            phase++;
+
         }
     }
 
     /**
-     * This class generates the bossfight
+     * This method generates the bossfight
      * @param context
      */
     private void bossfight(Context context){
@@ -282,13 +284,18 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         bossWon();
         vulnerable = isVulnerable();
 
+        //If the boss is vulnerable then spawn the hearts
         if(vulnerable){
             for(int i = 0; i < bossLife.size(); i++){
                 Heart d = bossLife.get(i);
                 if(d.isHit(lopticka.getX(),lopticka.getY())){
+
+                    //If you hit the heart the ball bounce
                     lopticka.zmenSmer();
                     bossLife.remove(i);
                     vulnerable = false;
+
+                    //If there are lifes left, go to the next phase
                     if(phase < 3){
                         changePhase();
                     }
@@ -297,11 +304,17 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
         skontrolujOkraje(false);
         lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+
+        //Check for collisions with bricks
         for (int i = 0; i < zoznam.size(); i++) {
             Brick b = zoznam.get(i);
+
+            //Move the brick if it has the right type
             if(b.getType() == 3){
                 b.move(size);
             }
+
+            //Detect collision with the bricks if the power up effect is not active
             if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
                 if(b.getHp() == 0){
                     zoznam.remove(i);
@@ -363,7 +376,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
+                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
             }
 
         }
@@ -394,7 +407,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             }
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
+                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
             }
 
             if(i == 3 && level > 0 && (brick_Type - 1) >= 0){
@@ -427,7 +440,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
+                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
             }
 
         }
@@ -474,6 +487,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             canvas.drawBitmap(pUp.getPwrUp(), pUp.getX(), pUp.getY(), paint );
         }
 
+        //If the level is the boss level, draw the boss and if he is vulnerable draw the hearts
         if(level == BOSS_LVL){
             paint.setColor(Color.BLUE);
             canvas.drawBitmap(boss.getBoss(), boss.getX(), boss.getY(), paint );
@@ -548,8 +562,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
-    //This variable serves as timer for the power-up effects
-    int timer = 0;
 
     //This method gets called continuously, it organize the screen according to level and game mode
     public void update() {

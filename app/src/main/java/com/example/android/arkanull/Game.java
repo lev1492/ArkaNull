@@ -93,7 +93,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         this.context = context;
         this.lifes = lifes;
         this.score = score;
-        level = BOSS_LVL;
+        level = 0;
 
         // start a gameOver to find out if the game is stopped and if the player has lost it
         start = false;

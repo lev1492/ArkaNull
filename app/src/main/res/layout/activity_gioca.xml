@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="openMultiPlayer"
-    tools:context=".Gioca">
+    tools:context=".GiocaActivity">
 
 
     <Button

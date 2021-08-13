@@ -6,6 +6,8 @@ public class Paddle {
     public final int RIGHT = 2;
     private float x;
     private float y;
+
+
     // Is the paddle moving and in which direction
     private int paddleMoving = STOPPED;
 
@@ -13,7 +15,6 @@ public class Paddle {
         this.x = x;
         this.y = y;
     }
-
 
     public float getX() {
         return x;

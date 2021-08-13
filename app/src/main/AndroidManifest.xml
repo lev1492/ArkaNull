@@ -12,39 +12,94 @@
         android:roundIcon="@drawable/redball"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity
             android:name=".Login"
             android:exported="true" />
         <activity
             android:name=".Punteggi"
+=======
+
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login"
+            android:exported="true" />
+
+        <activity
+            android:name=".PunteggiActivity"
+            android:label="Punteggi"
+>>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d
             android:exported="true" />
         <activity
+<<<<<<< HEAD
             android:name=".Multiplayer"
+=======
+            android:name=".MultiplayerActivity"
+            android:label="Multiplayer"
+>>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d
             android:exported="true" />
         <activity
+<<<<<<< HEAD
             android:name=".Carriera"
+=======
+            android:name=".CarrieraActivity"
+            android:label="Carriera"
+>>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d
             android:exported="true" />
         <activity
+<<<<<<< HEAD
             android:name=".Livelli"
+=======
+            android:name=".LivelliActivity"
+            android:label="Livelli"
+>>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d
             android:exported="true" />
         <activity
+<<<<<<< HEAD
             android:name=".Menu"
             android:label="Menu" />
         <activity
             android:name=".Impostazioni"
             android:parentActivityName=".Menu">
+=======
+            android:name=".MenuActivity"
+            android:label="Menu"
+            android:configChanges="orientation|screenSize" />
+
+        <activity
+            android:name=".ImpostazioniActivity"
+            android:label="Impostazioni"
+            android:parentActivityName=".MenuActivity">
+>>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Menu" />
+                android:value=".MenuActivity" />
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".Classifica"
             android:parentActivityName=".Menu">
+=======
+            android:name=".ClassificaActivity"
+            android:label="Classifica"
+            android:parentActivityName=".MenuActivity">
+>>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Menu" />
+                android:value=".MenuActivity" />
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".Gioca"
             android:parentActivityName=".Menu">
             <meta-data
@@ -66,6 +121,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+=======
+            android:name=".GiocaActivity"
+            android:label="Gioca"
+            android:parentActivityName=".MenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuActivity" />
+        </activity>
+
+>>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d
     </application>
+
 
 </manifest>

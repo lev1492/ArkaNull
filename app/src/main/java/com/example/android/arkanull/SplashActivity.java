@@ -6,14 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class Splash extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
-        Intent intent = new Intent(this , Login.class);
+        Intent intent = new Intent(this , LoginActivity.class);
         final Handler handler  = new Handler();
         final Runnable runnable = new Runnable() {
             @Override

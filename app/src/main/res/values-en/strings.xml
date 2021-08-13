@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Arkanoid</string>
-    <string name="account">Account</string>
     <string name="gioca">Play</string>
     <string name="classifica">Ranking</string>
     <string name="impostazioni">Settings</string>
     <string name="logout">Logout</string>
+    <string name="accelerometro">Accelerometer</string>
+    <string name="salva" >Save</string>
+
+
 
 </resources>

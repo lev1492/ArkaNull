@@ -5,30 +5,18 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.activity.result.IntentSenderRequest;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ComponentActivity;
 
-import com.example.android.arkanull.MainActivity;
-import com.example.android.arkanull.R;
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.AuthUI.IdpConfig.AnonymousBuilder;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     // variable for Firebase Auth
     private static FirebaseAuth mFirebaseAuth;
@@ -87,10 +75,15 @@ public class Login extends AppCompatActivity {
                     // if the user is already authenticated then we will
                     // redirect our user to next screen which is our home screen.
                     // we are redirecting to new screen via an intent.
+<<<<<<< HEAD:app/src/main/java/com/example/android/arkanull/Login.java
                     Intent i = new Intent(Login.this, Menu.class);
                    // i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getEmail() );
                     i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getDisplayName() );
 
+=======
+                    Intent i = new Intent(LoginActivity.this, MenuActivity.class);
+                    i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getDisplayName() );
+>>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d:app/src/main/java/com/example/android/arkanull/LoginActivity.java
                     startActivity(i);
                     // we are calling finish method to kill or
                     // mainactivity which is displaying our login ui.

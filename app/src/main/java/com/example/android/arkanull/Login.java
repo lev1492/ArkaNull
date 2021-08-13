@@ -30,8 +30,6 @@ import java.util.List;
 
 public class Login extends AppCompatActivity {
 
-
-
     // variable for Firebase Auth
     private static FirebaseAuth mFirebaseAuth;
     // declaring a const int value which we
@@ -90,7 +88,9 @@ public class Login extends AppCompatActivity {
                     // redirect our user to next screen which is our home screen.
                     // we are redirecting to new screen via an intent.
                     Intent i = new Intent(Login.this, Menu.class);
-                    i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getEmail() );
+                   // i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getEmail() );
+                    i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getDisplayName() );
+
                     startActivity(i);
                     // we are calling finish method to kill or
                     // mainactivity which is displaying our login ui.

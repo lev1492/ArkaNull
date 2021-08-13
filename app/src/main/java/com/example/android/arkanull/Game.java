@@ -1,5 +1,7 @@
 package com.example.android.arkanull;
 
+import static com.example.android.arkanull.Login.getmFirebaseAuth;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,8 +21,23 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 
 public class Game extends View implements SensorEventListener, View.OnTouchListener {
@@ -35,7 +52,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private Point size;
     private Paint paint;
     private int screenX;
-
+    private int scoreUpdate = 0;
     private Ball lopticka;
     private ArrayList<Brick> zoznam;
     private ArrayList<PowerUp> pList;
@@ -63,6 +80,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private final int NORMAL = 1;
     private final int HARD = 2;
     private int difficulty;
+    DatabaseReference reference;
+
 
 
     public Game(Context context, int lifes, int score, int g_Mode, int diff) {
@@ -107,6 +126,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     }
 
+
+
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
         point = new Point();
@@ -144,23 +165,17 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     // naplni zoznam tehlickami
     private void vygenerujBricks(Context context, int difficulty) {
-        if(level > 5){
-            generateEndless(context);
+        switch(difficulty){
+            case EASY:
+                generateEasy(context);
+                break;
+            case NORMAL:
+                generateNormal(context);
+                break;
+            case HARD:
+                generateHard(context);
+                break;
         }
-        else{
-            switch(difficulty){
-                case EASY:
-                    generateEasy(context);
-                    break;
-                case NORMAL:
-                    generateNormal(context);
-                    break;
-                case HARD:
-                    generateHard(context);
-                    break;
-            }
-        }
-
     }
 
     private void generateEasy(Context context){
@@ -248,9 +263,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     private void generateEndless(Context context){
-        int b;
+        int b = rand.nextInt();
         for (int i = 3; i < 7; i++) {
-            b = rand.nextInt(2) + difficulty;
             for (int j = 1; j < 6; j++) {
                 zoznam.add(new Brick(context, j * 150, i * 100, b));
             }
@@ -334,10 +348,40 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     // skontroluje stav hry. či ma životy alebo či hra konči
     private void skontrolujZivoty() {
+        DAORecord daoRecord = new DAORecord();
         if (lifes == 1 ) {
+            level = 0;
             gameOver = true;
             start = false;
             invalidate();
+
+
+            reference = FirebaseDatabase.getInstance().getReference();
+
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        if (score > scoreUpdate){
+
+                            scoreUpdate = score;
+                            HashMap<String , Object> hashMap = new HashMap<>();
+                            hashMap.put("displayName" ,getmFirebaseAuth().getCurrentUser().getDisplayName() );
+                            hashMap.put("score" , score);
+                            daoRecord.update("-Mh-ZjQamvX7G12l1fhe" , hashMap).addOnSuccessListener(suc ->{
+                                Log.d("RECORD" , "AGGIORNATO");
+                            });
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
         } else {
             lifes--;
             lopticka.setX(size.x / 2);
@@ -379,6 +423,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 }
         }
         lopticka.pohni();
+
     }
 
     public void arkanull(){
@@ -415,7 +460,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
             else if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
                 if(b.getHp() == 0){
-                    if(rand.nextInt(10) == 0 && !pUp.getSpawned()){
+                    if(rand.nextInt(10) == 0){
                         pUp = new PowerUp(context);
                         pUp.spawn(b.getX(), b.getY());
                     }
@@ -438,6 +483,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 updatePwrUp();
             }
         }
+
+
 
     }
 

@@ -51,7 +51,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     private SensorManager sManager;
     private Sensor accelerometer;
-    private int STATE = -1;
+    int STATE = -1;
 
     private int lifes;
     private int score;
@@ -99,7 +99,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         start = false;
         gameOver = false;
 
-        // TODO scelta dell'input  working in progress
+        // get input type from impostazioni's class
         STATE = ImpostazioniActivity.getTypeInput();
 
         if (STATE == ImpostazioniActivity.getAccelerometerInput()) {

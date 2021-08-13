@@ -4,13 +4,14 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private String nomeUtente;
+    private String nomeUtente = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +20,16 @@ public class MenuActivity extends AppCompatActivity {
 
         TextView titolo = (TextView) findViewById(R.id.nomeUtente);
         nomeUtente = getIntent().getStringExtra("nomeUtente");
-        if(nomeUtente == null) {
+        if( nomeUtente.isEmpty() || nomeUtente.equals(null)) {
             nomeUtente = "Ospite";
         }
         titolo.setText(nomeUtente);
+        Log.i("onCreate NomeUtente: ", nomeUtente);
 
     }
 
     public void openGioca(View view){
-        Intent intent = new Intent(this , MainActivity.class);
+        Intent intent = new Intent(this , GiocaActivity.class);
         startActivity(intent);
     }
 

@@ -13,6 +13,10 @@
     <string name="classifica">Classifica</string>
     <string name="impostazioni">Impostazioni</string>
     <string name="logout">Esci</string>
+    <string name="accelerometro">Accelerometro</string>
+    <string name="touch" translatable="false">Touch</string>
+    <string name="salva" >Salva</string>
+
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_application_id" translatable="false">YOUR_APP_ID</string>

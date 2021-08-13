@@ -52,9 +52,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private SensorManager sManager;
     private Sensor accelerometer;
     private int STATE = -1;
-    private int NO_INPUT = 0;
-    private int ACCELEROMETER_INPUT = 1;
-    private int TOUCH_INPUT = 2;
 
     private int lifes;
     private int score;
@@ -101,10 +98,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         gameOver = false;
 
         // TODO scelta dell'input  working in progress
-        STATE = ACCELEROMETER_INPUT;
-        STATE = TOUCH_INPUT;
+        STATE = ImpostazioniActivity.getTypeInput();
 
-        if (STATE == ACCELEROMETER_INPUT) {
+        if (STATE == ImpostazioniActivity.getAccelerometerInput()) {
             accelerometerInput(context);
         }
 
@@ -157,13 +153,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     public void zastavSnimanie() {
-        if(STATE == ACCELEROMETER_INPUT){
+        if(STATE == ImpostazioniActivity.getAccelerometerInput()){
             sManager.unregisterListener(this);
         }
     }
 
     public void spustiSnimanie() {
-        if(STATE == ACCELEROMETER_INPUT) {
+        if(STATE == ImpostazioniActivity.getAccelerometerInput()) {
             sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }
     }
@@ -173,7 +169,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         point = new Point();
         display.getSize(point);
         screenX = point.x;
-        if (STATE == TOUCH_INPUT) {
+        if (STATE == ImpostazioniActivity.getTouchInput()) {
             switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
 
                 // Player has touched the screen

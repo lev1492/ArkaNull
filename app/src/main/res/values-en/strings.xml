@@ -5,5 +5,9 @@
     <string name="classifica">Ranking</string>
     <string name="impostazioni">Settings</string>
     <string name="logout">Logout</string>
+    <string name="accelerometro">Accelerometer</string>
+    <string name="salva" >Save</string>
+
+
 
 </resources>

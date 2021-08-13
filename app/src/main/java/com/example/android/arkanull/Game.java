@@ -2,6 +2,7 @@ package com.example.android.arkanull;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -83,7 +84,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * @param g_Mode Indicates the game mode selected
      * @param diff Indicates the difficulty selected
      */
-    public Game(Context context, int lifes, int score, int g_Mode, int diff) {
+    public Game(Context context, int lifes, int score, int g_Mode, int diff)  {
         super(context);
         difficulty = diff;
         paint = new Paint();
@@ -205,7 +206,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     // zmena akcelerometera
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER && STATE == ImpostazioniActivity.getAccelerometerInput()) {
             paddle.setX(paddle.getX() - event.values[0] - event.values[0]);
 
             if (paddle.getX() + event.values[0] > size.x - 240) {

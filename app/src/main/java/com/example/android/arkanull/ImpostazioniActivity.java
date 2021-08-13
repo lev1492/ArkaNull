@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 //classe che apre le impostazioni del telefono
@@ -36,10 +39,19 @@ public class ImpostazioniActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_impostazioni);
         intent = new Intent(this, MenuActivity.class);
+
+        RadioButton accelerometroButton = findViewById(R.id.accelerometro);
+        RadioButton touchButton = findViewById(R.id.touch);
+        if ( typeInput == ACCELEROMETER_INPUT) {
+            accelerometroButton.setChecked(true);
+        } else if ( typeInput == TOUCH_INPUT) {
+            touchButton.setChecked(true);
+        }
     }
 
     public void onTypeInputClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
+
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.accelerometro:
@@ -49,9 +61,8 @@ public class ImpostazioniActivity extends AppCompatActivity {
             case R.id.touch:
                 if (checked)
                     typeInput = TOUCH_INPUT;
-                    break;
+                break;
         }
-        intent.putExtra("tipoInput", typeInput);
     }
 
     public void onSaveSetting(View view) {

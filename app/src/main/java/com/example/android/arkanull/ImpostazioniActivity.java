@@ -1,14 +1,17 @@
 package com.example.android.arkanull;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Switch;
 
 //classe che apre le impostazioni del telefono
 public class ImpostazioniActivity extends AppCompatActivity {
@@ -19,6 +22,7 @@ public class ImpostazioniActivity extends AppCompatActivity {
 
     private static int ACCELEROMETER_INPUT = 1;
     private static int TOUCH_INPUT = 2;
+    private static boolean AUDIO = false;
 
     private static int typeInput = TOUCH_INPUT;
 
@@ -40,13 +44,21 @@ public class ImpostazioniActivity extends AppCompatActivity {
         setContentView(R.layout.activity_impostazioni);
         intent = new Intent(this, MenuActivity.class);
 
-        RadioButton accelerometroButton = findViewById(R.id.accelerometro);
+        RadioButton acceleromterButton = findViewById(R.id.acceleromter);
         RadioButton touchButton = findViewById(R.id.touch);
         if ( typeInput == ACCELEROMETER_INPUT) {
-            accelerometroButton.setChecked(true);
+            acceleromterButton.setChecked(true);
         } else if ( typeInput == TOUCH_INPUT) {
             touchButton.setChecked(true);
         }
+        SwitchCompat audio = findViewById(R.id.audio);
+        if ( AUDIO ) {
+            audio.setChecked(true);
+        } else {
+            audio.setChecked(false);
+        }
+
+
     }
 
     public void onTypeInputClicked(View view) {
@@ -54,7 +66,7 @@ public class ImpostazioniActivity extends AppCompatActivity {
 
         // Check which radio button was clicked
         switch(view.getId()) {
-            case R.id.accelerometro:
+            case R.id.acceleromter:
                 if (checked)
                     typeInput = ACCELEROMETER_INPUT;
                     break;
@@ -63,6 +75,12 @@ public class ImpostazioniActivity extends AppCompatActivity {
                     typeInput = TOUCH_INPUT;
                 break;
         }
+    }
+
+    public void onSound(View view) {
+        SwitchCompat audio = findViewById(R.id.audio);
+        boolean checked = ((SwitchCompat) view).isChecked();
+        AUDIO = checked;
     }
 
     public void onSaveSetting(View view) {

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // vytvori novu hru
-        game = new Game(this, 3, 0, ARKANULL, NORMAL);
+        game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
         setContentView(game);
 
         // vytvori handler a thread

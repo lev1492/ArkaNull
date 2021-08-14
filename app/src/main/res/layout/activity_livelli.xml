@@ -24,6 +24,7 @@
         android:layout_marginStart="149dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="174dp"
+        android:onClick="onLevel"
         android:text="@string/easy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -31,12 +32,13 @@
         app:layout_constraintTop_toTopOf="@+id/workInProgress" />
 
     <Button
-        android:id="@+id/medium"
+        android:id="@+id/normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="151dp"
         android:layout_marginTop="88dp"
         android:layout_marginEnd="172dp"
+        android:onClick="onLevel"
         android:text="@string/medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -50,10 +52,11 @@
         android:layout_marginStart="149dp"
         android:layout_marginTop="92dp"
         android:layout_marginEnd="174dp"
+        android:onClick="onLevel"
         android:text="@string/hard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medium" />
+        app:layout_constraintTop_toBottomOf="@+id/normal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

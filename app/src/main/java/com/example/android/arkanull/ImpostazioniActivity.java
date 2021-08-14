@@ -84,6 +84,7 @@ public class ImpostazioniActivity extends AppCompatActivity {
     }
 
     public void onSaveSetting(View view) {
+
         startActivity(intent);
     }
 

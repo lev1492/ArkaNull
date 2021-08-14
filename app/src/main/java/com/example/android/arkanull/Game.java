@@ -64,12 +64,26 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     boolean paused = true;
     private Random rand = new Random();
 
-    private final int EASY = 0;
-    private final int NORMAL = 1;
-    private final int HARD = 2;
+    private final static int EASY = 0;
+    private final static int NORMAL = 1;
+    private final static int HARD = 2;
     private final int BOSS_LVL = 1;
     private int difficulty;
     private int phase;
+
+    public static int getEASY() {
+        return EASY;
+    }
+
+    public static int getNORMAL() {
+        return NORMAL;
+    }
+
+    public static int getHARD() {
+        return HARD;
+    }
+
+
 
 
     /**

@@ -2,7 +2,7 @@ package com.example.android.arkanull;
 
 import android.os.Handler;
 
-public class UpdateThread extends Thread {
+public class    UpdateThread extends Thread {
     Handler updatovaciHandler;
 
     public UpdateThread(Handler uh) {

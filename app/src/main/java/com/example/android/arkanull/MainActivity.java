@@ -1,6 +1,5 @@
 package com.example.android.arkanull;
 
-import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Message;
@@ -23,13 +22,13 @@ public class MainActivity extends AppCompatActivity {
     private final int NORMAL = 1;
     private final int HARD = 2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // nastavi orientaciu obrazovky
-         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         // vytvori novu hru
         game = new Game(this, 3, 0, ARKANULL, NORMAL);
         setContentView(game);

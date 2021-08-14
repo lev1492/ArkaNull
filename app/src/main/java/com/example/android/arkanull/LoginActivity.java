@@ -18,6 +18,8 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+
     // variable for Firebase Auth
     private static FirebaseAuth mFirebaseAuth;
     // declaring a const int value which we
@@ -75,15 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                     // if the user is already authenticated then we will
                     // redirect our user to next screen which is our home screen.
                     // we are redirecting to new screen via an intent.
-<<<<<<< HEAD:app/src/main/java/com/example/android/arkanull/Login.java
-                    Intent i = new Intent(Login.this, Menu.class);
-                   // i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getEmail() );
-                    i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getDisplayName() );
-
-=======
                     Intent i = new Intent(LoginActivity.this, MenuActivity.class);
                     i.putExtra("nomeUtente",  mFirebaseAuth.getCurrentUser().getDisplayName() );
->>>>>>> 01894d81fed7b558753a2f9b8e22c6f7aa292e1d:app/src/main/java/com/example/android/arkanull/LoginActivity.java
                     startActivity(i);
                     // we are calling finish method to kill or
                     // mainactivity which is displaying our login ui.

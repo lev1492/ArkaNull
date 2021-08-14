@@ -18,6 +18,10 @@
     <string name="touch" translatable="false">Touch</string>
     <string name="salva" >Salva</string>
     <string name="audio" >Audio</string>
+    <string name="easy" >Facile</string>
+    <string name="medium" >Medio</string>
+    <string name="hard" >Difficile</string>
+
 
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->

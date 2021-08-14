@@ -17,7 +17,7 @@ public class GiocaActivity extends AppCompatActivity {
     }
 
     public void openLivelli(View view){
-        Intent intent = new Intent(this , MainActivity.class);
+        Intent intent = new Intent(this , LivelliActivity.class);
         startActivity(intent);
     }
 

@@ -9,6 +9,9 @@
     <string name="accelerometro">Accelerometer</string>
     <string name="salva" >Save</string>
     <string name="audio" >Sound</string>
+    <string name="easy" >Easy</string>
+    <string name="medium" >Medium</string>
+    <string name="hard" >Hard</string>
 
 
 

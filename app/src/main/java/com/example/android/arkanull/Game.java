@@ -1,5 +1,8 @@
 package com.example.android.arkanull;
 
+import static com.example.android.arkanull.LoginActivity.getmFirebaseAuth;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,12 +15,23 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 
@@ -34,7 +48,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private Point size;
     private Paint paint;
     private int screenX;
-
+    private DatabaseReference reference;
     private Ball lopticka;
     private ArrayList<Brick> zoznam;
     private ArrayList<PowerUp> pList;
@@ -48,8 +62,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     private SensorManager sManager;
     private Sensor accelerometer;
-    private int INPUT_STATE;
-
+    int STATE = -1;
+    private int scoreUpdate = 0;
     private int lifes;
     private int score;
     private int level;
@@ -64,26 +78,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     boolean paused = true;
     private Random rand = new Random();
 
-    private final static int EASY = 0;
-    private final static int NORMAL = 1;
-    private final static int HARD = 2;
+    private final int EASY = 0;
+    private final int NORMAL = 1;
+    private final int HARD = 2;
     private final int BOSS_LVL = 1;
     private int difficulty;
     private int phase;
-
-    public static int getEASY() {
-        return EASY;
-    }
-
-    public static int getNORMAL() {
-        return NORMAL;
-    }
-
-    public static int getHARD() {
-        return HARD;
-    }
-
-
 
 
     /**
@@ -94,7 +94,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * @param g_Mode Indicates the game mode selected
      * @param diff Indicates the difficulty selected
      */
-    public Game(Context context, int lifes, int score, int g_Mode, int diff)  {
+    public Game(Context context, int lifes, int score, int g_Mode, int diff) {
         super(context);
         difficulty = diff;
         paint = new Paint();
@@ -111,9 +111,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         gameOver = false;
 
         // get input type from impostazioni's class
-        INPUT_STATE = ImpostazioniActivity.getTypeInput();
+        STATE = ImpostazioniActivity.getTypeInput();
 
-        if (INPUT_STATE == ImpostazioniActivity.getAccelerometerInput()) {
+        if (STATE == ImpostazioniActivity.getAccelerometerInput()) {
             accelerometerInput(context);
         }
 
@@ -163,13 +163,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     public void zastavSnimanie() {
-        if(INPUT_STATE == ImpostazioniActivity.getAccelerometerInput()){
+        if(STATE == ImpostazioniActivity.getAccelerometerInput()){
             sManager.unregisterListener(this);
         }
     }
 
     public void spustiSnimanie() {
-        if(INPUT_STATE == ImpostazioniActivity.getAccelerometerInput()) {
+        if(STATE == ImpostazioniActivity.getAccelerometerInput()) {
             sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }
     }
@@ -179,7 +179,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         point = new Point();
         display.getSize(point);
         screenX = point.x;
-        if (INPUT_STATE == ImpostazioniActivity.getTouchInput()) {
+        if (STATE == ImpostazioniActivity.getTouchInput()) {
             switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
 
                 // Player has touched the screen
@@ -216,7 +216,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     // zmena akcelerometera
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER && INPUT_STATE == ImpostazioniActivity.getAccelerometerInput()) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             paddle.setX(paddle.getX() - event.values[0] - event.values[0]);
 
             if (paddle.getX() + event.values[0] > size.x - 240) {
@@ -563,10 +563,40 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     //If the ball falls, it lower the lifes of the player or sets the game over if the player ran out of lifes
     private void skontrolujZivoty() {
+        DAORecord daoRecord = new DAORecord();
         if (lifes == 1 ) {
+            level = 0;
             gameOver = true;
             start = false;
             invalidate();
+
+
+            reference = FirebaseDatabase.getInstance().getReference();
+
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        if (score > scoreUpdate){
+
+                            scoreUpdate = score;
+                            HashMap<String , Object> hashMap = new HashMap<>();
+                            hashMap.put("displayName" ,getmFirebaseAuth().getCurrentUser().getDisplayName() );
+                            hashMap.put("score" , score);
+                            daoRecord.update("-Mh-ZjQamvX7G12l1fhe" , hashMap).addOnSuccessListener(suc ->{
+                                Log.d("RECORD" , "AGGIORNATO");
+                            });
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
         } else {
             lifes--;
             lopticka.setX(size.x / 2);
@@ -586,12 +616,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
 
         else if (start) {
-                switch(mode){
-                    case 0:
-                        classic();
+            switch(mode){
+                case 0:
+                    classic();
 
-                    case 1:
-                        arkanull();
+                case 1:
+                    arkanull();
             }
         }
     }
@@ -605,11 +635,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka.NarazPaddle(paddle.getX(), paddle.getY());
         for (int i = 0; i < zoznam.size(); i++) {
             Brick b = zoznam.get(i);
-                if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
-                    zoznam.remove(i);
-                    score = score + 80;
+            if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
+                zoznam.remove(i);
+                score = score + 80;
 
-                }
+            }
         }
         lopticka.pohni();
     }
@@ -618,66 +648,66 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * This mode has power ups and the bricks have hp or move according to their type
      */
     public void arkanull(){
-            vyhra();
+        vyhra();
 
-            //If the timer is different than 0, then the power up is in effect and by passing true we make the ball bounce even if it falls
-            if(timer != 0){
-                skontrolujOkraje(true);
+        //If the timer is different than 0, then the power up is in effect and by passing true we make the ball bounce even if it falls
+        if(timer != 0){
+            skontrolujOkraje(true);
+        }
+        else{
+            skontrolujOkraje(false);
+        }
+
+        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+
+        //This for cycle detects collision with the bricks
+        for (int i = 0; i < zoznam.size(); i++) {
+            Brick b = zoznam.get(i);
+
+            //If the brick is the specified type, it moves
+            if (b.getType() == 3) {
+                b.move(size);
             }
-            else{
-                skontrolujOkraje(false);
-            }
 
-            lopticka.NarazPaddle(paddle.getX(), paddle.getY());
-
-            //This for cycle detects collision with the bricks
-            for (int i = 0; i < zoznam.size(); i++) {
-                Brick b = zoznam.get(i);
-
-                //If the brick is the specified type, it moves
-                if (b.getType() == 3) {
-                    b.move(size);
-                }
-
-                //The power up is in effect, by passing true to NarazBrick we don't make the ball bounce off bricks and it pierce through every type of them
-                if (timer != 0) {
-                    if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
-                        if (b.getHp() == 0) {
-                            zoznam.remove(i);
-                            score = score + 80;
-                        } else {
-                            zoznam.remove(i);
-                            score = score + 100;
-                        }
-
-                    }
-                    timer--;
-                }
-
-                //If the power up is not in effect, by passing false to .NazarBrick we make the ball bounce off bricks and the bricks also have hit points before getting destroyed
-                else if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
+            //The power up is in effect, by passing true to NarazBrick we don't make the ball bounce off bricks and it pierce through every type of them
+            if (timer != 0) {
+                if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
                     if (b.getHp() == 0) {
-                        if (rand.nextInt(10 + (2 * difficulty)) == 0 && !pUp.getSpawned()) {
-                            pUp = new PowerUp(context);
-                            pUp.spawn(b.getX(), b.getY());
-                        }
                         zoznam.remove(i);
-
                         score = score + 80;
                     } else {
-                        b.hit();
-                        score = score + 20;
+                        zoznam.remove(i);
+                        score = score + 100;
                     }
 
                 }
+                timer--;
             }
-            lopticka.pohni();
-            if(pUp.getPwrUp() != null){
-                if(!(pUp.getPwrUp().isRecycled())){
-                    updatePwrUp();
+
+            //If the power up is not in effect, by passing false to .NazarBrick we make the ball bounce off bricks and the bricks also have hit points before getting destroyed
+            else if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
+                if (b.getHp() == 0) {
+                    if (rand.nextInt(10 + (2 * difficulty)) == 0 && !pUp.getSpawned()) {
+                        pUp = new PowerUp(context);
+                        pUp.spawn(b.getX(), b.getY());
+                    }
+                    zoznam.remove(i);
+
+                    score = score + 80;
+                } else {
+                    b.hit();
+                    score = score + 20;
                 }
+
             }
         }
+        lopticka.pohni();
+        if(pUp.getPwrUp() != null){
+            if(!(pUp.getPwrUp().isRecycled())){
+                updatePwrUp();
+            }
+        }
+    }
 
     /**
      * If a power-ups spawns, it follow those instruction to fall and detect collision with the paddle (grants power up)

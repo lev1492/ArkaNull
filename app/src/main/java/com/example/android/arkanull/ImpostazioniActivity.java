@@ -69,7 +69,7 @@ public class ImpostazioniActivity extends AppCompatActivity {
             case R.id.acceleromter:
                 if (checked)
                     typeInput = ACCELEROMETER_INPUT;
-                    break;
+                break;
             case R.id.touch:
                 if (checked)
                     typeInput = TOUCH_INPUT;

@@ -62,7 +62,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     private SensorManager sManager;
     private Sensor accelerometer;
-    int STATE = -1;
+    private int STATE_INPUT = -1;
     private int scoreUpdate = 0;
     private int lifes;
     private int score;
@@ -78,12 +78,24 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     boolean paused = true;
     private Random rand = new Random();
 
-    private final int EASY = 0;
-    private final int NORMAL = 1;
-    private final int HARD = 2;
+    private final static int EASY = 0;
+    private final static int NORMAL = 1;
+    private final static int HARD = 2;
     private final int BOSS_LVL = 1;
     private int difficulty;
     private int phase;
+
+    public static int getEASY() {
+        return EASY;
+    }
+
+    public static int getNORMAL() {
+        return NORMAL;
+    }
+
+    public static int getHARD() {
+        return HARD;
+    }
 
 
     /**
@@ -111,9 +123,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         gameOver = false;
 
         // get input type from impostazioni's class
-        STATE = ImpostazioniActivity.getTypeInput();
+        STATE_INPUT = ImpostazioniActivity.getTypeInput();
 
-        if (STATE == ImpostazioniActivity.getAccelerometerInput()) {
+        if (STATE_INPUT == ImpostazioniActivity.getAccelerometerInput()) {
             accelerometerInput(context);
         }
 
@@ -163,13 +175,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     public void zastavSnimanie() {
-        if(STATE == ImpostazioniActivity.getAccelerometerInput()){
+        if(STATE_INPUT == ImpostazioniActivity.getAccelerometerInput()){
             sManager.unregisterListener(this);
         }
     }
 
     public void spustiSnimanie() {
-        if(STATE == ImpostazioniActivity.getAccelerometerInput()) {
+        if(STATE_INPUT == ImpostazioniActivity.getAccelerometerInput()) {
             sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }
     }
@@ -179,7 +191,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         point = new Point();
         display.getSize(point);
         screenX = point.x;
-        if (STATE == ImpostazioniActivity.getTouchInput()) {
+        if (STATE_INPUT == ImpostazioniActivity.getTouchInput()) {
             switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
 
                 // Player has touched the screen

@@ -11,15 +11,14 @@ import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private String nomeUtente = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        TextView titolo = (TextView) findViewById(R.id.nomeUtente);
-        nomeUtente = getIntent().getStringExtra("nomeUtente");
+        TextView titolo = findViewById(R.id.nomeUtente);
+        String nomeUtente = getIntent().getStringExtra("nomeUtente");
         if( nomeUtente == null ) {
             nomeUtente = "OspiteNull";
         } else if (nomeUtente.isEmpty() ) {

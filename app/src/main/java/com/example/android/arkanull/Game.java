@@ -52,7 +52,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     private SensorManager sManager;
     private Sensor accelerometer;
-    int STATE = -1;
+    private int INPUT_STATE = -1;
 
     private int lifes;
     private int score;
@@ -101,9 +101,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         gameOver = false;
 
         // get input type from impostazioni's class
-        STATE = ImpostazioniActivity.getTypeInput();
+        INPUT_STATE = ImpostazioniActivity.getTypeInput();
 
-        if (STATE == ImpostazioniActivity.getAccelerometerInput()) {
+        if (INPUT_STATE == ImpostazioniActivity.getAccelerometerInput()) {
             accelerometerInput(context);
         }
 
@@ -153,13 +153,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     public void zastavSnimanie() {
-        if(STATE == ImpostazioniActivity.getAccelerometerInput()){
+        if(INPUT_STATE == ImpostazioniActivity.getAccelerometerInput()){
             sManager.unregisterListener(this);
         }
     }
 
     public void spustiSnimanie() {
-        if(STATE == ImpostazioniActivity.getAccelerometerInput()) {
+        if(INPUT_STATE == ImpostazioniActivity.getAccelerometerInput()) {
             sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }
     }
@@ -169,7 +169,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         point = new Point();
         display.getSize(point);
         screenX = point.x;
-        if (STATE == ImpostazioniActivity.getTouchInput()) {
+        if (INPUT_STATE == ImpostazioniActivity.getTouchInput()) {
             switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
 
                 // Player has touched the screen
@@ -206,7 +206,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     // zmena akcelerometera
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER && STATE == ImpostazioniActivity.getAccelerometerInput()) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER && INPUT_STATE == ImpostazioniActivity.getAccelerometerInput()) {
             paddle.setX(paddle.getX() - event.values[0] - event.values[0]);
 
             if (paddle.getX() + event.values[0] > size.x - 240) {

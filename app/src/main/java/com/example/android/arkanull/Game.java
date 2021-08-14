@@ -1,8 +1,6 @@
 package com.example.android.arkanull;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -14,10 +12,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -52,7 +48,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     private SensorManager sManager;
     private Sensor accelerometer;
-    private int INPUT_STATE = -1;
+    private int INPUT_STATE;
 
     private int lifes;
     private int score;

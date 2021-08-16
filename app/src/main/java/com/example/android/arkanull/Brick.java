@@ -81,13 +81,13 @@ public class Brick extends View {
     public void move(Point size){
         if(moving_Right){
             setX(this.x + 5);
-            if(this.x == size.x - 100){
+            if(this.x >= size.x - 100){
                 moving_Right = false;
             }
         }
         else{
             setX(this.x - 5);
-            if(this.x == 0){
+            if(this.x <= 0){
                 moving_Right = true;
             }
         }

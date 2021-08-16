@@ -84,6 +84,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private final int BOSS_LVL = 1;
     private int difficulty;
     private int phase;
+    private SoundManager soundManager;
 
     public static int getEASY() {
         return EASY;
@@ -111,7 +112,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         difficulty = diff;
         paint = new Paint();
         mode = g_Mode;
-
+        soundManager = new SoundManager(context);
         // set context, lives, scores and levels
         this.context = context;
         this.lifes = lifes;
@@ -146,23 +147,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         //Creates an array with hearts for the bossfight
         bossLife = new ArrayList<Heart>();
         phase = 0;
-        for(int i = 0; i < 3 ; i++) {
-            switch (i) {
-                case 0:
-                    bossLife.add(new Heart(context, size.x / 2 - 500, size.y - 1800));
-                    break;
-                case 1:
-                    bossLife.add(new Heart(context, size.x / 2 - 130, size.y - 1300));
-                    break;
-                case 2:
-                    bossLife.add(new Heart(context, size.x / 2 + 250, size.y - 1800));
-                    break;
-            }
-        }
+
         //If the level isn't the boss one, generates bricks
         if(level != BOSS_LVL){
             vygenerujBricks(context, difficulty);
         }
+
         this.setOnTouchListener(this);
 
     }
@@ -252,6 +242,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             level = 0;
             resetLevel();
             gameOver = false;
+            bossLife.clear();
 
         } else {
             start = true;
@@ -293,7 +284,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             phase++;
             for (int i = 3; i < 5; i++) {
                 for (int j = 1; j < 6; j++) {
-                    zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 + 200, phase));
+                    zoznam.add(new Brick(context, 0 + size.x / 7 * j, 0 + size.y / 12 * i + size.y / 7 , phase));
                 }
             }
 
@@ -307,6 +298,19 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private void bossfight(Context context){
         if(phase == 0){
             changePhase();
+            for(int i = 0; i < 3 ; i++) {
+                switch (i) {
+                    case 0:
+                        bossLife.add(new Heart(context, size.x / 2 - 500, size.y - 1800));
+                        break;
+                    case 1:
+                        bossLife.add(new Heart(context, size.x / 2 - 130, size.y - 1300));
+                        break;
+                    case 2:
+                        bossLife.add(new Heart(context, size.x / 2 + 250, size.y - 1800));
+                        break;
+                }
+            }
         }
         bossWon();
         vulnerable = isVulnerable();
@@ -318,6 +322,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 if(d.isHit(lopticka.getX(),lopticka.getY())){
 
                     //If you hit the heart the ball bounce
+                    soundManager.playHrtSound();
                     lopticka.zmenSmer();
                     bossLife.remove(i);
                     vulnerable = false;
@@ -330,7 +335,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             }
         }
         skontrolujOkraje(false);
-        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+        if(lopticka.NarazPaddle(paddle.getX(), paddle.getY())) soundManager.playBounce();
 
         //Check for collisions with bricks
         for (int i = 0; i < zoznam.size(); i++) {
@@ -345,10 +350,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
                 if(b.getHp() == 0){
                     zoznam.remove(i);
+                    soundManager.playBrickHit();
                     score = score + 80;
                 }
                 else{
                     b.hit();
+                    soundManager.playBounce();
                     score = score + 20;
                 }
             }
@@ -403,7 +410,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
+                zoznam.add(new Brick(context, 0 + size.x / 7 * j, 0 + size.y / 19 * i , brick_Type));
             }
 
         }
@@ -434,7 +441,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             }
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
+                zoznam.add(new Brick(context, 0 + size.x / 7 * j, 0 + size.y / 19 * i , brick_Type));
             }
 
             if(i == 3 && level > 0 && (brick_Type - 1) >= 0){
@@ -467,7 +474,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
 
             for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
+                zoznam.add(new Brick(context, 0 + size.x / 7 * j, 0 + size.y / 19 * i , brick_Type));
             }
 
         }
@@ -562,14 +569,18 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private void skontrolujOkraje(boolean b) {
         if (lopticka.getX() + lopticka.getxRychlost() >= size.x - 60) {
             lopticka.zmenSmer("prava");
+            soundManager.playBounce();
         } else if (lopticka.getX() + lopticka.getxRychlost() <= 0) {
             lopticka.zmenSmer("lava");
+            soundManager.playBounce();
         } else if (lopticka.getY() + lopticka.getyRychlost() <= 150) {
             lopticka.zmenSmer("hore");
+            soundManager.playBounce();
         } else if (lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == false) {
             skontrolujZivoty();
         } else if(lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == true) {
             lopticka.zmenSmer();
+            soundManager.playBounce();
         }
     }
 
@@ -644,10 +655,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public void classic(){
         vyhra();
         skontrolujOkraje(false);
-        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+        if(lopticka.NarazPaddle(paddle.getX(), paddle.getY())) soundManager.playBounce();
         for (int i = 0; i < zoznam.size(); i++) {
             Brick b = zoznam.get(i);
             if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
+                soundManager.playBrickHit();
                 zoznam.remove(i);
                 score = score + 80;
 
@@ -670,7 +682,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             skontrolujOkraje(false);
         }
 
-        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
+        if(lopticka.NarazPaddle(paddle.getX(), paddle.getY())) soundManager.playBounce();
 
         //This for cycle detects collision with the bricks
         for (int i = 0; i < zoznam.size(); i++) {
@@ -703,10 +715,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                         pUp = new PowerUp(context);
                         pUp.spawn(b.getX(), b.getY());
                     }
+                    soundManager.playBrickHit();
                     zoznam.remove(i);
-
                     score = score + 80;
                 } else {
+                    soundManager.playBounce();
                     b.hit();
                     score = score + 20;
                 }
@@ -729,6 +742,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         pUp.fall();
         if(pUp.touchPaddle(paddle.getX(),paddle.getY())){
             pUp.getPwrUp().recycle();
+            soundManager.playPwrUp();
             timer = 3000;
             pUp.setSpawned(false);
         }

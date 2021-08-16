@@ -24,6 +24,8 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -84,6 +86,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private final int BOSS_LVL = 1;
     private int difficulty;
     private int phase;
+    Record record = new Record();
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
 
     public static int getEASY() {
         return EASY;
@@ -573,6 +578,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
+
+
     //If the ball falls, it lower the lifes of the player or sets the game over if the player ran out of lifes
     private void skontrolujZivoty() {
         DAORecord daoRecord = new DAORecord();
@@ -582,31 +589,33 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             start = false;
             invalidate();
 
+          mDatabase = FirebaseDatabase.getInstance();
+          mReference = mDatabase.getReference("Record");
 
-            reference = FirebaseDatabase.getInstance().getReference();
+          /*mReference.addValueEventListener(new ValueEventListener() {
+              @Override
+              public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-                        if (score > scoreUpdate){
+              }
 
-                            scoreUpdate = score;
-                            HashMap<String , Object> hashMap = new HashMap<>();
-                            hashMap.put("displayName" ,getmFirebaseAuth().getCurrentUser().getDisplayName() );
-                            hashMap.put("score" , score);
-                            daoRecord.update("-Mh-ZjQamvX7G12l1fhe" , hashMap).addOnSuccessListener(suc ->{
-                                Log.d("RECORD" , "AGGIORNATO");
-                            });
-                        }
+              @Override
+              public void onCancelled(@NonNull DatabaseError error) {
+
+              }
+          });*/
+          mReference.child("-Mh4VZs0kWp8YNsmyrvB").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+              @Override
+              public void onComplete(@NonNull Task<DataSnapshot> task) {
+                  if(task.isSuccessful()){
+                    if(task.getResult().exists()){
+                        DataSnapshot dataSnapshot = task.getResult();
+                        String score = String.valueOf(dataSnapshot.child("score").getValue());
+                        Log.d("LETTURA" , "SCORE " + score);
+
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+                  }
+              }
+          });
 
 
         } else {

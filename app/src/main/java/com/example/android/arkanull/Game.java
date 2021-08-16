@@ -23,9 +23,11 @@ import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 
@@ -89,6 +92,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     Record record = new Record();
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private List<Record> records = new ArrayList<>();
 
     public static int getEASY() {
         return EASY;
@@ -590,32 +594,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             invalidate();
 
           mDatabase = FirebaseDatabase.getInstance();
-          mReference = mDatabase.getReference("Record");
+          mReference = mDatabase.getReference().child("Record");
 
-          /*mReference.addValueEventListener(new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-              }
-
-              @Override
-              public void onCancelled(@NonNull DatabaseError error) {
-
-              }
-          });*/
-          mReference.child("-Mh4VZs0kWp8YNsmyrvB").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-              @Override
-              public void onComplete(@NonNull Task<DataSnapshot> task) {
-                  if(task.isSuccessful()){
-                    if(task.getResult().exists()){
-                        DataSnapshot dataSnapshot = task.getResult();
-                        String score = String.valueOf(dataSnapshot.child("score").getValue());
-                        Log.d("LETTURA" , "SCORE " + score);
-
-                    }
-                  }
-              }
-          });
+          record.readScore(mDatabase , mReference);
 
 
         } else {

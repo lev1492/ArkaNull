@@ -25,6 +25,4 @@ public DAORecord(){
         return databaseReference.child(key).removeValue();
     }
 
-
-    
 }

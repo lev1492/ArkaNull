@@ -22,7 +22,7 @@ public class ImpostazioniActivity extends AppCompatActivity {
 
     private static int ACCELEROMETER_INPUT = 1;
     private static int TOUCH_INPUT = 2;
-    private static boolean AUDIO = false;
+    private static boolean SOUND = false;
 
     private static int typeInput = TOUCH_INPUT;
 
@@ -38,6 +38,8 @@ public class ImpostazioniActivity extends AppCompatActivity {
         return ACCELEROMETER_INPUT;
     }
 
+    public static boolean isSound() { return SOUND; }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class ImpostazioniActivity extends AppCompatActivity {
             touchButton.setChecked(true);
         }
         SwitchCompat audio = findViewById(R.id.audio);
-        if ( AUDIO ) {
+        if ( SOUND ) {
             audio.setChecked(true);
         } else {
             audio.setChecked(false);
@@ -80,7 +82,7 @@ public class ImpostazioniActivity extends AppCompatActivity {
     public void onSound(View view) {
         SwitchCompat audio = findViewById(R.id.audio);
         boolean checked = ((SwitchCompat) view).isChecked();
-        AUDIO = checked;
+        SOUND = checked;
     }
 
     public void onSaveSetting(View view) {

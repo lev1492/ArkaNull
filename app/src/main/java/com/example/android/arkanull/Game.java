@@ -164,6 +164,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
         this.setOnTouchListener(this);
 
+        soundManager.playGameMusic(true);
+
     }
 
     private boolean accelerometerInput(Context context) {
@@ -304,8 +306,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * @param context
      */
     private void bossfight(Context context){
+
         if(phase == 0){
             changePhase();
+            soundManager.playBossMusic(true);
             for(int i = 0; i < 3 ; i++) {
                 switch (i) {
                     case 0:
@@ -320,6 +324,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 }
             }
         }
+
         bossWon();
         vulnerable = isVulnerable();
 
@@ -391,6 +396,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             resetLevel();
             lopticka.zvysRychlost(level);
             start = false;
+            soundManager.playBossMusic(false);
+            soundManager.playGameMusic(true);
         }
     }
 
@@ -599,6 +606,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             gameOver = true;
             start = false;
             phase = 0;
+            soundManager.stopMusic();
             invalidate();
 
             mDatabase = FirebaseDatabase.getInstance();
@@ -635,6 +643,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public void update() {
 
         if(level == BOSS_LVL){
+            soundManager.playGameMusic(false);
             bossfight(context);
         }
 
@@ -754,7 +763,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             pUp.getPwrUp().recycle();
             pUp.setSpawned(false);
         }
-
     }
 
     /**

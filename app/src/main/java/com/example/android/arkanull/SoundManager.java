@@ -69,4 +69,8 @@ public class SoundManager {
         pwrUpSound.start();
     }
 
+    public MediaPlayer getGameMusic(){
+        return gameMusic;
+    }
+
 }

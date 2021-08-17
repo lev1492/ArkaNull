@@ -164,8 +164,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
         this.setOnTouchListener(this);
 
-        soundManager.playGameMusic(true);
-
     }
 
     private boolean accelerometerInput(Context context) {
@@ -643,7 +641,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public void update() {
 
         if(level == BOSS_LVL){
-            soundManager.playGameMusic(false);
+            if(soundManager.getGameMusic().isPlaying()) soundManager.playGameMusic(false);
             bossfight(context);
         }
 
@@ -653,6 +651,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     classic();
 
                 case 1:
+
                     arkanull();
             }
         }
@@ -681,6 +680,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * This mode has power ups and the bricks have hp or move according to their type
      */
     public void arkanull(){
+        if(!soundManager.getGameMusic().isPlaying()) soundManager.playGameMusic(true);
+
         vyhra();
 
         //If the timer is different than 0, then the power up is in effect and by passing true we make the ball bounce even if it falls

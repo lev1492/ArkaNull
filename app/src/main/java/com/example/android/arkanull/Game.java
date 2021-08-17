@@ -68,6 +68,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private SensorManager sManager;
     private Sensor accelerometer;
     private int STATE_INPUT = -1;
+    private boolean SOUND = false;
     private int scoreUpdate = 0;
     private int lifes;
     private int score;
@@ -133,6 +134,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
         // get input type from impostazioni's class
         STATE_INPUT = ImpostazioniActivity.getTypeInput();
+        SOUND =  ImpostazioniActivity.isSound();
 
         if (STATE_INPUT == ImpostazioniActivity.getAccelerometerInput()) {
             accelerometerInput(context);
@@ -202,7 +204,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         screenX = point.x;
         if (STATE_INPUT == ImpostazioniActivity.getTouchInput()) {
             switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
-
                 // Player has touched the screen
                 case MotionEvent.ACTION_DOWN:
 

@@ -49,24 +49,34 @@ public class SoundManager {
         else bossMusic.pause();
     }
 
-    public void playHrtSound(){
-        heartHit.seekTo(0);
-        heartHit.start();
+    public void playHrtSound(boolean t){
+        if(t){
+            heartHit.seekTo(0);
+            heartHit.start();
+        }
     }
 
-    public void playBrickHit(){
-        brickHit.seekTo(0);
-        brickHit.start();
+    public void playBrickHit(boolean t){
+        if(t){
+            brickHit.seekTo(0);
+            brickHit.start();
+        }
+
     }
 
-    public void playBounce(){
-        bounce.seekTo(0);
-        bounce.start();
+    public void playBounce(boolean t){
+        if(t){
+            bounce.seekTo(0);
+            bounce.start();
+        }
+
     }
 
-    public void playPwrUp(){
-        pwrUpSound.seekTo(0);
-        pwrUpSound.start();
+    public void playPwrUp(boolean t){
+        if(t){
+            pwrUpSound.seekTo(0);
+            pwrUpSound.start();
+        }
     }
 
     public MediaPlayer getGameMusic(){

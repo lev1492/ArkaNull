@@ -586,18 +586,30 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
     //If the ball falls, it lower the lifes of the player or sets the game over if the player ran out of lifes
     private void skontrolujZivoty() {
-        DAORecord daoRecord = new DAORecord();
         if (lifes == 1 ) {
             level = 0;
             gameOver = true;
             start = false;
             invalidate();
 
-          mDatabase = FirebaseDatabase.getInstance();
-          mReference = mDatabase.getReference().child("Record");
+            mDatabase = FirebaseDatabase.getInstance();
+            mReference = mDatabase.getReference().child("Record");
 
-          record.readScore(mDatabase , mReference);
+            mReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        String score = String.valueOf(dataSnapshot.child("score").getValue());
 
+                        Log.d("OTTENGO" , "SCORE" + score);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
         } else {
             lifes--;

@@ -1,5 +1,7 @@
 package com.example.android.arkanull;
 
+import static com.example.android.arkanull.LoginActivity.getmFirebaseAuth;
+
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -10,10 +12,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Comparator;
+
 public class Record {
     private int score;
     private String displayName;
     private String mail;
+
 
 
     public Record(String mail , String displayName , int score ){
@@ -50,26 +55,6 @@ public class Record {
         this.mail = mail;
     }
 
-    public void readScore(FirebaseDatabase mDatabase , DatabaseReference mReference){
-        String returnScore;
-        mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference().child("Record");
 
-        mReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String score = String.valueOf(dataSnapshot.child("score").getValue());
 
-                    Log.d("OTTENGO" , "SCORE" + score);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
 }

@@ -95,6 +95,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private List<Record> records = new ArrayList<>();
+    private LevelGenerator levelGenerator = new LevelGenerator();
 
     public static int getEASY() {
         return EASY;
@@ -265,37 +266,21 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      */
     private void vygenerujBricks(Context context, int difficulty) {
         if (level != BOSS_LVL) {
-
             if (level > 5) {
-                generateEndless(context);
+                levelGenerator.generateEndless(context, level, size, difficulty);
             } else {
                 switch (difficulty) {
                     case EASY:
-                        generateEasy(context);
+                        zoznam = levelGenerator.generateEasy(context, level, size);
                         break;
                     case NORMAL:
-                        generateNormal(context);
+                        zoznam = levelGenerator.generateNormal(context, level, size);
                         break;
                     case HARD:
-                        generateHard(context);
+                        zoznam = levelGenerator.generateHard(context, level, size);
                         break;
                 }
             }
-        }
-    }
-
-    /**
-     * This method creates bricks according to how many hearts the boss has left
-     */
-    private void changePhase(){
-        if(phase < 4){
-            phase++;
-            for (int i = 3; i < 5; i++) {
-                for (int j = 1; j < 6; j++) {
-                    zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 + 200, phase));
-                }
-            }
-
         }
     }
 
@@ -306,7 +291,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private void bossfight(Context context){
 
         if(phase == 0){
-            changePhase();
+            phase++;
+            zoznam = levelGenerator.generateBoss(context, size, phase);
             soundManager.playBossMusic(SOUND);
             for(int i = 0; i < 3 ; i++) {
                 switch (i) {
@@ -339,7 +325,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
                     //If there are lifes left, go to the next phase
                     if(phase < 3){
-                        changePhase();
+                        phase++;
+                        zoznam = levelGenerator.generateBoss(context, size, phase);
                     }
                 }
             }
@@ -396,113 +383,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             start = false;
             soundManager.stopMusic();
             soundManager.playGameMusic(SOUND);
-        }
-    }
-
-    /**
-     * Generates bricks for a new level if the difficulty is set to EASY
-     * @param context
-     */
-    private void generateEasy(Context context){
-        int brick_Type = 0;
-
-        if(level == 2 || level == 3){
-            brick_Type = 1;
-        }
-
-        for (int i = 3; i < 7; i++) {
-
-            if( i == 5 && level > 3 && (brick_Type + 1) < 4){
-                brick_Type++;
-            }
-
-            if( i == 6 && level > 2 && (brick_Type + 1 ) < 4){
-                brick_Type++;
-            }
-
-
-            for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
-            }
-
-        }
-    }
-
-    /**
-     * Generates bricks for a new level if the difficulty is set to NORMAL
-     * @param context
-     */
-    private void generateNormal(Context context){
-        int brick_Type = 0;
-
-        if(level == 2){
-            brick_Type = 1;
-        }
-
-        for (int i = 3; i < 7; i++) {
-
-            if( i == 5 && level > 3 && (brick_Type + 1) < 4){
-                brick_Type++;
-            }
-
-            if( i == 6 && level > 2 && (brick_Type + 1 ) < 4){
-                brick_Type++;
-            }
-            if(i == 3 && level > 0 && (brick_Type + 1) < 4){
-                brick_Type++;
-            }
-
-            for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
-            }
-
-            if(i == 3 && level > 0 && (brick_Type - 1) >= 0){
-                brick_Type--;
-            }
-
-        }
-    }
-
-    /**
-     * Generates bricks for a new level if the difficulty is set to HARD
-     * @param context
-     */
-    private void generateHard(Context context){
-        int brick_Type = 1;
-
-        if(level == 3){
-            brick_Type = 2 ;
-        }
-
-        for (int i = 3; i < 7; i++) {
-
-            if( i == 5 && level > 3 && (brick_Type + 1) < 4){
-                brick_Type++;
-            }
-
-            if( i == 6 && level > 2 && (brick_Type + 1 ) < 4){
-                brick_Type++;
-            }
-
-
-            for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
-            }
-
-        }
-    }
-
-    /**
-     * Generates random bricks according to the difficulty
-     * @param context
-     */
-    private void generateEndless(Context context){
-        int brick_Type;
-        for (int i = 3; i < 7; i++) {
-            brick_Type = rand.nextInt(2) + difficulty;
-            for (int j = 1; j < 6; j++) {
-                zoznam.add(new Brick(context, j * 150, i * 100, brick_Type));
-            }
         }
     }
 

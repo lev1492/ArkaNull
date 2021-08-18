@@ -1,8 +1,5 @@
 package com.example.android.arkanull;
 
-import static com.example.android.arkanull.LoginActivity.getmFirebaseAuth;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,20 +12,14 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.hardware.display.DisplayManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -44,7 +34,7 @@ import java.util.Random;
 
 public class Game extends View implements SensorEventListener, View.OnTouchListener {
 
-    private Bitmap pozadie;
+    private Bitmap background;
     private Bitmap redBall;
     private Bitmap roztiahnuty;
     private Bitmap paddle_p;
@@ -143,7 +133,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             accelerometerInput(context);
         }
 
-        nacitajPozadie(context);
+        setBackground(context);
 
         // create a bitmap for the ball and paddle
         redBall = BitmapFactory.decodeResource(getResources(), R.drawable.redball);
@@ -387,19 +377,20 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
-    // nastavi pozadie
-    private void nacitajPozadie(Context context) {
-        pozadie = Bitmap.createBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.pozadie_score));
+    // set the background
+    private void setBackground(Context context) {
+        background = Bitmap.createBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.background_score));
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         display = wm.getDefaultDisplay();
         size = new Point();
         display.getSize(size);
     }
 
+
     protected void onDraw(Canvas canvas) {
         //Creates a background only once
         if (roztiahnuty == null) {
-            roztiahnuty = Bitmap.createScaledBitmap(pozadie, size.x, size.y, false);
+            roztiahnuty = Bitmap.createScaledBitmap(background, size.x, size.y, false);
         }
         canvas.drawBitmap(roztiahnuty, 0, 0, paint);
 

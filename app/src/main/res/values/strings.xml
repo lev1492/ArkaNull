@@ -1,30 +1,23 @@
 <resources>
-    <string name="app_name">Arkanoid</string>
-    <string name="title_activity_login" translatable="false">LoginActivity</string>
-    <string name="prompt_email" translatable="false">Email</string>
-    <string name="prompt_password" translatable="false">Password</string>
-    <string name="action_sign_in" translatable="false">Sign in or register</string>
-    <string name="action_sign_in_short" translatable="false">Sign in</string>
-    <string name="welcome" translatable="false">"Welcome !"</string>
-    <string name="invalid_username" translatable="false">Not a valid username</string>
-    <string name="invalid_password" translatable="false">Password must be >5 characters</string>
-    <string name="login_failed" translatable="false">"Login failed"</string>
+    <string name="app_name" translatable="false">Arkanoid</string>
+
     <string name="gioca">Gioca</string>
     <string name="classifica">Classifica</string>
     <string name="impostazioni">Impostazioni</string>
     <string name="logout">Esci</string>
-    <string name="tipoInput">Tipo Input</string>
     <string name="accelerometro">Accelerometro</string>
     <string name="touch" translatable="false">Touch</string>
     <string name="salva" >Salva</string>
     <string name="audio" >Audio</string>
-    <string name="easy" >Facile</string>
-    <string name="medium" >Medio</string>
-    <string name="hard" >Difficile</string>
+    <string name="facile" >Facile</string>
+    <string name="medio" >Medio</string>
+    <string name="difficile" >Difficile</string>
+    <string name="livelli" >Livelli</string>
+    <string name="carriera" >Carriera</string>
+    <string name="multiplayer" translatable="false">Multiplayer</string>
+
 
 
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
-    <string name="facebook_application_id" translatable="false">YOUR_APP_ID</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">fbYOUR_APP_ID</string>
 </resources>

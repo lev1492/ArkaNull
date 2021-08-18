@@ -31,22 +31,37 @@
         <activity
             android:name=".PunteggiActivity"
             android:label="Punteggi"
-            android:exported="true" />
-
+            android:parentActivityName=".ClassificaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ClassificaActivity" />
+        </activity>
         <activity
             android:name=".MultiplayerActivity"
             android:label="Multiplayer"
-            android:exported="true" />
+            android:parentActivityName=".GiocaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GiocaActivity" />
+        </activity>
 
         <activity
             android:name=".CarrieraActivity"
             android:label="Carriera"
-            android:exported="true" />
+            android:parentActivityName=".GiocaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GiocaActivity" />
+        </activity>
 
         <activity
             android:name=".LivelliActivity"
             android:label="Livelli"
-            android:exported="true" />
+            android:parentActivityName=".GiocaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GiocaActivity" />
+        </activity>
 
         <activity
             android:name=".MenuActivity"

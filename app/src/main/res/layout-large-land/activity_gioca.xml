@@ -11,23 +11,23 @@
 
     <Button
         android:id="@+id/livelli"
-        style="@style/AppThemePortraitSmartphone"
+        style="@style/AppThemeLand"
         android:onClick="openLivelli"
         android:text="@string/livelli"
-        app:layout_constraintTop_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <Button
         android:id="@+id/carriera"
-        style="@style/AppThemePortraitSmartphone"
+        style="@style/AppThemeLand"
         android:onClick="openCarriera"
         android:text="@string/carriera"
         app:layout_constraintTop_toBottomOf="@+id/livelli" />
 
     <Button
-        style="@style/AppThemePortraitSmartphone"
+        android:id="@+id/multiplayer"
+        style="@style/AppThemeLand"
         android:onClick="openMultiPlayer"
         android:text="@string/multiplayer"
-        app:layout_constraintTop_toBottomOf="@+id/carriera"
-   />
+        app:layout_constraintTop_toBottomOf="@+id/carriera" />
 
 </LinearLayout>

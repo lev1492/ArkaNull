@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Arkanoid</string>
     <string name="gioca">Play</string>
     <string name="classifica">Ranking</string>
     <string name="impostazioni">Settings</string>
     <string name="logout">Logout</string>
-    <string name="tipoInput">Type Input</string>
     <string name="accelerometro">Accelerometer</string>
     <string name="salva" >Save</string>
     <string name="audio" >Sound</string>
-    <string name="easy" >Easy</string>
-    <string name="medium" >Medium</string>
-    <string name="hard" >Hard</string>
+    <string name="facile" >Easy</string>
+    <string name="medio" >Medium</string>
+    <string name="difficile" >Hard</string>
+    <string name="livelli" >Levels</string>
+    <string name="carriera" >Career</string>
 
 
 

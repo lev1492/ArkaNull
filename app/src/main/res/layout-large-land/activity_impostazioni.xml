@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +8,10 @@
     tools:context=".ImpostazioniActivity">
 
     <RadioGroup
+
         android:id="@+id/activity_impostazioni"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_width="1707dp"
+        android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="33dp"
         android:orientation="vertical"
@@ -22,6 +24,7 @@
 
         <RadioButton
             android:id="@+id/acceleromter"
+            style="@style/AppThemeLand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -29,6 +32,7 @@
 
         <RadioButton
             android:id="@+id/touch"
+            style="@style/AppThemeLand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -37,6 +41,7 @@
     </RadioGroup>
 
     <TextView
+        style="@style/AppThemeLand"
         android:id="@+id/workInProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,19 +53,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        style="@style/AppThemeLand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginEnd="173dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="124dp"
         android:onClick="onSaveSetting"
         android:text="@string/salva"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        style="@style/AppThemeLand"
         android:id="@+id/audioText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,9 +81,10 @@
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/audio"
+        style="@style/AppThemeLand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="321dp"
         android:onClick="onSound"
         android:switchMinWidth="56dp"
@@ -84,6 +92,7 @@
         android:textOff="OFF"
         android:textOn="ON"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.012"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/audioText"
         tools:ignore="MissingConstraints" />

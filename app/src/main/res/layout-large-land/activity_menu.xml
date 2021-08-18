@@ -8,10 +8,8 @@
     >
 
     <Button
+        style="@style/AppThemeLand"
         android:id="@+id/gioca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
         android:onClick="openGioca"
         android:text="@string/gioca"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,21 +18,16 @@
 
 
     <Button
+        style="@style/AppThemeLand"
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
         android:onClick="openClassifica"
         android:text="@string/classifica"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gioca"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/gioca" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        style="@style/AppThemeLand"
         android:onClick="openImpostazioni"
         android:text="@string/impostazioni"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,19 +37,20 @@
         app:layout_constraintVertical_bias="0.141" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/AppThemeLand"
         android:layout_marginStart="296dp"
         android:layout_marginEnd="27dp"
         android:onClick="logOut"
         android:text="@string/logout"
         app:layout_constraintBottom_toTopOf="@+id/gioca"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.869"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
+        style="@style/AppThemeLand"
         android:id="@+id/nomeUtente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

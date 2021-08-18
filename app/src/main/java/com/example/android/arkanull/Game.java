@@ -15,6 +15,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.display.DisplayManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -495,7 +496,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         String score = String.valueOf(dataSnapshot.child("score").getValue());
-
                         Log.d("OTTENGO" , "SCORE" + score);
                     }
                 }

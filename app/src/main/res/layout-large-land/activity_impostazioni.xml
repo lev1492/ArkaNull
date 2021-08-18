@@ -24,7 +24,7 @@
 
         <RadioButton
             android:id="@+id/acceleromter"
-            style="@style/AppThemeLand"
+            style="@style/AppThemeLandTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -32,7 +32,7 @@
 
         <RadioButton
             android:id="@+id/touch"
-            style="@style/AppThemeLand"
+            style="@style/AppThemeLandTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -41,19 +41,19 @@
     </RadioGroup>
 
     <TextView
-        style="@style/AppThemeLand"
+        style="@style/AppThemeLandTablet"
         android:id="@+id/workInProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
-        android:text="Tipo di Input"
+        android:text="@string/type_input"
         app:layout_constraintBottom_toTopOf="@+id/activity_impostazioni"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        style="@style/AppThemeLand"
+        style="@style/AppThemeLandTablet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        style="@style/AppThemeLand"
+        style="@style/AppThemeLandTablet"
         android:id="@+id/audioText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/audio"
-        style="@style/AppThemeLand"
+        style="@style/AppThemeLandTablet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

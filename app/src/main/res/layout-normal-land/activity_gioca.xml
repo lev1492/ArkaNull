@@ -5,27 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_gravity="center_vertical"
+    android:orientation="horizontal"
     tools:context=".GiocaActivity">
 
 
     <Button
         android:id="@+id/livelli"
-        style="@style/AppThemeLandTablet"
+        style="@style/AppThemeLandSmartphone"
+        android:layout_gravity="center_vertical"
         android:onClick="openLivelli"
         android:text="@string/livelli"
         app:layout_constraintTop_toBottomOf="parent" />
 
     <Button
         android:id="@+id/carriera"
-        style="@style/AppThemeLandTablet"
+        style="@style/AppThemeLandSmartphone"
         android:onClick="openCarriera"
         android:text="@string/carriera"
         app:layout_constraintTop_toBottomOf="@+id/livelli" />
 
     <Button
         android:id="@+id/multiplayer"
-        style="@style/AppThemeLandTablet"
+        style="@style/AppThemeLandSmartphone"
         android:onClick="openMultiPlayer"
         android:text="@string/multiplayer"
         app:layout_constraintTop_toBottomOf="@+id/carriera" />

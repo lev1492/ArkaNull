@@ -15,6 +15,8 @@
     <string name="livelli" >Livelli</string>
     <string name="carriera" >Carriera</string>
     <string name="multiplayer" translatable="false">Multiplayer</string>
+    <string name="scores">Punteggi</string>
+    <string name="type_input">Tipo di input</string>
 
 
 

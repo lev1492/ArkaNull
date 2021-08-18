@@ -12,6 +12,10 @@
     <string name="difficile" >Hard</string>
     <string name="livelli" >Levels</string>
     <string name="carriera" >Career</string>
+    <string name="scores">Scores</string>
+    <string name="type_input">Type of input</string>
+
+
 
 
 

@@ -4,26 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".LivelliActivity">
-
 
     <Button
         android:id="@+id/easy"
-        style="@style/AppThemeLandTablet"
+        style="@style/AppThemeLandSmartphone"
         android:onClick="onLevel"
-        android:text="@string/facile" />
+        android:text="@string/facile"
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <Button
         android:id="@+id/normal"
-        style="@style/AppThemeLandTablet"
+        style="@style/AppThemeLandSmartphone"
         android:onClick="onLevel"
         android:text="@string/medio"
         app:layout_constraintTop_toBottomOf="@+id/easy" />
 
     <Button
         android:id="@+id/hard"
-        style="@style/AppThemeLandTablet"
+        style="@style/AppThemeLandSmartphone"
         android:onClick="onLevel"
         android:text="@string/difficile"
         app:layout_constraintTop_toBottomOf="@+id/normal" />

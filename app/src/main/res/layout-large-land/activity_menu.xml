@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/nomeUtente"
             style="@style/AppThemeLandTablet"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="left|fill_vertical"
             android:gravity="center_vertical"
@@ -28,6 +28,7 @@
             style="@style/AppThemeLandTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
             android:layout_gravity="right|fill_vertical"
             android:onClick="logOut"
             android:text="@string/logout" />

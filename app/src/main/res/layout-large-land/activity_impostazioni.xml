@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ImpostazioniActivity">
 
+
     <RadioGroup
-
         android:id="@+id/activity_impostazioni"
-        android:layout_width="1707dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="33dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/audioText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workInProgress">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/type_input"
+            style="@style/AppTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:text="@string/type_input" />
 
         <RadioButton
             android:id="@+id/acceleromter"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppThemePlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -32,7 +33,7 @@
 
         <RadioButton
             android:id="@+id/touch"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppThemePlus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -40,60 +41,40 @@
 
     </RadioGroup>
 
-    <TextView
-        style="@style/AppThemeLandTablet"
-        android:id="@+id/workInProgress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        android:text="@string/type_input"
-        app:layout_constraintBottom_toTopOf="@+id/activity_impostazioni"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        style="@style/AppThemeLandTablet"
+    <androidx.constraintlayout.widget.Group
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginEnd="173dp"
-        android:layout_marginBottom="124dp"
-        android:onClick="onSaveSetting"
-        android:text="@string/salva"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:constraint_referenced_ids="audioText,audio">
 
+    </androidx.constraintlayout.widget.Group>
     <TextView
-        style="@style/AppThemeLandTablet"
         android:id="@+id/audioText"
+        style="@style/AppThemePlus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:layout_marginBottom="3dp"
-        android:text="@string/audio"
-        app:layout_constraintBottom_toTopOf="@+id/audio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_impostazioni" />
+        android:text="@string/audio" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/audio"
-        style="@style/AppThemeLandTablet"
-        android:layout_width="wrap_content"
+        style="@style/AppThemePlus"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="321dp"
+        android:layout_marginEnd="200dp"
         android:onClick="onSound"
         android:switchMinWidth="56dp"
         android:text="@string/audio"
         android:textOff="OFF"
-        android:textOn="ON"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/audioText"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textOn="ON" />
+
+    <Button
+        android:id="@+id/save"
+        style="@style/AppThemePlus"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onSaveSetting"
+        android:text="@string/salva" />
+
+</LinearLayout>

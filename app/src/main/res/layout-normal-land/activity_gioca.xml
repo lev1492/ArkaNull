@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
-    android:orientation="horizontal"
     tools:context=".GiocaActivity">
 
 
     <Button
         android:id="@+id/livelli"
         style="@style/AppThemeLandSmartphone"
-        android:layout_gravity="center_vertical"
+        android:layout_alignParentStart="true"
         android:onClick="openLivelli"
-        android:text="@string/livelli"
-        app:layout_constraintTop_toBottomOf="parent" />
+        android:text="@string/livelli" />
 
     <Button
         android:id="@+id/carriera"
         style="@style/AppThemeLandSmartphone"
+        android:layout_centerHorizontal="true"
         android:onClick="openCarriera"
-        android:text="@string/carriera"
-        app:layout_constraintTop_toBottomOf="@+id/livelli" />
+        android:text="@string/carriera" />
 
     <Button
         android:id="@+id/multiplayer"
         style="@style/AppThemeLandSmartphone"
+        android:layout_alignParentEnd="true"
         android:onClick="openMultiPlayer"
-        android:text="@string/multiplayer"
-        app:layout_constraintTop_toBottomOf="@+id/carriera" />
+        android:text="@string/multiplayer" />
 
-</LinearLayout>
+</RelativeLayout>

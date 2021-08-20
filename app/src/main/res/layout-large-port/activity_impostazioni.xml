@@ -12,12 +12,13 @@
         android:id="@+id/activity_impostazioni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/type_input"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppThemePortraitTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="37dp"
@@ -25,7 +26,7 @@
 
         <RadioButton
             android:id="@+id/acceleromter"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppThemePortraitTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -33,7 +34,7 @@
 
         <RadioButton
             android:id="@+id/touch"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppThemePortraitTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -41,40 +42,34 @@
 
     </RadioGroup>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/audioText"
+        style="@style/AppThemePortraitTablet"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="@string/audio" />
 
-        <TextView
-            android:id="@+id/audioText"
-            style="@style/AppThemeLandTablet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/audio" />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/audio"
+        style="@style/AppThemePortraitTablet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="200dp"
+        android:onClick="onSound"
+        android:switchMinWidth="56dp"
+        android:text="@string/audio"
+        android:textOff="OFF"
+        android:textOn="ON" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/audio"
-            style="@style/AppThemeLandTablet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="200dp"
-            android:onClick="onSound"
-            android:switchMinWidth="56dp"
-            android:text="@string/audio"
-            android:textOff="OFF"
-            android:textOn="ON" />
-
-        <Button
-            android:id="@+id/save"
-            style="@style/AppThemeLandTablet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="20dp"
-            android:onClick="onSaveSetting"
-            android:text="@string/salva" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/save"
+        style="@style/AppThemePortraitTablet"
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onSaveSetting"
+        android:text="@string/salva" />
 
 </LinearLayout>

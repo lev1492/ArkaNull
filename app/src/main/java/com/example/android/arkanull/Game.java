@@ -378,7 +378,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     }
 
     // set the background
-    private void setBackground(Context context) {
+    private void setBackground(@NonNull Context context) {
         background = Bitmap.createBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.background_score));
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         display = wm.getDefaultDisplay();
@@ -386,7 +386,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         display.getSize(size);
     }
 
-
+    @Override
     protected void onDraw(Canvas canvas) {
         //Creates a background only once
         if (roztiahnuty == null) {

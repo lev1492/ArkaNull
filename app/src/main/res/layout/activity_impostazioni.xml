@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/type_input"
-            style="@style/AppThemePlus"
+            style="@style/AppThemePortraitSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="37dp"
@@ -26,7 +26,7 @@
 
         <RadioButton
             android:id="@+id/acceleromter"
-            style="@style/AppThemePlus"
+            style="@style/AppThemePortraitSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -34,7 +34,7 @@
 
         <RadioButton
             android:id="@+id/touch"
-            style="@style/AppThemePlus"
+            style="@style/AppThemePortraitSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -42,22 +42,16 @@
 
     </RadioGroup>
 
-    <androidx.constraintlayout.widget.Group
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="audioText,audio">
-
-    </androidx.constraintlayout.widget.Group>
     <TextView
         android:id="@+id/audioText"
-        style="@style/AppThemePlus"
+        style="@style/AppThemePortraitSmartphone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/audio" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/audio"
-        style="@style/AppThemePlus"
+        style="@style/AppThemePortraitSmartphone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="200dp"
@@ -69,7 +63,7 @@
 
     <Button
         android:id="@+id/save"
-        style="@style/AppThemePlus"
+        style="@style/AppThemePortraitSmartphone"
         android:layout_marginTop="250dp"
         android:layout_marginBottom="20dp"
         android:layout_width="wrap_content"
@@ -78,4 +72,4 @@
         android:onClick="onSaveSetting"
         android:text="@string/salva" />
 
-</LinearLayout>
+</RelativeLayout>

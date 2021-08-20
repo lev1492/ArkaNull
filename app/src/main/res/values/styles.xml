@@ -16,6 +16,15 @@
         <item name="android:layout_marginTop">10dp</item>
     </style>
 
+    <style name="AppImpostazioniSmartphone">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
     <style name="AppThemeSmartphone" parent="AppTheme">
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">75dp</item>
@@ -59,6 +68,15 @@
         <item name="android:layout_marginEnd">20dp</item>
         <item name="android:layout_marginTop">50dp</item>
         <item name="android:layout_marginBottom">50dp</item>
+    </style>
+
+    <style name="AppImpostazioniTablet">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">50dp</item>
     </style>
 
     <style name="AppThemeLandTablet" parent="AppThemeTablet">

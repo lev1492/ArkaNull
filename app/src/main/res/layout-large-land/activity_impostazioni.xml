@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/type_input"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="37dp"
@@ -25,7 +25,7 @@
 
         <RadioButton
             android:id="@+id/acceleromter"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -33,29 +33,22 @@
 
         <RadioButton
             android:id="@+id/touch"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
             android:text="@string/touch" />
 
-    </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
         <TextView
             android:id="@+id/audioText"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/audio" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/audio"
-            style="@style/AppThemeLandTablet"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="200dp"
@@ -65,16 +58,18 @@
             android:textOff="OFF"
             android:textOn="ON" />
 
-        <Button
-            android:id="@+id/save"
-            style="@style/AppThemeLandTablet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="20dp"
-            android:onClick="onSaveSetting"
-            android:text="@string/salva" />
-    </LinearLayout>
+    </RadioGroup>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/save"
+        style="@style/AppImpostazioniTablet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="onSaveSetting"
+        android:text="@string/salva" />
+
+</RelativeLayout>

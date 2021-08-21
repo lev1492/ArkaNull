@@ -59,7 +59,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private SensorManager sManager;
     private Sensor accelerometer;
     private int STATE_INPUT = -1;
-    private boolean SOUND = false;
+    private boolean SOUND;
     private int scoreUpdate = 0;
     private int lifes;
     private int score;
@@ -121,6 +121,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         this.score = score;
         level = 0;
 
+
         // start a gameOver to find out if the game is stopped and if the player has lost it
         start = false;
         gameOver = false;
@@ -165,13 +166,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         return true;
     }
 
-    public void zastavSnimanie() {
+    public void rilevamentoStop() {
         if(STATE_INPUT == ImpostazioniActivity.getAccelerometerInput()){
             sManager.unregisterListener(this);
         }
     }
 
-    public void spustiSnimanie() {
+    public void rilevamentoStart() {
         if(STATE_INPUT == ImpostazioniActivity.getAccelerometerInput()) {
             sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }

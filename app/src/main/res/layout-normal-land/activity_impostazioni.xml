@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,20 +12,18 @@
         android:id="@+id/activity_impostazioni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/type_input"
-            style="@style/AppThemePlus"
+            style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
             android:text="@string/type_input" />
 
         <RadioButton
             android:id="@+id/acceleromter"
-            style="@style/AppThemePlus"
+            style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -33,48 +31,45 @@
 
         <RadioButton
             android:id="@+id/touch"
-            style="@style/AppThemePlus"
+            style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
             android:text="@string/touch" />
 
-    </RadioGroup>
 
-    <androidx.constraintlayout.widget.Group
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="audioText,audio">
+        <TextView
+            android:id="@+id/audioText"
+            style="@style/AppToolBarSmartphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/audio" />
 
-    </androidx.constraintlayout.widget.Group>
-    <TextView
-        android:id="@+id/audioText"
-        style="@style/AppThemePlus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/audio" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/audio"
-        style="@style/AppThemePlus"
+        style="@style/AppToolBarSmartphone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="200dp"
+        android:layout_marginEnd="300dp"
         android:onClick="onSound"
         android:switchMinWidth="56dp"
         android:text="@string/audio"
         android:textOff="OFF"
         android:textOn="ON" />
 
+    </RadioGroup>
+
     <Button
         android:id="@+id/save"
-        style="@style/AppThemePlus"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
+        style="@style/AppToolBarSmartphone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
         android:onClick="onSaveSetting"
         android:text="@string/salva" />
 
-</LinearLayout>
+
+</RelativeLayout>

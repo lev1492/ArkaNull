@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,6 +17,7 @@
 
         <TextView
             android:id="@+id/nomeUtente"
+            style="@style/AppToolBarSmartphone"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_gravity="left|fill_vertical"
@@ -26,38 +26,38 @@
 
         <Button
             android:layout_width="wrap_content"
+            style="@style/AppToolBarSmartphone"
             android:layout_height="wrap_content"
             android:layout_gravity="right|fill_vertical"
             android:onClick="logOut"
             android:text="@string/logout" />
     </Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/gioca"
-            android:layout_marginTop="20dp"
             style="@style/AppThemePortraitSmartphone"
+            android:layout_alignParentTop="true"
             android:onClick="openGioca"
             android:text="@string/gioca" />
 
         <Button
             android:id="@+id/classifica"
             style="@style/AppThemePortraitSmartphone"
+            android:layout_centerVertical="true"
             android:onClick="openClassifica"
-            android:text="@string/classifica"
-            app:layout_constraintTop_toBottomOf="@+id/gioca" />
+            android:text="@string/classifica" />
 
         <Button
             android:id="@+id/impostazioni"
             style="@style/AppThemePortraitSmartphone"
+            android:layout_alignParentBottom="true"
             android:onClick="openImpostazioni"
-            android:text="@string/impostazioni"
-            app:layout_constraintTop_toBottomOf="@+id/classifica" />
-    </LinearLayout>
+            android:text="@string/impostazioni" />
+    </RelativeLayout>
 
 
 </LinearLayout>

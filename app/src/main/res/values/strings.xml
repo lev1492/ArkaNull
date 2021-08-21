@@ -7,18 +7,30 @@
     <string name="logout">Esci</string>
     <string name="accelerometro">Accelerometro</string>
     <string name="touch" translatable="false">Touch</string>
-    <string name="salva" >Salva</string>
-    <string name="audio" >Audio</string>
-    <string name="facile" >Facile</string>
-    <string name="medio" >Medio</string>
-    <string name="difficile" >Difficile</string>
-    <string name="livelli" >Livelli</string>
-    <string name="carriera" >Carriera</string>
+    <string name="salva">Salva</string>
+    <string name="audio">Audio</string>
+    <string name="facile">Facile</string>
+    <string name="medio">Medio</string>
+    <string name="difficile">Difficile</string>
+    <string name="livelli">Livelli</string>
+    <string name="carriera">Carriera</string>
     <string name="multiplayer" translatable="false">Multiplayer</string>
     <string name="scores">Punteggi</string>
     <string name="type_input">Tipo di input</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
 
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
 
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->

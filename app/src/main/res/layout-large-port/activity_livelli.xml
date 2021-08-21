@@ -6,25 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".LivelliActivity">
 
-
     <Button
         android:id="@+id/easy"
-        style="@style/AppThemeLandTablet"
-        android:layout_alignParentStart="true"
+        style="@style/AppThemePortraitTablet"
+        android:layout_alignParentTop="true"
         android:onClick="onLevel"
         android:text="@string/facile" />
 
     <Button
         android:id="@+id/normal"
-        style="@style/AppThemeLandTablet"
-        android:layout_centerHorizontal="true"
+        style="@style/AppThemePortraitTablet"
+        android:layout_centerVertical="true"
         android:onClick="onLevel"
         android:text="@string/medio" />
 
     <Button
         android:id="@+id/hard"
-        style="@style/AppThemeLandTablet"
-        android:layout_alignParentEnd="true"
+        style="@style/AppThemePortraitTablet"
+        android:layout_alignParentBottom="true"
         android:onClick="onLevel"
         android:text="@string/difficile" />
 

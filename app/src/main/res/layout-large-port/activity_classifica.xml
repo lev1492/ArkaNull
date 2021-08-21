@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/punteggi"
-        style="@style/AppThemePortraitSmartphone"
+        style="@style/AppThemePortraitTablet"
         android:layout_alignParentTop="true"
         android:onClick="openPunteggi"
         android:text="@string/scores" />

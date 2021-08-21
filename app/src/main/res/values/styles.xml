@@ -7,81 +7,87 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemePlus" parent="AppTheme">
-        <item name="android:layout_toStartOf">@id/parent</item>
-        <item name="android:layout_toEndOf">@id/parent</item>
-        <item name="android:layout_alignTop">@id/parent</item>
-
+    <style name="AppToolBarSmartphone">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">75dp</item>
         <item name="android:textSize">20sp</item>
-
-
-        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
         <item name="android:layout_marginTop">10dp</item>
-        <item name="android:layout_marginEnd">10dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="AppImpostazioniSmartphone">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="AppThemeSmartphone" parent="AppTheme">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">75dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginStart">70dp</item>
+        <item name="android:layout_marginEnd">70dp</item>
+        <item name="android:layout_marginTop">70dp</item>
+        <item name="android:layout_marginBottom">70dp</item>
     </style>
 
 
-    <style name="AppThemeLandTablet" parent="AppThemePlus">
-        <item name="android:textColor">#FAD201</item>
+    <style name="AppThemePortraitSmartphone" parent="AppThemeSmartphone">
+        <item name="android:textColor">#0000FF</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+
+    <style name="AppThemeLandSmartphone" parent="AppThemeSmartphone">
+        <item name="android:textColor">#FE0000</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+
+
+
+    <style name="AppThemeTablet" parent="AppTheme">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">125dp</item>
         <item name="android:textSize">36sp</item>
-
-        <item name="android:layout_marginStart">100dp</item>
-        <item name="android:layout_marginTop">100dp</item>
-        <item name="android:layout_marginEnd">0dp</item>
-        <item name="android:layout_marginBottom">100dp</item>
-
-        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginStart">140dp</item>
+        <item name="android:layout_marginTop">140dp</item>
+        <item name="android:layout_marginEnd">140dp</item>
+        <item name="android:layout_marginBottom">140dp</item>
     </style>
 
-    <style name="AppThemePortraitSmartphone" parent="AppThemePlus">
-        <item name="android:textColor">#0000FF</item>
-
+    <style name="AppToolBarTablet">
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">75dp</item>
-        <item name="android:textSize">20sp</item>
-
-        <item name="android:layout_marginStart">50dp</item>
-        <item name="android:layout_marginTop">100dp</item>
-        <item name="android:layout_marginEnd">50dp</item>
-        <item name="android:layout_marginBottom">50dp</item>
-
-        <item name="android:layout_gravity">center_horizontal</item>
-    </style>
-
-
-
-
-    <style name="AppThemeLandSmartphone" parent="AppThemePlus">
-        <item name="android:textColor">#FE0000</item>
-
-        <item name="android:layout_width">150dp</item>
-        <item name="android:layout_height">75dp</item>
-        <item name="android:textSize">20sp</item>
-
-        <item name="android:layout_marginStart">80dp</item>
-        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:layout_marginStart">20dp</item>
         <item name="android:layout_marginEnd">20dp</item>
-        <item name="android:layout_marginBottom">20dp</item>
-
-        <item name="android:layout_gravity">center_vertical</item>
-
+        <item name="android:layout_marginTop">50dp</item>
+        <item name="android:layout_marginBottom">50dp</item>
     </style>
 
-    <style name="AppThemePortraitTablet" parent="AppThemePlus">
-        <item name="android:textColor">#66FF00</item>
-
+    <style name="AppImpostazioniTablet">
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">75dp</item>
-        <item name="android:textSize">20sp</item>
-
-        <item name="android:layout_marginStart">50dp</item>
-        <item name="android:layout_marginTop">100dp</item>
-        <item name="android:layout_marginEnd">50dp</item>
-        <item name="android:layout_marginBottom">50dp</item>
-
-        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">50dp</item>
     </style>
+
+    <style name="AppThemeLandTablet" parent="AppThemeTablet">
+        <item name="android:textColor">#FAD201</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+
+    <style name="AppThemePortraitTablet" parent="AppThemeTablet">
+        <item name="android:textColor">#66FF00</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
 </resources>

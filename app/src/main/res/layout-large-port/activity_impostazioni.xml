@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/type_input"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="37dp"
@@ -24,7 +24,7 @@
 
         <RadioButton
             android:id="@+id/acceleromter"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -32,36 +32,36 @@
 
         <RadioButton
             android:id="@+id/touch"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
             android:text="@string/touch" />
 
-        <TextView
-            android:id="@+id/audioText"
-            style="@style/AppToolBarSmartphone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/audio" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/audio"
-            style="@style/AppToolBarSmartphone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="200dp"
-            android:onClick="onSound"
-            android:switchMinWidth="56dp"
-            android:text="@string/audio"
-            android:textOff="OFF"
-            android:textOn="ON" />
+    <TextView
+        android:id="@+id/audioText"
+        style="@style/AppImpostazioniTablet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/audio" />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/audio"
+        style="@style/AppImpostazioniTablet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="200dp"
+        android:onClick="onSound"
+        android:switchMinWidth="56dp"
+        android:text="@string/audio"
+        android:textOff="OFF"
+        android:textOn="ON" />
     </RadioGroup>
 
     <Button
         android:id="@+id/save"
-        style="@style/AppToolBarSmartphone"
+        style="@style/AppImpostazioniTablet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -69,6 +69,5 @@
         android:layout_marginBottom="70dp"
         android:onClick="onSaveSetting"
         android:text="@string/salva" />
-
 
 </RelativeLayout>

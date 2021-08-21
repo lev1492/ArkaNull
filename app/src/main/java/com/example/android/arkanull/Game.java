@@ -166,13 +166,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         return true;
     }
 
-    public void rilevamentoStop() {
+    public void detectionStop() {
         if(STATE_INPUT == ImpostazioniActivity.getAccelerometerInput()){
             sManager.unregisterListener(this);
         }
     }
 
-    public void rilevamentoStart() {
+    public void detectionStart() {
         if(STATE_INPUT == ImpostazioniActivity.getAccelerometerInput()) {
             sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }

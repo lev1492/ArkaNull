@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onPause() {
         super.onPause();
-        game.rilevamentoStop();
+        game.detectionStop();
     }
 
     protected void onResume() {
         super.onResume();
-        game.rilevamentoStart();
+        game.detectionStart();
     }
 
 

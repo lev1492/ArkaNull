@@ -44,6 +44,8 @@ public class LevelGenerator {
 
     public ArrayList<Brick> generateNormal(Context context, int level, Point size){
         bricks.clear();
+        int x = size.x / 6;
+        int y = size.y / 17;
         int brick_Type = 0;
 
         if(level == 2){
@@ -64,7 +66,7 @@ public class LevelGenerator {
             }
 
             for (int j = 1; j < 6; j++) {
-                bricks.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
+                bricks.add(new Brick(context, size.x - j * x , size.y /  2 - i * y , brick_Type));
             }
 
             if(i == 3 && level > 0 && (brick_Type - 1) >= 0){

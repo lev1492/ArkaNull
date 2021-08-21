@@ -27,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // nastavi orientaciu obrazovky
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // se si vuole ripristinare lo stato precedente inserire SCREEN_ORIENTATION_PORTRAIT
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
 
         // vytvori novu hru
         game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());

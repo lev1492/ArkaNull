@@ -3,6 +3,7 @@ package com.example.android.arkanull;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.view.View;
 
 public class Bossfight extends View {
@@ -10,13 +11,14 @@ public class Bossfight extends View {
     private float x;
     private float y;
     private int hp;
-
+    private boolean moving_Right;
     public Bossfight(Context context, float x, float y){
         super(context);
         this.boss = BitmapFactory.decodeResource(getResources(), R.drawable.boss);
         this.hp = 3;
         this.x = x;
         this.y = y;
+        moving_Right = true;
     }
 
     private boolean isClose(float ax, float ay, float bx, float by) {
@@ -31,6 +33,40 @@ public class Bossfight extends View {
         }
         return false;
     }
+
+    public void move(Point size){
+        if (size.x == 1080) {
+            if(moving_Right){
+                setX(this.x + 8);
+                if(this.x >= size.x / 2){
+                    moving_Right = false;
+                }
+            }
+            else{
+                setX(this.x - 8);
+                if(this.x <= size.x / 15){
+                    moving_Right = true;
+                }
+            }
+        }
+
+        else if(size.x == 1800){
+            if(moving_Right){
+                setX(this.x + 8);
+                if(this.x >= size.x / 2){
+                    moving_Right = false;
+                }
+            }
+            else{
+                setX(this.x - 8);
+                if(this.x <= size.x / 4){
+                    moving_Right = true;
+                }
+            }
+        }
+
+    }
+
 
     public Bitmap getBoss() {
         return boss;

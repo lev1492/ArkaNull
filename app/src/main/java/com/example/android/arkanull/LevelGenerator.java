@@ -18,6 +18,8 @@ public class LevelGenerator {
     public ArrayList<Brick> generateEasy(Context context, int level, Point size){
         bricks.clear();
         int brick_Type = 0;
+        int x = size.x / 6;
+        int y = size.y / 17;
 
         if(level == 2 || level == 3){
             brick_Type = 1;
@@ -35,7 +37,7 @@ public class LevelGenerator {
 
 
             for (int j = 1; j < 6; j++) {
-                bricks.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
+                bricks.add(new Brick(context, size.x - j * x , size.y /  2 - i * y , brick_Type));
             }
 
         }
@@ -80,6 +82,8 @@ public class LevelGenerator {
     public ArrayList<Brick> generateHard(Context context, int level, Point size){
         bricks.clear();
         int brick_Type = 1;
+        int x = size.x / 6;
+        int y = size.y / 17;
 
         if(level == 3){
             brick_Type = 2 ;
@@ -97,7 +101,7 @@ public class LevelGenerator {
 
 
             for (int j = 1; j < 6; j++) {
-                bricks.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
+                bricks.add(new Brick(context, size.x - j * x , size.y /  2 - i * y , brick_Type));
             }
 
         }
@@ -105,10 +109,13 @@ public class LevelGenerator {
     }
 
     public ArrayList<Brick> generateBoss(Context context, Point size, int phase) {
+        int x = size.x / 6;
+        int y = size.y / 50;
+
         bricks.clear();
         for (int i = 3; i < 5; i++) {
             for (int j = 1; j < 6; j++) {
-                bricks.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 + 200, phase));
+                bricks.add(new Brick(context, size.x - j * x , size.y /  2 - i * y * 2, phase));
             }
         }
         return bricks;
@@ -116,10 +123,13 @@ public class LevelGenerator {
 
     public ArrayList<Brick> generateEndless(Context context, int level, Point size, int difficulty) {
         int brick_Type;
+        int x = size.x / 6;
+        int y = size.y / 17;
+
         for (int i = 3; i < 7; i++) {
             brick_Type = rand.nextInt(2) + difficulty;
             for (int j = 1; j < 6; j++) {
-                bricks.add(new Brick(context, j * 150, i * 100, brick_Type));
+                bricks.add(new Brick(context, size.x - j * x , size.y /  2 - i * y , brick_Type));
             }
         }
         return bricks;

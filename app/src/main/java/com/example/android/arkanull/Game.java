@@ -145,7 +145,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         lopticka = new Ball(size.x / 2, size.y - 480 );
         paddle = new Paddle(size.x / 2, size.y - 400);
         pUp = new PowerUp(context);
-        boss = new Bossfight(context, size.x / 2 - 300, size.y - 1900);
+        boss = new Bossfight(context, size.x / 3 , size.y / 12);
         zoznam = new ArrayList<Brick>();
 
         //Creates an array with hearts for the bossfight
@@ -281,6 +281,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * @param context
      */
     private void bossfight(Context context){
+        boss.move(size);
 
         if(phase == 0){
             phase++;
@@ -289,13 +290,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             for(int i = 0; i < 3 ; i++) {
                 switch (i) {
                     case 0:
-                        bossLife.add(new Heart(context, size.x / 2 - 500, size.y - 1800));
+                        bossLife.add(new Heart(context, size.x / 25 , size.y / 8));
                         break;
                     case 1:
-                        bossLife.add(new Heart(context, size.x / 2 - 130, size.y - 1300));
+                        bossLife.add(new Heart(context, size.x / 2 - size.x / 10 , size.y / 3));
                         break;
                     case 2:
-                        bossLife.add(new Heart(context, size.x / 2 + 250, size.y - 1800));
+                        bossLife.add(new Heart(context, size.x - (size.x / 4)  , size.y / 8));
                         break;
                 }
             }

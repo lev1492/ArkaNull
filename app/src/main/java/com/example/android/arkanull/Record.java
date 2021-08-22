@@ -16,8 +16,8 @@ import java.util.Comparator;
 
 public class Record {
     private int score;
-    private String displayName;
     private String mail;
+    private String displayName;
 
 
 

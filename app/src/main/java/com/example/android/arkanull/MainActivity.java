@@ -1,10 +1,13 @@
 package com.example.android.arkanull;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Message;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,31 +20,57 @@ public class MainActivity extends AppCompatActivity {
 
     //Arkanull is the main game, with power-ups and different levels
     private static final int ARKANULL = 1;
-
-    private final int EASY = 0;
-    private final int NORMAL = 1;
-    private final int HARD = 2;
+    private static int orientation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // nastavi orientaciu obrazovky
-
+        // set the screen orientation
         // se si vuole ripristinare lo stato precedente inserire SCREEN_ORIENTATION_PORTRAIT
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
+        orientation = getRequestedOrientation();
 
-        // vytvori novu hru
+        Log.d("MainActivity","Sono in onCreate");
+
+
+        // create a new game
         game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
         setContentView(game);
 
-        // vytvori handler a thread
-        VytvorHandler();
+        // create handler a thread
+        createHandler();
         myThread = new UpdateThread(updateHandler);
         myThread.start();
+
     }
 
-    private void VytvorHandler() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        Log.d("MainActivity","Sono in onStart");
+
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        Log.d("MainActivity","Sono in onSaveInstanceState");
+
+
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        Log.d("MainActivity","Sono in onRestoreInstanceState");
+
+    }
+
+    private void createHandler() {
         updateHandler = new Handler() {
             public void handleMessage(Message msg) {
                 game.invalidate();
@@ -53,16 +82,44 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onPause() {
         super.onPause();
+        Log.d("MainActivity","Sono in onPause");
+
         game.detectionStop();
     }
 
     protected void onResume() {
         super.onResume();
+
+        Log.d("MainActivity","Sono in onResume");
+
         game.detectionStart();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Log.d("MainActivity","Sono in onDestroy");
 
 
-
-
+    }
 }
+/*
+    TextView vstup;
+    @Override public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.whatever);
+        vstup = (TextView)findViewById(R.id.whatever);
+
+    }
+
+    @Override public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        state.putCharSequence(App.VSTUP, vstup.getText());
+    }
+
+    @Override public void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        vstup.setText(state.getCharSequence(App.VSTUP));
+    }
+*/

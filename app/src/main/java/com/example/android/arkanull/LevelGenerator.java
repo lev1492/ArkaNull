@@ -15,8 +15,20 @@ public class LevelGenerator {
         this.rand = new Random();
     }
 
+    private ArrayList<Brick> createBreak (Context context, Point size, int brick_Type, int i) {
+        int x = size.x / 6;
+        int y = size.y / 17;
+
+        for (int j = 1; j < 6; j++) {
+            bricks.add(new Brick(context, size.x - j * x , size.y /  2 - i * y , brick_Type));
+        }
+        return bricks;
+    }
+
     public ArrayList<Brick> generateEasy(Context context, int level, Point size){
         bricks.clear();
+        int x = size.x / 6;
+        int y = size.y / 17;
         int brick_Type = 0;
 
         if(level == 2 || level == 3){
@@ -34,8 +46,10 @@ public class LevelGenerator {
             }
 
 
+
+
             for (int j = 1; j < 6; j++) {
-                bricks.add(new Brick(context, size.x - j * 200 , size.y /  2 - i * 100 - 150, brick_Type));
+                bricks.add(new Brick(context, size.x - j * x , size.y /  2 - i * y , brick_Type));
             }
 
         }

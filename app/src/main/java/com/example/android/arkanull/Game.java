@@ -17,9 +17,11 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -461,7 +464,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             soundManager.playBounce(SOUND);
             lopticka.zmenSmer("hore");
         } else if (lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == false) {
-            skontrolujZivoty();
+            checkLives();
         } else if(lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == true) {
             soundManager.playBounce(SOUND);
             lopticka.zmenSmer();
@@ -471,7 +474,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
 
     //If the ball falls, it lower the lifes of the player or sets the game over if the player ran out of lifes
-    private void skontrolujZivoty() {
+    private void checkLives() {
         if (lifes == 1 ) {
             level = 0;
             gameOver = true;
@@ -482,14 +485,39 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
             mDatabase = FirebaseDatabase.getInstance();
             mReference = mDatabase.getReference().child("Record");
-
-            mReference.addValueEventListener(new ValueEventListener() {
+            DAORecord dao = new DAORecord();
+            HashMap<String, Object> userUpdate = new HashMap<>();
+            mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        String score = String.valueOf(dataSnapshot.child("score").getValue());
-                        Log.d("OTTENGO" , "SCORE" + score);
+                    FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
+                    boolean found = false;
+                    if ( user.getEmail() != null) {
+                        Record record = new Record(user.getEmail(), user.getDisplayName(), score);
+
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            String email = String.valueOf(dataSnapshot.child("mail").getValue());
+                            String name = String.valueOf(dataSnapshot.child("displayName").getValue());
+                            String scoreD = String.valueOf(dataSnapshot.child("score").getValue());
+
+                            if (user.getEmail().equals(email)) {
+                                userUpdate.put("mail", user.getEmail());
+                                userUpdate.put("displayName", user.getDisplayName());
+                                userUpdate.put("score", score);
+                                if(score > Integer.parseInt(scoreD)) {
+                                    dao.update(dataSnapshot.getKey(), userUpdate);
+                                }
+                                found = true;
+                            }
+                            Log.d("Game Caricamento Dati", dataSnapshot.getKey() + " " +email + "  " + name + "  " + scoreD);
+
+                        }
+                        if(!found) {
+                            dao.add(record);
+                        }
+
                     }
+
                 }
 
                 @Override

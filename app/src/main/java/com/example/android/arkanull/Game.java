@@ -17,9 +17,11 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -462,7 +465,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             soundManager.playBounce(SOUND);
             lopticka.zmenSmer("hore");
         } else if (lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == false) {
-            skontrolujZivoty();
+            checkLives();
         } else if(lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == true) {
             soundManager.playBounce(SOUND);
             lopticka.zmenSmer();
@@ -472,7 +475,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
 
     //If the ball falls, it lower the lifes of the player or sets the game over if the player ran out of lifes
-    private void skontrolujZivoty() {
+    private void checkLives() {
         if (lifes == 1 ) {
             level = 0;
             gameOver = true;
@@ -481,16 +484,15 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             soundManager.stopMusic();
             invalidate();
 
-            mDatabase = FirebaseDatabase.getInstance();
-            mReference = mDatabase.getReference().child("Record");
-
-            mReference.addValueEventListener(new ValueEventListener() {
+          //  mDatabase = FirebaseDatabase.getInstance();
+         //   mReference = mDatabase.getReference().child("Record").child(DAORecord.RANKING);
+            DAORecord dao = new DAORecord(DAORecord.RANKING);
+            mReference = dao.getDatabaseReference();
+            mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        String score = String.valueOf(dataSnapshot.child("score").getValue());
-                        Log.d("OTTENGO" , "SCORE" + score);
-                    }
+                    FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
+                    DAORecord.saveDate(dao, snapshot, user, score, DAORecord.RANKING);
                 }
 
                 @Override
@@ -508,6 +510,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             start = false;
         }
     }
+
+
 
 
     //This method gets called continuously, it organize the screen according to level and game mode

@@ -11,8 +11,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -23,19 +21,19 @@ public class DAORecord {
     public final static String RANKING = "Ranking";
     public final static String MULTIPLAYER = "Multiplayer";
 
+    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     ArrayList<Record> users = new ArrayList<Record>();
 
     public DAORecord(){
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        databaseReference = db.getReference(Record.class.getSimpleName());
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference(Record.class.getSimpleName());
 
     }
 
     public DAORecord(String childValue){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference().child(Record.class.getSimpleName()).child(childValue);
-
     }
 
     public DatabaseReference getDatabaseReference() {
@@ -43,12 +41,10 @@ public class DAORecord {
     }
 
     public Task<Void> add (Record record){
-
         return databaseReference.push().setValue(record);
     }
 
-    public Task<Void> add (Record record, String childValue){
-
+    public Task<Void> add (Record record, String childValue ){
         return databaseReference.child(childValue).push().setValue(record);
     }
 
@@ -64,20 +60,23 @@ public class DAORecord {
         return databaseReference.child(key).removeValue();
     }
 
-
     public ArrayList<Record> getUsers() {
         return users;
     }
 
-    static class recordScoreComparator implements Comparator<Record> {
+    static class RecordScoreComparator implements Comparator<Record> {
         @Override
         public int compare(Record a, Record b) {
-            return b.getScore() - a.getScore();
+            int compare = b.getScore() - a.getScore();
+            if(compare == 0){
+                compare = a.getDisplayName().compareTo(b.getDisplayName());
+            }
+            return compare;
         }
 
     }
 
-    public ArrayList readClassifica(@NonNull DataSnapshot snapshot) {
+    public ArrayList<Record> readClassifica(@NonNull DataSnapshot snapshot) {
         ArrayList<Record> users = new ArrayList<Record>();
 
         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -87,15 +86,9 @@ public class DAORecord {
             int score = Integer.parseInt(scoreString);
             Record record = new Record(email, name, score);
             users.add(record);
-
-            Log.d("Game Caricamento Dati ReadClassifica", dataSnapshot.getKey() + " " +email + "  " + name + "  " + score);
-
-
         }
-        Collections.sort(users, new recordScoreComparator());
-        for(Record user : users){
-            Log.d("After Sort", user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
-        }
+        // Sort record by score
+        Collections.sort(users, new RecordScoreComparator());
         return users;
     }
 
@@ -103,10 +96,16 @@ public class DAORecord {
         boolean found = false;
         HashMap<String, Object> userUpdate = new HashMap<>();
 
-        //TEST readClassifica, da eliminare -- Funziona
-        ArrayList<Record> users = readClassifica(snapshot);
+        //TEST readClassifica, da eliminare
+        //-- Funziona
+        //ArrayList<Record> users = readClassifica(snapshot);
+        //-- Fine
 
-        if ( user.getEmail() != null) {
+        if ( user.getEmail() == null ) {
+            Log.d("Utente Ospite", "NULL");
+        } else if (user.getEmail().isEmpty()){
+            Log.d("Utente Ospite", "EMPTY");
+        } else {
             Record record = new Record(user.getEmail(), user.getDisplayName(), score);
 
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -132,6 +131,10 @@ public class DAORecord {
 
         }
     }
+
+
+
+
 
 
 }

@@ -30,8 +30,6 @@ public class LevelGenerator {
         int x = size.x / 6;
         int y = size.y / 17;
         int brick_Type = 0;
-        int x = size.x / 6;
-        int y = size.y / 17;
 
         if(level == 2 || level == 3){
             brick_Type = 1;

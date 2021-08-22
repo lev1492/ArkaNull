@@ -28,11 +28,4 @@ public class PunteggiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_punteggi);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ArrayList<Record> users = new ArrayList<Record>();
-      //  DAORecord dao = new DAORecord();
-       // users = dao.readClassifica();
-    }
 }

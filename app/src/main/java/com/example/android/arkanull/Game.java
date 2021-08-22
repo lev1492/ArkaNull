@@ -484,15 +484,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             soundManager.stopMusic();
             invalidate();
 
-          //  mDatabase = FirebaseDatabase.getInstance();
-         //   mReference = mDatabase.getReference().child("Record").child(DAORecord.RANKING);
             DAORecord dao = new DAORecord(DAORecord.RANKING);
             mReference = dao.getDatabaseReference();
             mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
-                    DAORecord.saveDate(dao, snapshot, user, score, DAORecord.RANKING);
+                    dao.saveDate(snapshot, user, score, DAORecord.RANKING);
                 }
 
                 @Override

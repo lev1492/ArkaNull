@@ -484,7 +484,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             invalidate();
 
             mDatabase = FirebaseDatabase.getInstance();
-            mReference = mDatabase.getReference().child("Record");
+            mReference = mDatabase.getReference().child("Record").child(DAORecord.RANKING);
             DAORecord dao = new DAORecord();
             HashMap<String, Object> userUpdate = new HashMap<>();
             mReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -505,7 +505,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                                 userUpdate.put("displayName", user.getDisplayName());
                                 userUpdate.put("score", score);
                                 if(score > Integer.parseInt(scoreD)) {
-                                    dao.update(dataSnapshot.getKey(), userUpdate);
+                                    dao.update(dataSnapshot.getKey(), DAORecord.RANKING, userUpdate);
                                 }
                                 found = true;
                             }
@@ -513,7 +513,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
                         }
                         if(!found) {
-                            dao.add(record);
+                            dao.add(record, DAORecord.RANKING);
                         }
 
                     }

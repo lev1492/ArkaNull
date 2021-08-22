@@ -32,7 +32,7 @@ public class PunteggiActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         ArrayList<Record> users = new ArrayList<Record>();
-        DAORecord dao = new DAORecord();
-        users = dao.readClassifica();
+      //  DAORecord dao = new DAORecord();
+       // users = dao.readClassifica();
     }
 }

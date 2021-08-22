@@ -23,9 +23,20 @@ public class DAORecord {
     private DatabaseReference databaseReference;
     ArrayList<Record> users = new ArrayList<Record>();
 
-    public DAORecord(){
+    public DAORecord(String childValue){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        databaseReference = db.getReference(Record.class.getSimpleName());
+        //databaseReference = db.getReference(Record.class.getSimpleName());
+        databaseReference = db.getReference().child(Record.class.getSimpleName()).child(childValue);
+
+    }
+
+    public DatabaseReference getDatabaseReference() {
+        return databaseReference;
+    }
+
+    public Task<Void> add (Record record){
+
+        return databaseReference.push().setValue(record);
     }
 
     public Task<Void> add (Record record, String childValue){
@@ -35,6 +46,10 @@ public class DAORecord {
 
     public Task<Void> update(String key , String childValue, HashMap<String , Object> hashMap){
         return databaseReference.child(childValue).child(key).updateChildren(hashMap);
+    }
+
+    public Task<Void> update(String key , HashMap<String , Object> hashMap){
+        return databaseReference.child(key).updateChildren(hashMap);
     }
 
     public Task<Void> remove(String key){
@@ -65,6 +80,36 @@ public class DAORecord {
         });
         return users;
 
+    }
+
+    public static void saveDate(DAORecord dao, @NonNull DataSnapshot snapshot, FirebaseUser user, int score, String childValue) {
+        boolean found = false;
+        HashMap<String, Object> userUpdate = new HashMap<>();
+        if ( user.getEmail() != null) {
+            Record record = new Record(user.getEmail(), user.getDisplayName(), score);
+
+            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                String email = String.valueOf(dataSnapshot.child("mail").getValue());
+                String name = String.valueOf(dataSnapshot.child("displayName").getValue());
+                String scoreD = String.valueOf(dataSnapshot.child("score").getValue());
+
+                if (user.getEmail().equals(email)) {
+                    userUpdate.put("mail", user.getEmail());
+                    userUpdate.put("displayName", user.getDisplayName());
+                    userUpdate.put("score", score);
+                    if(score > Integer.parseInt(scoreD)) {
+                        dao.update(dataSnapshot.getKey(), userUpdate);
+                    }
+                    found = true;
+                }
+                Log.d("Game Caricamento Dati", dataSnapshot.getKey() + " " +email + "  " + name + "  " + scoreD);
+
+            }
+            if(!found) {
+                dao.add(record);
+            }
+
+        }
     }
 
 

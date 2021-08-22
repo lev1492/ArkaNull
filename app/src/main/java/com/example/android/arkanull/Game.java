@@ -483,41 +483,15 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             soundManager.stopMusic();
             invalidate();
 
-            mDatabase = FirebaseDatabase.getInstance();
-            mReference = mDatabase.getReference().child("Record").child(DAORecord.RANKING);
-            DAORecord dao = new DAORecord();
-            HashMap<String, Object> userUpdate = new HashMap<>();
+          //  mDatabase = FirebaseDatabase.getInstance();
+         //   mReference = mDatabase.getReference().child("Record").child(DAORecord.RANKING);
+            DAORecord dao = new DAORecord(DAORecord.RANKING);
+            mReference = dao.getDatabaseReference();
             mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
-                    boolean found = false;
-                    if ( user.getEmail() != null) {
-                        Record record = new Record(user.getEmail(), user.getDisplayName(), score);
-
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            String email = String.valueOf(dataSnapshot.child("mail").getValue());
-                            String name = String.valueOf(dataSnapshot.child("displayName").getValue());
-                            String scoreD = String.valueOf(dataSnapshot.child("score").getValue());
-
-                            if (user.getEmail().equals(email)) {
-                                userUpdate.put("mail", user.getEmail());
-                                userUpdate.put("displayName", user.getDisplayName());
-                                userUpdate.put("score", score);
-                                if(score > Integer.parseInt(scoreD)) {
-                                    dao.update(dataSnapshot.getKey(), DAORecord.RANKING, userUpdate);
-                                }
-                                found = true;
-                            }
-                            Log.d("Game Caricamento Dati", dataSnapshot.getKey() + " " +email + "  " + name + "  " + scoreD);
-
-                        }
-                        if(!found) {
-                            dao.add(record, DAORecord.RANKING);
-                        }
-
-                    }
-
+                    DAORecord.saveDate(dao, snapshot, user, score, DAORecord.RANKING);
                 }
 
                 @Override
@@ -535,6 +509,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             start = false;
         }
     }
+
+
 
 
     //This method gets called continuously, it organize the screen according to level and game mode

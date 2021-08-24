@@ -552,7 +552,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
-                    dao.saveDate(snapshot, user, score, DAORecord.RANKING);
+                    dao.saveDate(snapshot, user, score);
                 }
 
                 @Override

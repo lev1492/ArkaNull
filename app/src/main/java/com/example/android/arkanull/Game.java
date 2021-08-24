@@ -32,14 +32,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class Game extends View implements SensorEventListener, View.OnTouchListener {
 
     private Bitmap background;
     private Bitmap redBall;
-    private Bitmap roztiahnuty;
+    private Bitmap extended;
     private Bitmap paddle_p;
     private Bitmap pwrUp;
     private Point point;
@@ -48,8 +48,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private Paint paint;
     private int screenX;
     private DatabaseReference reference;
-    private Ball lopticka;
-    private ArrayList<Brick> zoznam;
+    private Ball ball;
+    private ArrayList<Brick> list;
     private ArrayList<PowerUp> pList;
     private ArrayList<Heart> bossLife;
     private Paddle paddle;
@@ -145,18 +145,18 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         //pwrUp = BitmapFactory.decodeResource(getResources(), R.drawable.pwrup);
 
         // create a new ball, paddle, power up and list of bricks
-        lopticka = new Ball(size.x / 2, size.y - 480 );
+        ball = new Ball(size.x / 2, size.y - 480 );
         paddle = new Paddle(size.x / 2, size.y - 400);
         pUp = new PowerUp(context);
         boss = new Bossfight(context, size.x / 3 , size.y / 12);
-        zoznam = new ArrayList<Brick>();
+        list = new ArrayList<Brick>();
 
         //Creates an array with hearts for the bossfight
         bossLife = new ArrayList<Heart>();
         phase = 0;
         //If the level isn't the boss one, generates bricks
         if(level != BOSS_LVL){
-            vygenerujBricks(context, difficulty);
+            generateBricks(context, difficulty);
         }
         this.setOnTouchListener(this);
 
@@ -180,6 +180,68 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             sManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }
     }
+
+    /*AtomicBoolean actionDownFlag = new AtomicBoolean(true);
+
+    Thread MoveAtLeftThread = new Thread(new Runnable(){
+        public void run(){
+            while(actionDownFlag.get()){
+                if ( paddle.getX() - 100 >= 20 ) {
+                    paddle.setMovementState(paddle.LEFT);
+                    paddle.setX(paddle.getX() - 1);
+                }
+            }
+            paddle.setMovementState(paddle.STOPPED);
+
+        }
+    });
+
+    Thread MoveAtRightThread = new Thread(new Runnable(){
+        public void run(){
+            while(actionDownFlag.get()){
+                if ( paddle.getX() + 100 < size.x - 200) {
+                    paddle.setMovementState(paddle.RIGHT);
+                    paddle.setX(paddle.getX() + 1);
+                }
+            }
+            paddle.setMovementState(paddle.STOPPED);
+        }
+    });
+
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        point = new Point();
+        display.getSize(point);
+        screenX = point.x;
+        if (STATE_INPUT == ImpostazioniActivity.getTouchInput()) {
+            //switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+                // Player has touched the screen
+            if(motionEvent.getAction()==MotionEvent.ACTION_DOWN) {
+
+                paused = false;
+
+                if (motionEvent.getX() > screenX / 2) {
+                    if (paddle.getX() + 100 < size.x - 200) {
+                        MoveAtRightThread.start();
+                    }
+
+                } else {
+                    if (paddle.getX() - 100 >= 20) {
+                        MoveAtLeftThread.start();
+                    }
+
+                }
+            }
+
+                // Player has removed finger from screen
+                //case MotionEvent.ACTION_UP:
+            if(motionEvent.getAction()==MotionEvent.ACTION_UP){
+               // paddle.setMovementState(paddle.STOPPED);
+                actionDownFlag.set(false);
+            }
+        }
+        return true;
+    }*/
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
@@ -219,7 +281,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         return true;
     }
 
-    // zmena akcelerometera
+    // change accelerometer
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -237,7 +299,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    // sluzi na pozastavenie hry v pripade novej hry
+    // serves to suspend the game in case of a new game
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (gameOver == true && start == false) {
@@ -259,20 +321,20 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * @param context
      * @param difficulty
      */
-    private void vygenerujBricks(Context context, int difficulty) {
+    private void generateBricks(Context context, int difficulty) {
         if (level != BOSS_LVL) {
             if (level > 5) {
                 levelGenerator.generateEndless(context, level, size, difficulty);
             } else {
                 switch (difficulty) {
                     case EASY:
-                        zoznam = levelGenerator.generateEasy(context, level, size);
+                        list = levelGenerator.generateEasy(context, level, size);
                         break;
                     case NORMAL:
-                        zoznam = levelGenerator.generateNormal(context, level, size);
+                        list = levelGenerator.generateNormal(context, level, size);
                         break;
                     case HARD:
-                        zoznam = levelGenerator.generateHard(context, level, size);
+                        list = levelGenerator.generateHard(context, level, size);
                         break;
                 }
             }
@@ -288,7 +350,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
         if(phase == 0){
             phase++;
-            zoznam = levelGenerator.generateBoss(context, size, phase);
+            list = levelGenerator.generateBoss(context, size, phase);
             soundManager.playBossMusic(SOUND);
             for(int i = 0; i < 3 ; i++) {
                 switch (i) {
@@ -312,27 +374,27 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         if(vulnerable){
             for(int i = 0; i < bossLife.size(); i++){
                 Heart d = bossLife.get(i);
-                if(d.isHit(lopticka.getX(),lopticka.getY())){
+                if(d.isHit(ball.getX(),ball.getY())){
                     soundManager.playHrtSound(SOUND);
                     //If you hit the heart the ball bounce
-                    lopticka.zmenSmer();
+                    ball.changeDirection();
                     bossLife.remove(i);
                     vulnerable = false;
 
                     //If there are lifes left, go to the next phase
                     if(phase < 3){
                         phase++;
-                        zoznam = levelGenerator.generateBoss(context, size, phase);
+                        list = levelGenerator.generateBoss(context, size, phase);
                     }
                 }
             }
         }
-        skontrolujOkraje(false);
-        if(lopticka.NarazPaddle(paddle.getX(), paddle.getY())) soundManager.playBounce(SOUND);
+        checkEdges(false);
+        if(ball.ImpactPaddle(paddle.getX(), paddle.getY())) soundManager.playBounce(SOUND);
 
         //Check for collisions with bricks
-        for (int i = 0; i < zoznam.size(); i++) {
-            Brick b = zoznam.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            Brick b = list.get(i);
 
             //Move the brick if it has the right type
             if(b.getType() == 3){
@@ -340,9 +402,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             }
 
             //Detect collision with the bricks if the power up effect is not active
-            if (lopticka.NarazBrick(b.getX(), b.getY(), false) ) {
+            if (ball.ImpactBrick(b.getX(), b.getY(), false) ) {
                 if(b.getHp() == 0){
-                    zoznam.remove(i);
+                    list.remove(i);
                     soundManager.playBrickHit(SOUND);
                     score = score + 80;
                 }
@@ -353,7 +415,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 }
             }
         }
-        lopticka.pohni();
+        ball.pohni();
     }
 
     /**
@@ -361,7 +423,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * @return
      */
     private boolean isVulnerable(){
-        if(zoznam.isEmpty()){
+        if(list.isEmpty()){
             return true;
         }
         return false;
@@ -375,7 +437,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             score = score + 5000;
             ++level;
             resetLevel();
-            lopticka.zvysRychlost(level);
+            ball.increaseSpeed(level);
             start = false;
             soundManager.stopMusic();
             soundManager.playGameMusic(SOUND);
@@ -394,14 +456,14 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     @Override
     protected void onDraw(Canvas canvas) {
         //Creates a background only once
-        if (roztiahnuty == null) {
-            roztiahnuty = Bitmap.createScaledBitmap(background, size.x, size.y, false);
+        if (extended == null) {
+            extended = Bitmap.createScaledBitmap(background, size.x, size.y, false);
         }
-        canvas.drawBitmap(roztiahnuty, 0, 0, paint);
+        canvas.drawBitmap(extended, 0, 0, paint);
 
         //Draw the ball
         paint.setColor(Color.RED);
-        canvas.drawBitmap(redBall, lopticka.getX(), lopticka.getY(), paint);
+        canvas.drawBitmap(redBall, ball.getX(), ball.getY(), paint);
 
         //Draw power ups
         if(pUp.getSpawned() && mode == 1 && !pUp.getPwrUp().isRecycled()){
@@ -429,19 +491,19 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
         //draw bricks
         paint.setColor(Color.GREEN);
-        for (int i = 0; i < zoznam.size(); i++) {
-            Brick b = zoznam.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            Brick b = list.get(i);
             r = new RectF(b.getX(), b.getY(), b.getX() + 100, b.getY() + 80);
             canvas.drawBitmap(b.getBrick(), null, r, paint);
         }
 
-        // vykresli text
+        // draw text
         paint.setColor(Color.WHITE);
         paint.setTextSize(50);
         canvas.drawText("" + lifes, 400, 100, paint);
         canvas.drawText("" + score, 700, 100, paint);
 
-        // v pripade prehry vykresli "Game over!"
+        // draw "Game over!" in case of loss
         if (gameOver) {
             paint.setColor(Color.RED);
             paint.setTextSize(100);
@@ -454,21 +516,21 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * bounce even if it touches the bottom edge
      * @param b
      */
-    private void skontrolujOkraje(boolean b) {
-        if (lopticka.getX() + lopticka.getxRychlost() >= size.x - 60) {
+    private void checkEdges(boolean b) {
+        if (ball.getX() + ball.getxSpeed() >= size.x - 60) {
             soundManager.playBounce(SOUND);
-            lopticka.zmenSmer("prava");
-        } else if (lopticka.getX() + lopticka.getxRychlost() <= 0) {
+            ball.changeDirection("prava");
+        } else if (ball.getX() + ball.getxSpeed() <= 0) {
             soundManager.playBounce(SOUND);
-            lopticka.zmenSmer("lava");
-        } else if (lopticka.getY() + lopticka.getyRychlost() <= 150) {
+            ball.changeDirection("lava");
+        } else if (ball.getY() + ball.getySpeed() <= 150) {
             soundManager.playBounce(SOUND);
-            lopticka.zmenSmer("hore");
-        } else if (lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == false) {
+            ball.changeDirection("hore");
+        } else if (ball.getY() + ball.getySpeed() >= size.y - 200 && b == false) {
             checkLives();
-        } else if(lopticka.getY() + lopticka.getyRychlost() >= size.y - 200 && b == true) {
+        } else if(ball.getY() + ball.getySpeed() >= size.y - 200 && b == true) {
             soundManager.playBounce(SOUND);
-            lopticka.zmenSmer();
+            ball.changeDirection();
         }
     }
 
@@ -501,10 +563,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
         } else {
             lifes--;
-            lopticka.setX(size.x / 2);
-            lopticka.setY(size.y - 480);
-            lopticka.vytvorRychlost();
-            lopticka.zvysRychlost(level);
+            ball.setX(size.x / 2);
+            ball.setY(size.y - 480);
+            ball.createSpeed();
+            ball.increaseSpeed(level);
             start = false;
         }
     }
@@ -536,19 +598,19 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * The classic game modes has no power ups or bricks with different effects
      */
     public void classic(){
-        vyhra();
-        skontrolujOkraje(false);
-        lopticka.NarazPaddle(paddle.getX(), paddle.getY());
-        for (int i = 0; i < zoznam.size(); i++) {
-            Brick b = zoznam.get(i);
-            if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
-                zoznam.remove(i);
+        win();
+        checkEdges(false);
+        ball.ImpactPaddle(paddle.getX(), paddle.getY());
+        for (int i = 0; i < list.size(); i++) {
+            Brick b = list.get(i);
+            if (ball.ImpactBrick(b.getX(), b.getY(), false)) {
+                list.remove(i);
                 soundManager.playBrickHit(SOUND);
                 score = score + 80;
 
             }
         }
-        lopticka.pohni();
+        ball.pohni();
     }
 
     /**
@@ -557,37 +619,37 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public void arkanull(){
         if(!soundManager.getGameMusic().isPlaying()) soundManager.playGameMusic(SOUND);
 
-        vyhra();
+        win();
 
         //If the timer is different than 0, then the power up is in effect and by passing true we make the ball bounce even if it falls
         if(timer != 0){
-            skontrolujOkraje(true);
+            checkEdges(true);
         }
         else{
-            skontrolujOkraje(false);
+            checkEdges(false);
         }
 
-        if(lopticka.NarazPaddle(paddle.getX(), paddle.getY())) soundManager.playBounce(SOUND);
+        if(ball.ImpactPaddle(paddle.getX(), paddle.getY())) soundManager.playBounce(SOUND);
 
         //This for cycle detects collision with the bricks
-        for (int i = 0; i < zoznam.size(); i++) {
-            Brick b = zoznam.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            Brick b = list.get(i);
 
             //If the brick is the specified type, it moves
             if (b.getType() == 3) {
                 b.move(size);
             }
 
-            //The power up is in effect, by passing true to NarazBrick we don't make the ball bounce off bricks and it pierce through every type of them
+            //The power up is in effect, by passing true to ImpactBrick we don't make the ball bounce off bricks and it pierce through every type of them
             if (timer != 0) {
-                if (lopticka.NarazBrick(b.getX(), b.getY(), true)) {
+                if (ball.ImpactBrick(b.getX(), b.getY(), true)) {
                     if (b.getHp() == 0) {
-                        zoznam.remove(i);
+                        list.remove(i);
                         soundManager.playBrickHit(SOUND);
                         score = score + 80;
                     } else {
                         soundManager.playBrickHit(SOUND);
-                        zoznam.remove(i);
+                        list.remove(i);
                         score = score + 100;
                     }
                 }
@@ -595,7 +657,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             }
 
             //If the power up is not in effect, by passing false to .NazarBrick we make the ball bounce off bricks and the bricks also have hit points before getting destroyed
-            else if (lopticka.NarazBrick(b.getX(), b.getY(), false)) {
+            else if (ball.ImpactBrick(b.getX(), b.getY(), false)) {
                 if (b.getHp() == 0) {
 
                     //Randomly spawns a power up if there is none already active or on screen
@@ -604,7 +666,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                         pUp.spawn(b.getX(), b.getY());
                     }
                     soundManager.playBrickHit(SOUND);
-                    zoznam.remove(i);
+                    list.remove(i);
 
                     score = score + 80;
                 } else {
@@ -615,7 +677,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
             }
         }
-        lopticka.pohni();
+        ball.pohni();
         if(pUp.getPwrUp() != null){
             if(!(pUp.getPwrUp().isRecycled())){
                 updatePwrUp();
@@ -645,19 +707,19 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * Reset the level with new bricks
      */
     private void resetLevel() {
-        lopticka.setX(size.x / 2);
-        lopticka.setY(size.y - 480);
-        lopticka.vytvorRychlost();
-        zoznam = new ArrayList<Brick>();
-        vygenerujBricks(context, difficulty);
+        ball.setX(size.x / 2);
+        ball.setY(size.y - 480);
+        ball.createSpeed();
+        list = new ArrayList<Brick>();
+        generateBricks(context, difficulty);
     }
 
     /**
      * If you destroyed every brick in a level, this method destroys power-ups created and reset the timer, then
      * it loads the next level
      */
-    private void vyhra() {
-        if (zoznam.isEmpty()) {
+    private void win() {
+        if (list.isEmpty()) {
             if(pUp.getSpawned()){
                 pUp.pwrUp().recycle();
                 pUp.setSpawned(false);
@@ -665,7 +727,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             timer = 0;
             ++level;
             resetLevel();
-            lopticka.zvysRychlost(level);
+            ball.increaseSpeed(level);
             start = false;
         }
     }

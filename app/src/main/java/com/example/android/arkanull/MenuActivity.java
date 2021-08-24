@@ -20,7 +20,7 @@ public class MenuActivity extends AppCompatActivity {
         TextView titolo = findViewById(R.id.nomeUtente);
         String nomeUtente = getIntent().getStringExtra("nomeUtente");
         if( nomeUtente == null ) {
-            nomeUtente = "OspiteNull";
+            nomeUtente = "Guest";
         } else if (nomeUtente.isEmpty() ) {
             nomeUtente = "OspiteEmpty";
         }

@@ -125,7 +125,7 @@ public class Ball {
     }
 
     // Moves by the specified speed
-    protected void pohni() {
+    protected void setSpeed() {
         x = x + xSpeed;
         y = y + ySpeed;
     }

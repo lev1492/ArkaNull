@@ -415,7 +415,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 }
             }
         }
-        ball.pohni();
+        ball.setSpeed();
     }
 
     /**
@@ -610,7 +610,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
             }
         }
-        ball.pohni();
+        ball.setSpeed();
     }
 
     /**
@@ -677,12 +677,31 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
             }
         }
-        ball.pohni();
+        ball.setSpeed();
         if(pUp.getPwrUp() != null){
             if(!(pUp.getPwrUp().isRecycled())){
                 updatePwrUp();
             }
         }
+    }
+
+    /**
+     * The career game modes with different levels
+     */
+    public void career(){
+        win();
+        checkEdges(false);
+        ball.ImpactPaddle(paddle.getX(), paddle.getY());
+        for (int i = 0; i < list.size(); i++) {
+            Brick b = list.get(i);
+            if (ball.ImpactBrick(b.getX(), b.getY(), false)) {
+                list.remove(i);
+                soundManager.playBrickHit(SOUND);
+                score = score + 80;
+
+            }
+        }
+        ball.setSpeed();
     }
 
     /**

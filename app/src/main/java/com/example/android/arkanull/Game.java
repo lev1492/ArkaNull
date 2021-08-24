@@ -689,21 +689,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * The career game modes with different levels
      */
     public void career(){
-        if(!soundManager.getGameMusic().isPlaying()) soundManager.playGameMusic(SOUND);
 
-        win();
-        checkEdges(false);
-        ball.ImpactPaddle(paddle.getX(), paddle.getY());
-        for (int i = 0; i < list.size(); i++) {
-            Brick b = list.get(i);
-            if (ball.ImpactBrick(b.getX(), b.getY(), false)) {
-                list.remove(i);
-                soundManager.playBrickHit(SOUND);
-                score = score + 80;
-
-            }
-        }
-        ball.setSpeed();
     }
 
     /**

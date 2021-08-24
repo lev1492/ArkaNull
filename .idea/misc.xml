@@ -8,6 +8,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/drawable/ic_launchers_background.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_carriera.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/xml/root_preferences.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/domen/AndroidStudioProjects/ArkaNull/app/src/main/res/drawable/ic_launchers_background.xml" value="0.119921875" />
         <entry key="..\:/Users/domen/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-land/activity_carriera.xml" value="0.18775510204081633" />
         <entry key="..\:/Users/domen/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-land/activity_classifica.xml" value="0.1" />

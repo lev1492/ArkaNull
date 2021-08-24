@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Arkanoid</string>
+    <string name="app_name" translatable="false">ArkaNull</string>
 
     <string name="gioca">Gioca</string>
     <string name="classifica">Classifica</string>

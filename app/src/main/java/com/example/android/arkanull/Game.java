@@ -656,7 +656,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 timer--;
             }
 
-            //If the power up is not in effect, by passing false to .NazarBrick we make the ball bounce off bricks and the bricks also have hit points before getting destroyed
+            //If the power up is not in effect, by passing false to .ImpactBrick we make the ball bounce off bricks and the bricks also have hit points before getting destroyed
             else if (ball.ImpactBrick(b.getX(), b.getY(), false)) {
                 if (b.getHp() == 0) {
 
@@ -689,6 +689,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * The career game modes with different levels
      */
     public void career(){
+        if(!soundManager.getGameMusic().isPlaying()) soundManager.playGameMusic(SOUND);
+
         win();
         checkEdges(false);
         ball.ImpactPaddle(paddle.getX(), paddle.getY());

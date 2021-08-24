@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 
 public class DAORecord {
 
@@ -26,14 +25,14 @@ public class DAORecord {
     ArrayList<Record> users = new ArrayList<Record>();
 
     public DAORecord(){
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference(Record.class.getSimpleName());
 
     }
 
     public DAORecord(String childValue){
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        databaseReference = db.getReference().child(Record.class.getSimpleName()).child(childValue);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child(Record.class.getSimpleName()).child(childValue);
     }
 
     public DatabaseReference getDatabaseReference() {
@@ -92,14 +91,9 @@ public class DAORecord {
         return users;
     }
 
-    public void saveDate(@NonNull DataSnapshot snapshot, FirebaseUser user, int score, String childValue) {
+    public void saveDate(@NonNull DataSnapshot snapshot, FirebaseUser user, int score) {
         boolean found = false;
         HashMap<String, Object> userUpdate = new HashMap<>();
-
-        //TEST readClassifica, da eliminare
-        //-- Funziona
-        //ArrayList<Record> users = readClassifica(snapshot);
-        //-- Fine
 
         if ( user.getEmail() == null ) {
             Log.d("Utente Ospite", "NULL");

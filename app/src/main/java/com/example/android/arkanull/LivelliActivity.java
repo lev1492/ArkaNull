@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 public class LivelliActivity extends AppCompatActivity {
 
+    public boolean flagGMode;
+
     private static int LEVEL;
 
     public static int getLEVEL() {
@@ -26,7 +28,8 @@ public class LivelliActivity extends AppCompatActivity {
     }
 
     public void onLevel (View view){
-
+        //flag che indica la modalità di gioco aracade
+        MainActivity.flagGMode = true;
         switch (view.getId()){
             case R.id.easy:
                 LEVEL = Game.getEASY();

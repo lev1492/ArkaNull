@@ -1,6 +1,8 @@
 package com.example.android.arkanull;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -81,6 +83,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private final static int EASY = 0;
     private final static int NORMAL = 1;
     private final static int HARD = 2;
+
+    private final static int CLASSIC = 0;
+    private final static int ARKANULL = 1;
+    private final static int CAREER = 2;
+
     private final int BOSS_LVL = 1;
     private int difficulty;
     private int phase;
@@ -102,6 +109,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public static int getHARD() {
         return HARD;
     }
+
 
 
     /**
@@ -181,6 +189,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         }
     }
 
+    // per rendere il movimento del paddle fluido quando si mantiene il dito premuto sul touch...on developement
     /*AtomicBoolean actionDownFlag = new AtomicBoolean(true);
 
     Thread MoveAtLeftThread = new Thread(new Runnable(){
@@ -299,7 +308,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    // serves to suspend the game in case of a new game
+    // suspend the game in case of a new game
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (gameOver == true && start == false) {
@@ -588,8 +597,10 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     classic();
 
                 case 1:
-
                     arkanull();
+
+                case 2:
+                    career();
             }
         }
     }
@@ -607,7 +618,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 list.remove(i);
                 soundManager.playBrickHit(SOUND);
                 score = score + 80;
-
             }
         }
         ball.setSpeed();
@@ -689,7 +699,33 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * The career game modes with different levels
      */
     public void career(){
+        if(list.size()==0){
+            paused = true;
+            CarrieraActivity.nextLevel++;
+            Toast.makeText(this.getContext(),"Hai Vinto", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this.getContext(), CarrieraActivity.class);
+            this.getContext().startActivity(intent);
+        }
+        win();
+        checkEdges(false);
+        ball.ImpactPaddle(paddle.getX(), paddle.getY());
+        for (int i = 0; i < list.size(); i++) {
+            Brick b = list.get(i);
+            if (ball.ImpactBrick(b.getX(), b.getY(), false)) {
+                list.remove(i);
+                soundManager.playBrickHit(SOUND);
+                score = score + 80;
 
+            }
+        }
+
+        ball.setSpeed();
+        /*if(list.size()==0){
+            Toast.makeText(this.getContext(),"Hai Vinto", Toast.LENGTH_SHORT).show();
+            paused = true;
+            Intent intent = new Intent(this.getContext(), CarrieraActivity.class);
+            this.getContext().startActivity(intent);
+        }*/
     }
 
     /**

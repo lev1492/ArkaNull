@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static boolean flagGMode;
     private Game game;
     private UpdateThread myThread;
     private Handler updateHandler;
@@ -20,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Arkanull is the main game, with power-ups and different levels
     private static final int ARKANULL = 1;
+
+    //Career is the game that stops the game when the bricks end.
+    private static final int CAREER = 2;
+
     private static int orientation;
 
     @Override
@@ -35,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         // create a new game
-        game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
+        //game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
+        if(!flagGMode){
+          game = new Game(this, 3, 0, CAREER, CarrieraActivity.getLEVEL());
+        }else {
+          game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
+        }
         setContentView(game);
 
         // create handler a thread

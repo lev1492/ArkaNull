@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GiocaActivity">
+    tools:context=".CarrieraActivity">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:clickable="false"
+                android:enabled="false"
+                android:onClick="level2"
                 android:text="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -39,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="3"
-                android:clickable="false"
+                android:enabled="false"
                 android:text="3"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -48,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="4"
-                android:clickable="false"
+                android:enabled="false"
                 android:text="4"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
         </TableRow>
@@ -62,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
-                android:clickable="false"
+                android:enabled="false"
                 android:text="5"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -71,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
-                android:clickable="false"
+                android:enabled="false"
                 android:text="6"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -80,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="3"
+                android:enabled="false"
                 android:text="7"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -88,6 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="4"
+                android:enabled="false"
                 android:text="8"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
         </TableRow>
@@ -101,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:enabled="false"
                 android:text="9"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -109,6 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
+                android:enabled="false"
                 android:text="10"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -117,6 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="3"
+                android:enabled="false"
                 android:text="11"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -125,6 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="4"
+                android:enabled="false"
                 android:text="12"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
         </TableRow>
@@ -138,6 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:enabled="false"
                 android:text="13"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -146,6 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
+                android:enabled="false"
                 android:text="14"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -154,6 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="3"
+                android:enabled="false"
                 android:text="15"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -162,6 +172,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="4"
+                android:enabled="false"
                 android:text="16"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
         </TableRow>
@@ -175,6 +186,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:enabled="false"
                 android:text="17"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -183,6 +195,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
+                android:enabled="false"
                 android:text="18"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -191,6 +204,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="3"
+                android:enabled="false"
                 android:text="19"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
@@ -199,6 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_column="4"
+                android:enabled="false"
                 android:text="20"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
         </TableRow>

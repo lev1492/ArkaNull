@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,8 +41,21 @@ public class CarrieraActivity extends AppCompatActivity {
         }
     }
 
+    public void level(View view){
+        MainActivity.flagGMode = false;
+        TextView levelText = findViewById(view.getId());
+        int level = Integer.parseInt(levelText.getText().toString());
+        intent = new Intent(this , MainActivity.class);
+        LEVEL = level;
+        nextLevel=level;
+        Toast.makeText( view.getContext(), "Livello " + level, Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+    }
+/*
     public void level1(View view){
         MainActivity.flagGMode = false;
+        TextView levelText = findViewById(R.id.level1);
+        int level = Integer.parseInt(levelText.getText().toString());
         intent = new Intent(this , MainActivity.class);
         LEVEL = 1;
         nextLevel=1;
@@ -130,5 +144,5 @@ public class CarrieraActivity extends AppCompatActivity {
         Toast.makeText( view.getContext(), "Livello 10", Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }
-
+*/
 }

@@ -80,9 +80,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     boolean paused = true;
     private Random rand = new Random();
 
-    private final static int EASY = 0;
-    private final static int NORMAL = 1;
-    private final static int HARD = 2;
+    public final static int EASY = 0;
+    public final static int NORMAL = 1;
+    public final static int HARD = 2;
 
     private final static int CLASSIC = 0;
     private final static int ARKANULL = 1;

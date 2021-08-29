@@ -21,7 +21,11 @@ public class PunteggiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_punteggi);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         classifica = getIntent().getParcelableArrayListExtra("classifica");
         for(Record user : classifica ){
             Log.d("PunteggiActivity", user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
@@ -33,8 +37,6 @@ public class PunteggiActivity extends AppCompatActivity {
         listViewClassifica.setAdapter(classificaAdapter);
 
     }
-
-
 }
 
 

@@ -42,10 +42,17 @@ public class ImpostazioniActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_impostazioni);
-        intent = new Intent(this, MenuActivity.class);
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        intent = new Intent(this, MenuActivity.class);
         RadioButton acceleromterButton = findViewById(R.id.acceleromter);
         RadioButton touchButton = findViewById(R.id.touch);
+
         if ( typeInput == ACCELEROMETER_INPUT) {
             acceleromterButton.setChecked(true);
         } else if ( typeInput == TOUCH_INPUT) {
@@ -57,8 +64,6 @@ public class ImpostazioniActivity extends AppCompatActivity {
         } else {
             audio.setChecked(false);
         }
-
-
     }
 
     public void onTypeInputClicked(View view) {

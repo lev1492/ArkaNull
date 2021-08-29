@@ -91,7 +91,7 @@ public class DAORecord {
         return users;
     }
 
-    public void saveDate(@NonNull DataSnapshot snapshot, FirebaseUser user, int score) {
+    public void saveScore(@NonNull DataSnapshot snapshot, FirebaseUser user, int score) {
         boolean found = false;
         HashMap<String, Object> userUpdate = new HashMap<>();
 
@@ -122,13 +122,6 @@ public class DAORecord {
             if(!found) {
                 add(record);
             }
-
         }
     }
-
-
-
-
-
-
 }

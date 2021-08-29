@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
+
 public class MenuActivity extends AppCompatActivity {
 
 
@@ -17,17 +19,29 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         TextView titolo = findViewById(R.id.nomeUtente);
-        String nomeUtente = getIntent().getStringExtra("nomeUtente");
+        TextView logout = findViewById(R.id.logout);
+        FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
+        String nomeUtente = user.getDisplayName();
+        String logoutText;
         //TODO nomeUtente = ""; AND invece di logout -> accedi
         if( nomeUtente == null ) {
-            nomeUtente = "Guest";
+            nomeUtente = "";
+            logoutText = "Accedi";
+            logout.setText(logoutText);
+
         } else if (nomeUtente.isEmpty() ) {
-            nomeUtente = "OspiteEmpty";
+            nomeUtente = "";
+            logoutText = "Accedi";
+            logout.setText(logoutText);
         }
         titolo.setText(nomeUtente);
         Log.i("onCreate NomeUtente: ", nomeUtente);
-
     }
 
     public void openGioca(View view){
@@ -49,6 +63,5 @@ public class MenuActivity extends AppCompatActivity {
         LoginActivity.logOut();
         Intent intent = new Intent(this , LoginActivity.class);
         startActivity(intent);
-        Toast.makeText( view.getContext(), "Logout effettuato con successo", Toast.LENGTH_SHORT).show();
     }
 }

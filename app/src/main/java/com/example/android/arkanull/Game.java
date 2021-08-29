@@ -1,8 +1,6 @@
 package com.example.android.arkanull;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -14,12 +12,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -31,10 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class Game extends View implements SensorEventListener, View.OnTouchListener {
@@ -561,7 +555,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
-                    dao.saveDate(snapshot, user, score);
+                    dao.saveScore(snapshot, user, score);
                 }
 
                 @Override

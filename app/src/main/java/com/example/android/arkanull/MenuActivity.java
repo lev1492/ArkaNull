@@ -28,19 +28,17 @@ public class MenuActivity extends AppCompatActivity {
         TextView logout = findViewById(R.id.logout);
         FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
         String nomeUtente = user.getDisplayName();
-        String logoutText;
-        //TODO nomeUtente = ""; AND invece di logout -> accedi
+        String logoutText = getResources().getString(R.string.logout);
         if( nomeUtente == null ) {
             nomeUtente = "";
-            logoutText = "Accedi";
+            logoutText = getResources().getString(R.string.login);
             logout.setText(logoutText);
-
         } else if (nomeUtente.isEmpty() ) {
             nomeUtente = "";
-            logoutText = "Accedi";
-            logout.setText(logoutText);
+            logoutText = getResources().getString(R.string.login);
         }
         titolo.setText(nomeUtente);
+        logout.setText(logoutText);
         Log.i("onCreate NomeUtente: ", nomeUtente);
     }
 

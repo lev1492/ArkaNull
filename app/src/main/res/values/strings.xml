@@ -4,6 +4,7 @@
     <string name="gioca">Gioca</string>
     <string name="classifica">Classifica</string>
     <string name="impostazioni">Impostazioni</string>
+    <string name="login">Accedi</string>
     <string name="logout">Esci</string>
     <string name="accelerometro">Accelerometro</string>
     <string name="touch" translatable="false">Touch</string>
@@ -18,12 +19,12 @@
     <string name="scores">Punteggi</string>
     <string name="type_input">Tipo di input</string>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="messages_header" translatable="false">Messages</string>
+    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>

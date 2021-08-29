@@ -600,7 +600,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     arkanull();
 
                 case 2:
-                    career();
+                    //career();
             }
         }
     }
@@ -698,6 +698,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     /**
      * The career game modes with different levels
      */
+/*
     public void career(){
         if(list.size()==0){
             paused = true;
@@ -726,7 +727,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             Intent intent = new Intent(this.getContext(), CarrieraActivity.class);
             this.getContext().startActivity(intent);
         }*/
-    }
+  // }
 
     /**
      * If a power-ups spawns, it follow those instruction to fall and detect collision with the paddle (grants power up)

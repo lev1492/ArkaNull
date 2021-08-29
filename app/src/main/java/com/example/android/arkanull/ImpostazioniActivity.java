@@ -17,8 +17,6 @@ import android.widget.Switch;
 public class ImpostazioniActivity extends AppCompatActivity {
 
     Intent intent;
-    private final static String ACCELEROMETRO = "accelerometro";
-    private final static String TOUCH = "touch";
 
     private static int ACCELEROMETER_INPUT = 1;
     private static int TOUCH_INPUT = 2;

@@ -5,9 +5,9 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,17 +26,18 @@ public class ClassificaActivity extends AppCompatActivity {
     }
 
     public void openPunteggi(View view){
-
+        Intent intent = new Intent(this , PunteggiActivity.class);
         DAORecord dao = new DAORecord(DAORecord.RANKING);
         DatabaseReference mReference = dao.getDatabaseReference();
         mReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
-                //DAORecord.saveDate(dao, snapshot, user, score, DAORecord.RANKING);
-                ArrayList<Record> users = new ArrayList<Record>();
-
-                users = dao.readClassifica(snapshot);
+                ArrayList<Record> users = dao.readClassifica(snapshot);
+                for(Record user : users){
+                    Log.d("ClassificaActivity", user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
+                }
+                intent.putParcelableArrayListExtra("classifica", users);
+                startActivity(intent);
 
             }
 
@@ -46,8 +47,5 @@ public class ClassificaActivity extends AppCompatActivity {
             }
         });
 
-
-        Intent intent = new Intent(this , PunteggiActivity.class);
-        startActivity(intent);
     }
 }

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         // set the screen orientation
         // se si vuole ripristinare lo stato precedente inserire SCREEN_ORIENTATION_PORTRAIT
+        //TODO aggiungere nelle impostazioni la possibilità di scegliere l'orientamento del display
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER);
         orientation = getRequestedOrientation();
 
@@ -41,11 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         // create a new game
         //game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
+        //TODO parametro CAREER o ARKANULL da passare tramite intent
         if(!flagGMode){
-          game = new Game(this, 3, 0, CAREER, CarrieraActivity.getLEVEL());
+            game = new Game(this, 3, 0, CAREER, CarrieraActivity.getLEVEL());
         }else {
-          game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
+            game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
         }
+
+
         setContentView(game);
 
         // create handler a thread

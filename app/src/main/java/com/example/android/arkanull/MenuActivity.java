@@ -19,6 +19,7 @@ public class MenuActivity extends AppCompatActivity {
 
         TextView titolo = findViewById(R.id.nomeUtente);
         String nomeUtente = getIntent().getStringExtra("nomeUtente");
+        //TODO nomeUtente = ""; AND invece di logout -> accedi
         if( nomeUtente == null ) {
             nomeUtente = "Guest";
         } else if (nomeUtente.isEmpty() ) {

@@ -32,7 +32,7 @@ public class ClassificaActivity extends AppCompatActivity {
         mReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Record> users = dao.readClassifica(snapshot);
+                ArrayList<Record> users = dao.readRanking(snapshot);
                 for(Record user : users){
                     Log.d("ClassificaActivity", user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
                 }

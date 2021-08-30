@@ -16,11 +16,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Comparator;
 
+
+
 public class Record implements Parcelable {
     private int score;
     private String mail;
     private String displayName;
 
+    public final static String SCORE = "score";
+    public final static String MAIL = "mail";
+    public final static String DISPLAY_NAME = "displayName";
 
 
     public Record(String mail , String displayName , int score ){

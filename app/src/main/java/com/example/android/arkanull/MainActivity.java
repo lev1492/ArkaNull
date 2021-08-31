@@ -11,19 +11,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static boolean flagGMode;
     private Game game;
     private UpdateThread myThread;
     private Handler updateHandler;
-
-    //Classic is the original game without modifications
-    private static final int CLASSIC = 0;
-
-    //Arkanull is the main game, with power-ups and different levels
-    private static final int ARKANULL = 1;
-
-    //Career is the game that stops the game when the bricks end.
-    private static final int CAREER = 2;
+    private Intent intent = new Intent();
+    private int gameMode;
 
     private static int orientation;
 
@@ -39,15 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("MainActivity","Sono in onCreate");
 
+        gameMode = intent.getIntExtra("GameMode", 1);
 
         // create a new game
-        //game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
-        //TODO parametro CAREER o ARKANULL da passare tramite intent
-        if(!flagGMode){
-            game = new Game(this, 3, 0, CAREER, CarrieraActivity.getLEVEL());
-        }else {
-            game = new Game(this, 3, 0, ARKANULL, LivelliActivity.getLEVEL());
-        }
+        game = new Game(this, 3, 0, gameMode, LivelliActivity.getLEVEL());
+
 
 
         setContentView(game);

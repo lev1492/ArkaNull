@@ -30,13 +30,13 @@ public class DAORecord {
 
     public DAORecord(String dbName){
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(dbName).push();
+        databaseReference = firebaseDatabase.getReference(dbName);
 
     }
 
     public DAORecord(String dbName, String childValue){
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child(dbName).child(childValue).push();
+        databaseReference = firebaseDatabase.getReference(dbName).child(childValue);
     }
 
     public DatabaseReference getDatabaseReference() {
@@ -44,11 +44,11 @@ public class DAORecord {
     }
 
     public Task<Void> add (Record record){
-        return databaseReference.setValue(record);
+        return databaseReference.push().setValue(record);
     }
 
     public Task<Void> add (Record record, String childValue ){
-        return databaseReference.child(childValue).setValue(record);
+        return databaseReference.push().child(childValue).setValue(record);
     }
 
     public Task<Void> update(String key , String childValue, HashMap<String , Object> hashMap){
@@ -124,7 +124,12 @@ public class DAORecord {
 
             }
             if(!found) {
+                //add per il ranking
+                //add(record);
+                //add per il multiplayer
                 add(record, DAORecord.PLAYER1);
+                //add(record, DAORecord.PLAYER2);
+
             }
         }
     }

@@ -18,6 +18,12 @@
     <string name="multiplayer" translatable="false">Multiplayer</string>
     <string name="scores">Punteggi</string>
     <string name="type_input">Tipo di input</string>
+    <string name="newChallange">Nuova Sfida</string>
+    <string name="replyChallange">Rispondi Sfida</string>
+    <string name="historicalChallenges">Storico Sfide</string>
+
+
+
     <!-- Preference Titles -->
     <string name="messages_header" translatable="false">Messages</string>
     <string name="sync_header" translatable="false">Sync</string>
@@ -27,11 +33,14 @@
     <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="title_activity_challange" translatable="false">Challange</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
 
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->

@@ -14,7 +14,7 @@ public class LevelGenerator {
         this.bricks = new ArrayList<Brick>();
         this.rand = new Random();
     }
-
+    //TODO da eliminare se non serve
     private ArrayList<Brick> createBreak (Context context, Point size, int brick_Type, int i) {
         int x = size.x / 6;
         int y = size.y / 17;

@@ -1,6 +1,7 @@
 package com.example.android.arkanull;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -16,6 +17,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -78,9 +80,17 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public final static int NORMAL = 1;
     public final static int HARD = 2;
 
-    private final static int CLASSIC = 0;
-    private final static int ARKANULL = 1;
-    private final static int CAREER = 2;
+    //Classic is the original game without modifications
+    public static final int CLASSIC = 0;
+
+    //Arkanull is the main game, with power-ups and different levels
+    public static final int ARKANULL = 1;
+
+    //Career is the game that stops the game when the bricks end.
+    public static final int MULTIPLAYER = 2;
+
+    //Career is the game that stops the game when the bricks end.
+    public static final int CAREER = 3;
 
     private final int BOSS_LVL = 1;
     private int difficulty;
@@ -549,13 +559,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             soundManager.stopMusic();
             invalidate();
 
-            DAORecord dao = new DAORecord(DAORecord.RANKING);
-            mReference = dao.getDatabaseReference();
+            DAORecord daoRecord = new DAORecord(DAORecord.MULTIPLAYER);
+            mReference = daoRecord.getDatabaseReference();
             mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
-                    dao.saveScore(snapshot, user, score);
+                    daoRecord.saveScore(snapshot, user, score);
                 }
 
                 @Override
@@ -563,7 +573,22 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
                 }
             });
+/*
+            DAOChallange daoChallange = new DAOChallange(DAORecord.MULTIPLAYER);
+            mReference = daoChallange.getDatabaseReference();
+            mReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
+                    daoChallange.saveNewChallenge(snapshot, user, score);
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+*/
         } else {
             lifes--;
             ball.setX(size.x / 2);
@@ -589,12 +614,15 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             switch(mode){
                 case 0:
                     classic();
-
+                    break;
                 case 1:
                     arkanull();
-
+                    break;
                 case 2:
-                    //career();
+                    arkanull();
+                    break;
+                case 3:
+                    career();
             }
         }
     }
@@ -692,13 +720,14 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     /**
      * The career game modes with different levels
      */
-/*
+
     public void career(){
         if(list.size()==0){
             paused = true;
             CarrieraActivity.nextLevel++;
             Toast.makeText(this.getContext(),"Hai Vinto", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this.getContext(), CarrieraActivity.class);
+            intent.putExtra("GameMode", CAREER);
             this.getContext().startActivity(intent);
         }
         win();
@@ -721,7 +750,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             Intent intent = new Intent(this.getContext(), CarrieraActivity.class);
             this.getContext().startActivity(intent);
         }*/
-  // }
+   }
 
     /**
      * If a power-ups spawns, it follow those instruction to fall and detect collision with the paddle (grants power up)

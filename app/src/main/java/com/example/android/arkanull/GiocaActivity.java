@@ -27,7 +27,7 @@ public class GiocaActivity extends AppCompatActivity {
     }
 
     public void openMultiPlayer(View view){
-        Intent intent = new Intent(this , MainActivity.class);
+        Intent intent = new Intent(this , Challange.class);
         startActivity(intent);
     }
 }

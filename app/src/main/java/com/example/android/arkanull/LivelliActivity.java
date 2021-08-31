@@ -28,7 +28,6 @@ public class LivelliActivity extends AppCompatActivity {
 
     public void onLevel (View view){
         //flag che indica la modalità di gioco aracade
-        MainActivity.flagGMode = true;
         switch (view.getId()){
             case R.id.easy:
                 LEVEL = Game.EASY;
@@ -46,6 +45,7 @@ public class LivelliActivity extends AppCompatActivity {
                 break;
 
         }
+        intent.putExtra("GameMode", Game.ARKANULL);
         startActivity(intent);
     }
 }

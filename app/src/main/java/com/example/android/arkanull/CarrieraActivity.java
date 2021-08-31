@@ -42,7 +42,6 @@ public class CarrieraActivity extends AppCompatActivity {
     }
 
     public void level(View view){
-        MainActivity.flagGMode = false;
         TextView levelText = findViewById(view.getId());
         int level = Integer.parseInt(levelText.getText().toString());
         intent = new Intent(this , MainActivity.class);

@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Challange"
+            android:name=".ListaSfideActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChallangeActivity"
             android:exported="true"
             android:label="@string/title_activity_challange"
             android:theme="@style/AppTheme.NoActionBar" />

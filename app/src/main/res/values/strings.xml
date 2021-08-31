@@ -23,7 +23,6 @@
     <string name="historicalChallenges">Storico Sfide</string>
 
 
-
     <!-- Preference Titles -->
     <string name="messages_header" translatable="false">Messages</string>
     <string name="sync_header" translatable="false">Sync</string>

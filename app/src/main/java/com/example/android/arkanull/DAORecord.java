@@ -18,8 +18,7 @@ import java.util.HashMap;
 
 public class DAORecord {
 
-    public final static String RANKING = "Ranking";
-    public final static String MULTIPLAYER = "Challange";
+    public final static String[] GameMode = {"Ranking", "Challange"};
     public final static String PLAYER1 = "Player1";
     public final static String PLAYER2 = "Player2";
 
@@ -30,7 +29,7 @@ public class DAORecord {
 
     public DAORecord(String dbName){
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(dbName);
+        databaseReference = firebaseDatabase.getReference().child(dbName);
 
     }
 
@@ -125,12 +124,24 @@ public class DAORecord {
             }
             if(!found) {
                 //add per il ranking
-                //add(record);
+                add(record);
                 //add per il multiplayer
-                add(record, DAORecord.PLAYER1);
+                //add(record, DAORecord.PLAYER1);
                 //add(record, DAORecord.PLAYER2);
 
             }
+        }
+    }
+
+    public void newChallange(FirebaseUser user, int score) {
+        if ( user.getEmail() == null ) {
+            Log.d("Utente Ospite", "NULL");
+        } else if (user.getEmail().isEmpty()){
+            Log.d("Utente Ospite", "EMPTY");
+        } else {
+            Record record = new Record(user.getEmail(), user.getDisplayName(), score);
+            add(record, DAORecord.PLAYER1);
+
         }
     }
 

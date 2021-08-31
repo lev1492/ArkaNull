@@ -80,17 +80,19 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public final static int NORMAL = 1;
     public final static int HARD = 2;
 
+    public final static String[] GAME_MODE = {"Classic", "Ranking", "Challange", "Career"};
+
     //Classic is the original game without modifications
-    public static final int CLASSIC = 0;
+    public final static int CLASSIC = 0;
 
     //Arkanull is the main game, with power-ups and different levels
-    public static final int ARKANULL = 1;
+    public final static int ARKANULL = 1;
 
     //Career is the game that stops the game when the bricks end.
-    public static final int MULTIPLAYER = 2;
+    public final static int MULTIPLAYER = 2;
 
     //Career is the game that stops the game when the bricks end.
-    public static final int CAREER = 3;
+    public final static int CAREER = 3;
 
     private final int BOSS_LVL = 1;
     private int difficulty;
@@ -101,19 +103,6 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     private DatabaseReference mReference;
     private List<Record> records = new ArrayList<>();
     private LevelGenerator levelGenerator = new LevelGenerator();
-
-    public static int getEASY() {
-        return EASY;
-    }
-
-    public static int getNORMAL() {
-        return NORMAL;
-    }
-
-    public static int getHARD() {
-        return HARD;
-    }
-
 
 
     /**
@@ -559,13 +548,27 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             soundManager.stopMusic();
             invalidate();
 
-            DAORecord daoRecord = new DAORecord(DAORecord.MULTIPLAYER);
+
+            DAORecord daoRecord = new DAORecord(GAME_MODE[mode]);
             mReference = daoRecord.getDatabaseReference();
             mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
-                    daoRecord.saveScore(snapshot, user, score);
+                    switch(mode){
+                        case 0:
+                            break;
+                        case 1:
+                            daoRecord.saveScore(snapshot, user, score);
+                            break;
+                        case 2:
+                            daoRecord.newChallange(user, score);
+                            break;
+                        case 3:
+                            career();
+                            break;
+                    }
+
                 }
 
                 @Override
@@ -573,22 +576,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
 
                 }
             });
-/*
-            DAOChallange daoChallange = new DAOChallange(DAORecord.MULTIPLAYER);
-            mReference = daoChallange.getDatabaseReference();
-            mReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
-                    daoChallange.saveNewChallenge(snapshot, user, score);
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-*/
         } else {
             lifes--;
             ball.setX(size.x / 2);
@@ -616,13 +604,15 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     classic();
                     break;
                 case 1:
-                    arkanull();
-                    break;
                 case 2:
                     arkanull();
                     break;
                 case 3:
                     career();
+                    break;
+                default:
+                    classic();
+                    break;
             }
         }
     }

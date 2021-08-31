@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("MainActivity","Sono in onCreate");
 
-        gameMode = intent.getIntExtra("GameMode", 1);
+        gameMode = getIntent().getExtras().getInt("GameMode");
+        Log.d("gameMode Intent", "L'intent contiene: " + gameMode);
 
         // create a new game
         game = new Game(this, 3, 0, gameMode, LivelliActivity.getLEVEL());

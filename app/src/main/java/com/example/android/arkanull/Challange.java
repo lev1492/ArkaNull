@@ -29,4 +29,5 @@ public class Challange extends AppCompatActivity {
     public void openHistoricalChallange(View view){
         Intent intent = new Intent(this , MainActivity.class);
         startActivity(intent);
-    }}
+    }
+}

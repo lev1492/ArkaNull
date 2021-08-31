@@ -27,25 +27,27 @@ public class LivelliActivity extends AppCompatActivity {
     }
 
     public void onLevel (View view){
+        String level = "";
         //flag che indica la modalità di gioco aracade
         switch (view.getId()){
             case R.id.easy:
                 LEVEL = Game.EASY;
-                Toast.makeText( view.getContext(), "Livello Easy", Toast.LENGTH_SHORT).show();
+                level = "Livello Easy";
                 break;
 
             case R.id.normal:
                 LEVEL = Game.NORMAL;
-                Toast.makeText( view.getContext(), "Livello Medium", Toast.LENGTH_SHORT).show();
+                level = "Livello Medium";
                 break;
 
             case R.id.hard:
                 LEVEL = Game.HARD;
-                Toast.makeText( view.getContext(), "Livello Hard", Toast.LENGTH_SHORT).show();
+                level = "Livello Hard";
                 break;
 
         }
-        intent.putExtra("GameMode", Game.ARKANULL);
-        startActivity(intent);
+        Toast.makeText( view.getContext(), level, Toast.LENGTH_SHORT).show();
+        intent.putExtra("GameMode", 1);
+        this.startActivity(intent);
     }
 }

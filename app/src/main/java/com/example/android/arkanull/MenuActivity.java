@@ -49,6 +49,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void openClassifica(View view){
         Intent intent = new Intent(this , ClassificaActivity.class);
+        intent.putExtra("GameMode", Game.GAME_MODE[Game.ARKANULL]);
         startActivity(intent);
     }
 

@@ -27,7 +27,8 @@ public class ClassificaActivity extends AppCompatActivity {
 
     public void openPunteggi(View view){
         Intent intent = new Intent(this , PunteggiActivity.class);
-        DAORecord dao = new DAORecord(DAORecord.RANKING);
+        String gameMode = intent.getStringExtra("GameMode");
+        DAORecord dao = new DAORecord(gameMode);
         DatabaseReference mReference = dao.getDatabaseReference();
         mReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

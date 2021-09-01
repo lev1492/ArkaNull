@@ -469,7 +469,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         canvas.drawBitmap(redBall, ball.getX(), ball.getY(), paint);
 
         //Draw power ups
-        if(pUp.getSpawned() && mode == 1 && !pUp.getPwrUp().isRecycled()){
+        if(pUp.getSpawned() && (mode == ARKANULL || mode == MULTIPLAYER) && !pUp.getPwrUp().isRecycled()){
             paint.setColor(Color.BLUE);
             canvas.drawBitmap(pUp.getPwrUp(), pUp.getX(), pUp.getY(), paint );
         }
@@ -505,6 +505,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         paint.setTextSize(50);
         canvas.drawText("" + lifes, 400, 100, paint);
         canvas.drawText("" + score, 700, 100, paint);
+        if ( mode == MULTIPLAYER) {
+            int score2 = ListaSfideActivity.SCORE2;
+            canvas.drawText("" + score2, 1000, 100, paint);
+        }
+
 
         // draw "Game over!" in case of loss
         if (gameOver) {

@@ -22,6 +22,7 @@ public class ListaSfideActivity extends AppCompatActivity {
     String[] id;
     String selectedId;
     Intent intent;
+    public static int SCORE2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +36,9 @@ public class ListaSfideActivity extends AppCompatActivity {
         classifica = getIntent().getParcelableArrayListExtra("classifica");
         id = getIntent().getStringArrayExtra("id");
         int i = 0;
-        //String userEmailLogged = LoginActivity.getmFirebaseAuth().getCurrentUser().getEmail();
 
         for (Record user : classifica) {
-          /*  if (user.getMail().equals(userEmailLogged)){
-                classifica.remove(user);
-            }*/
             Log.d("PunteggiActivity", id[i] + " " + user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
-            i++;
         }
 
         listViewClassifica = findViewById(R.id.classifica);
@@ -58,6 +54,7 @@ public class ListaSfideActivity extends AppCompatActivity {
                 Toast.makeText( listViewClassifica.getContext() , id[position], Toast.LENGTH_SHORT).show();
                 if(selectedId != null) {
                     intent.putExtra("idSfida", selectedId);
+                    SCORE2 = myObject.getScore();
                     intent.putExtra("GameMode", Game.MULTIPLAYER);
                     startActivity(intent);
                 }

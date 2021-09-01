@@ -2,9 +2,13 @@ package com.example.android.arkanull;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -30,5 +34,13 @@ public class ListaSfideActivity extends AppCompatActivity {
         RecordAdapter classificaAdapter = new RecordAdapter(this, classifica);
 
         listViewClassifica.setAdapter(classificaAdapter);
+
+        listViewClassifica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Record myObject = (Record) classificaAdapter.getItem(position);
+                Toast.makeText( listViewClassifica.getContext() , myObject.getMail(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

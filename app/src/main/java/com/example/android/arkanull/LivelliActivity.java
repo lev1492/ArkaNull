@@ -47,7 +47,7 @@ public class LivelliActivity extends AppCompatActivity {
 
         }
         Toast.makeText( view.getContext(), level, Toast.LENGTH_SHORT).show();
-        intent.putExtra("GameMode", 1);
+        intent.putExtra("GameMode", Game.ARKANULL);
         this.startActivity(intent);
     }
 }

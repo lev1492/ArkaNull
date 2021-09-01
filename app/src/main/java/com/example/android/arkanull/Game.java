@@ -13,6 +13,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -547,8 +548,8 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             phase = 0;
             soundManager.stopMusic();
             invalidate();
-
-
+            String id = MainActivity.getIdSfida();
+            Log.d("idGAmeReplyChallange", id);
             DAORecord daoRecord = new DAORecord(GAME_MODE[mode]);
             mReference = daoRecord.getDatabaseReference();
             mReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -562,7 +563,12 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                             daoRecord.saveScore(snapshot, user, score);
                             break;
                         case 2:
-                            daoRecord.newChallange(user, score);
+                            if(id != null) {
+                                Log.d("idGAmeReplyChallange", id);
+                                daoRecord.replyChallange(user, score, id);
+                            } else {
+                                daoRecord.newChallange(user, score);
+                            }
                             break;
                         case 3:
                             career();

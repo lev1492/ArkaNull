@@ -3,6 +3,7 @@ package com.example.android.arkanull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,11 +18,14 @@ public class ListaSfideActivity extends AppCompatActivity {
     ArrayList<Record> classifica = new ArrayList<>();
     ListView listViewClassifica;
     String[] id;
+    String selectedId;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_sfide);
+        intent = new Intent(this, MainActivity.class);
     }
     @Override
     protected void onStart() {
@@ -43,8 +47,15 @@ public class ListaSfideActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Record myObject = (Record) classificaAdapter.getItem(position);
+                selectedId = id[position];
                 Toast.makeText( listViewClassifica.getContext() , id[position], Toast.LENGTH_SHORT).show();
+                if(selectedId != null) {
+                    intent.putExtra("idSfida", selectedId);
+                    intent.putExtra("GameMode", Game.MULTIPLAYER);
+                    startActivity(intent);
+                }
             }
         });
+
     }
 }

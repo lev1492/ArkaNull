@@ -51,7 +51,7 @@ public class DAORecord {
     }
 
     public Task<Void> update(String key , String childValue, HashMap<String , Object> hashMap){
-        return databaseReference.child(childValue).child(key).updateChildren(hashMap);
+        return databaseReference.child(key).child(childValue).updateChildren(hashMap);
     }
 
     public Task<Void> update(String key , HashMap<String , Object> hashMap){
@@ -125,9 +125,7 @@ public class DAORecord {
             if(!found) {
                 //add per il ranking
                 add(record);
-                //add per il multiplayer
-                //add(record, DAORecord.PLAYER1);
-                //add(record, DAORecord.PLAYER2);
+
 
             }
         }
@@ -142,6 +140,18 @@ public class DAORecord {
             Record record = new Record(user.getEmail(), user.getDisplayName(), score);
             add(record, DAORecord.PLAYER1);
 
+        }
+    }
+
+    public void replyChallange(FirebaseUser user, int score, String id) {
+        HashMap<String, Object> userUpdate = new HashMap<>();
+        if ( user.getEmail() != null ) {
+            userUpdate.put(Record.MAIL, user.getEmail());
+            userUpdate.put(Record.DISPLAY_NAME, user.getDisplayName());
+            userUpdate.put(Record.SCORE, score);
+            update(id, DAORecord.PLAYER2, userUpdate);
+        } else {
+            Log.d("Utente Ospite", "OSPITE");
         }
     }
 

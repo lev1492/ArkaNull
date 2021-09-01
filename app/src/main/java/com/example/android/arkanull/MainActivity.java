@@ -16,8 +16,14 @@ public class MainActivity extends AppCompatActivity {
     private Handler updateHandler;
     private Intent intent = new Intent();
     private int gameMode;
+    private static String idSfida;
 
     private static int orientation;
+
+
+    public static String getIdSfida() {
+        return idSfida;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         gameMode = getIntent().getExtras().getInt("GameMode");
         Log.d("gameMode Intent", "L'intent contiene: " + gameMode);
+        idSfida = getIntent().getStringExtra("idSfida");
+        Log.d("idMainReplyChallange", "idMainReplyChallange" + idSfida);
 
         // create a new game
         game = new Game(this, 3, 0, gameMode, LivelliActivity.getLEVEL());

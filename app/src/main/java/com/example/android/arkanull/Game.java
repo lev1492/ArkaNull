@@ -549,7 +549,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
             soundManager.stopMusic();
             invalidate();
             String id = MainActivity.getIdSfida();
-            Log.d("idGAmeReplyChallange", id);
+            Log.d("idGAmeChallange", "l'id è" + id);
             DAORecord daoRecord = new DAORecord(GAME_MODE[mode]);
             mReference = daoRecord.getDatabaseReference();
             mReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -564,10 +564,11 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                             break;
                         case 2:
                             if(id != null) {
-                                Log.d("idGAmeReplyChallange", id);
+                                Log.d("idGAmeReplyChallange", "l'id è" + id);
                                 daoRecord.replyChallange(user, score, id);
                             } else {
                                 daoRecord.newChallange(user, score);
+                                Log.d("idGAmeNewChallange", "l'id è" + id);
                             }
                             break;
                         case 3:

@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +19,6 @@ import java.util.HashMap;
 
 public class DAORecord {
 
-    public final static String[] GameMode = {"Ranking", "Challange"};
     public final static String PLAYER1 = "Player1";
     public final static String PLAYER2 = "Player2";
 
@@ -78,6 +78,7 @@ public class DAORecord {
 
     }
 
+    //used for level
     public ArrayList<Record> readRanking(@NonNull DataSnapshot snapshot) {
         ArrayList<Record> users = new ArrayList<Record>();
 
@@ -94,11 +95,12 @@ public class DAORecord {
         return users;
     }
 
+    //used for level
     public void saveScore(@NonNull DataSnapshot snapshot, FirebaseUser user, int score) {
         boolean found = false;
         HashMap<String, Object> userUpdate = new HashMap<>();
 
-        if ( user.getEmail() == null ) {
+        if ( user.getEmail() != null ) {
             Log.d("Utente Ospite", "NULL");
         } else if (user.getEmail().isEmpty()){
             Log.d("Utente Ospite", "EMPTY");
@@ -131,7 +133,9 @@ public class DAORecord {
         }
     }
 
+    //used for challange
     public void newChallange(FirebaseUser user, int score) {
+
         if ( user.getEmail() == null ) {
             Log.d("Utente Ospite", "NULL");
         } else if (user.getEmail().isEmpty()){
@@ -139,25 +143,27 @@ public class DAORecord {
         } else {
             Record record = new Record(user.getEmail(), user.getDisplayName(), score);
             add(record, DAORecord.PLAYER1);
-
         }
     }
 
+    //used for challange
     public void replyChallange(FirebaseUser user, int score, String id) {
         HashMap<String, Object> userUpdate = new HashMap<>();
-        if ( user.getEmail() != null ) {
+        if ( user.getEmail() == null ) {
+            Log.d("Utente Ospite", "NULL");
+        } else if (user.getEmail().isEmpty()){
+            Log.d("Utente Ospite", "EMPTY");
+        } else {
             userUpdate.put(Record.MAIL, user.getEmail());
             userUpdate.put(Record.DISPLAY_NAME, user.getDisplayName());
             userUpdate.put(Record.SCORE, score);
             update(id, DAORecord.PLAYER2, userUpdate);
-        } else {
-            Log.d("Utente Ospite", "OSPITE");
         }
     }
 
     public HashMap<String, Record> readChalleange(@NonNull DataSnapshot snapshot, String player) {
-        //ArrayList<Record> users = new ArrayList<Record>();
         HashMap<String, Record> users = new HashMap<>();
+        String currentUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         Log.d("READ_CHALLANGE", "Sono nella funzione read challange");
 
         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -165,13 +171,18 @@ public class DAORecord {
             String email = String.valueOf(dataSnapshot.child(player).child(Record.MAIL).getValue());
             String name = String.valueOf(dataSnapshot.child(player).child(Record.DISPLAY_NAME).getValue());
             String scoreString = String.valueOf(dataSnapshot.child(player).child(Record.SCORE).getValue());
-            int score = Integer.parseInt(scoreString);
-            Record record = new Record(email, name, score);
-            users.put(id, record);
-            Log.d("READ_CHALLANGE", id + " " + email + "  " + name + "  " + scoreString);
+            String email2 = String.valueOf(dataSnapshot.child(DAORecord.PLAYER2).child(Record.MAIL).getValue());
+            if(email2.equals("null") && !email.equals(currentUserEmail)){
+                int score = Integer.parseInt(scoreString);
+                Record record = new Record(email, name, score);
+                users.put(id, record);
+                Log.d("READ_CHALLANGE", "Ramo if "  + id + " " + email + "  " + name + "  " + scoreString + " " + email2);
+            }else {
+                Log.d("READ_CHALLANGE", "Ramo else " + id + " " + email + "  " + name + "  " + scoreString+ " " + email2);
+
+            }
 
         }
-        // Sort record by score
         return users;
     }
 

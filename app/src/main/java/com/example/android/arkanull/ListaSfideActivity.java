@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 public class ListaSfideActivity extends AppCompatActivity {
@@ -33,7 +35,12 @@ public class ListaSfideActivity extends AppCompatActivity {
         classifica = getIntent().getParcelableArrayListExtra("classifica");
         id = getIntent().getStringArrayExtra("id");
         int i = 0;
+        //String userEmailLogged = LoginActivity.getmFirebaseAuth().getCurrentUser().getEmail();
+
         for (Record user : classifica) {
+          /*  if (user.getMail().equals(userEmailLogged)){
+                classifica.remove(user);
+            }*/
             Log.d("PunteggiActivity", id[i] + " " + user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
             i++;
         }

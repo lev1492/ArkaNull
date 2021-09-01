@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("MainActivity","Sono in onCreate");
 
-        gameMode = getIntent().getExtras().getInt("GameMode");
+        gameMode = getIntent().getExtras().getInt("GameMode", Game.CLASSIC);
         Log.d("gameMode Intent", "L'intent contiene: " + gameMode);
         idSfida = getIntent().getStringExtra("idSfida");
         Log.d("idMainReplyChallange", "idMainReplyChallange" + idSfida);

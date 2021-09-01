@@ -145,22 +145,23 @@ public class DAORecord {
         }
     }
 
-    public ArrayList<Record> readChalleange(@NonNull DataSnapshot snapshot, String player) {
-        ArrayList<Record> users = new ArrayList<Record>();
+    public HashMap<String, Record> readChalleange(@NonNull DataSnapshot snapshot, String player) {
+        //ArrayList<Record> users = new ArrayList<Record>();
+        HashMap<String, Record> users = new HashMap<>();
         Log.d("READ_CHALLANGE", "Sono nella funzione read challange");
 
         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+            String id = String.valueOf(dataSnapshot.getKey());
             String email = String.valueOf(dataSnapshot.child(player).child(Record.MAIL).getValue());
             String name = String.valueOf(dataSnapshot.child(player).child(Record.DISPLAY_NAME).getValue());
             String scoreString = String.valueOf(dataSnapshot.child(player).child(Record.SCORE).getValue());
             int score = Integer.parseInt(scoreString);
             Record record = new Record(email, name, score);
-            users.add(record);
-            Log.d("READ_CHALLANGE", dataSnapshot.getKey() + " " +email + "  " + name + "  " + scoreString);
+            users.put(id, record);
+            Log.d("READ_CHALLANGE", id + " " + email + "  " + name + "  " + scoreString);
 
         }
         // Sort record by score
-        Collections.sort(users, new RecordScoreComparator());
         return users;
     }
 

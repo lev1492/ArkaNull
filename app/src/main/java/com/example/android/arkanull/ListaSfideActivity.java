@@ -16,6 +16,7 @@ public class ListaSfideActivity extends AppCompatActivity {
 
     ArrayList<Record> classifica = new ArrayList<>();
     ListView listViewClassifica;
+    String[] id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,11 @@ public class ListaSfideActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         classifica = getIntent().getParcelableArrayListExtra("classifica");
+        id = getIntent().getStringArrayExtra("id");
+        int i = 0;
         for (Record user : classifica) {
-            Log.d("PunteggiActivity", user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
+            Log.d("PunteggiActivity", id[i] + " " + user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
+            i++;
         }
 
         listViewClassifica = findViewById(R.id.classifica);
@@ -39,7 +43,7 @@ public class ListaSfideActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Record myObject = (Record) classificaAdapter.getItem(position);
-                Toast.makeText( listViewClassifica.getContext() , myObject.getMail(), Toast.LENGTH_SHORT).show();
+                Toast.makeText( listViewClassifica.getContext() , id[position], Toast.LENGTH_SHORT).show();
             }
         });
     }

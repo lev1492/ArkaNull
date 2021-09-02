@@ -98,7 +98,7 @@ public class DAORecord {
         boolean found = false;
         HashMap<String, Object> userUpdate = new HashMap<>();
 
-        if ( user.getEmail() != null ) {
+        if ( user.getEmail() == null ) {
             Log.d("Utente Ospite", "NULL");
         } else if (user.getEmail().isEmpty()){
             Log.d("Utente Ospite", "EMPTY");
@@ -119,6 +119,7 @@ public class DAORecord {
                     }
                     found = true;
                 }
+                Log.d("Game Caricamento Dati", "la variabile found è: " + found);
                 Log.d("Game Caricamento Dati", dataSnapshot.getKey() + " " +email + "  " + name + "  " + scoreD);
 
             }

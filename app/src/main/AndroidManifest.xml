@@ -34,20 +34,13 @@
             android:label="Login" />
         <activity
             android:name=".PunteggiActivity"
-            android:label="Punteggi"
-            android:parentActivityName=".ClassificaActivity">
+            android:label="@string/classifica"
+            android:parentActivityName=".MenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ClassificaActivity" />
+                android:value=".MenuActivity" />
         </activity>
-        <activity
-            android:name=".MultiplayerActivity"
-            android:label="Multiplayer"
-            android:parentActivityName=".GiocaActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GiocaActivity" />
-        </activity>
+
         <activity
             android:name=".CarrieraActivity"
             android:label="Carriera"
@@ -75,14 +68,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuActivity" />
         </activity>
-        <activity
-            android:name=".ClassificaActivity"
-            android:label="Classifica"
-            android:parentActivityName=".MenuActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MenuActivity" />
-        </activity>
+
         <activity
             android:name=".GiocaActivity"
             android:label="Gioca"

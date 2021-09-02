@@ -11,7 +11,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -81,7 +80,6 @@ public class DAORecord {
     //used for level
     public ArrayList<Record> readRanking(@NonNull DataSnapshot snapshot) {
         ArrayList<Record> users = new ArrayList<Record>();
-
         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
             String email = String.valueOf(dataSnapshot.child(Record.MAIL).getValue());
             String name = String.valueOf(dataSnapshot.child(Record.DISPLAY_NAME).getValue());

@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         // create a new game
         game = new Game(this, 3, 0, gameMode, LivelliActivity.getLEVEL());
 
-
-
         setContentView(game);
 
         // create handler a thread

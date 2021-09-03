@@ -2,6 +2,8 @@ package com.example.android.arkanull;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,10 +25,34 @@ public class CarrieraActivity extends AppCompatActivity {
 
     public static Button s1;
 
+    public static LevelEditor levelEdit;
     Intent intent;
+
+    private Handler updateHandler;
+    private UpdateThread myThread;
+
+    private void createHandler() {
+        updateHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                levelEdit.invalidate();
+                levelEdit.update();
+                super.handleMessage(msg);
+            }
+        };
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        levelEdit = new LevelEditor(this);
+        setContentView(levelEdit);
+
+        // create handler a thread
+        createHandler();
+        myThread = new UpdateThread(updateHandler);
+        myThread.start();
+
+        /*
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carriera);
 
@@ -39,6 +65,9 @@ public class CarrieraActivity extends AppCompatActivity {
             s1 = ((Button) findViewById(resID));
             s1.setEnabled(true);
         }
+         */
+
+
     }
 
     public void level(View view){

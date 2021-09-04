@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 public class DAORecord {
 
-    private String TAG = "DAORecord";
+    private String TAG = getClass().getSimpleName();
     public final static String PLAYER1 = "Player1";
     public final static String PLAYER2 = "Player2";
 

@@ -32,7 +32,7 @@ public class ListaSfideActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_sfide);
-        if(savedInstanceState!= null){
+        if(savedInstanceState != null){
             classifica = savedInstanceState.getParcelableArrayList("classifica");
             id = savedInstanceState.getStringArray("id");
             Log.d(TAG, ":ON_START:stampa classifica" + classifica);

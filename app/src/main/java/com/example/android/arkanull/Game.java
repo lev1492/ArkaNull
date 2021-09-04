@@ -259,15 +259,19 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     paused = false;
 
                     if (motionEvent.getX() > screenX / 2) {
+                        paddle.setMovementState(paddle.RIGHT);
                         if ( paddle.getX() + 100 < size.x - 200) {
-                            paddle.setMovementState(paddle.RIGHT);
                             paddle.setX(paddle.getX() + 100);
+                        } else {
+                            paddle.setX(size.x-200);
                         }
 
                     } else {
+                        paddle.setMovementState(paddle.LEFT);
                         if ( paddle.getX() - 100 >= 20 ) {
-                            paddle.setMovementState(paddle.LEFT);
                             paddle.setX(paddle.getX() - 100);
+                        } else {
+                            paddle.setX(20);
                         }
 
                     }

@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private Intent intent = new Intent();
     private int gameMode;
     private static String idSfida;
-
     private static int orientation;
 
 
@@ -52,30 +51,6 @@ public class MainActivity extends AppCompatActivity {
         myThread = new UpdateThread(updateHandler);
         myThread.start();
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-        Log.d("MainActivity","Sono in onStart");
-
-
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle state) {
-        super.onSaveInstanceState(state);
-        Log.d("MainActivity","Sono in onSaveInstanceState");
-
-
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle state) {
-        super.onRestoreInstanceState(state);
-        Log.d("MainActivity","Sono in onRestoreInstanceState");
 
     }
 
@@ -91,44 +66,16 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onPause() {
         super.onPause();
-        Log.d("MainActivity","Sono in onPause");
-
         game.detectionStop();
     }
 
     protected void onResume() {
         super.onResume();
-
-        Log.d("MainActivity","Sono in onResume");
-
         game.detectionStart();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        Log.d("MainActivity","Sono in onDestroy");
-
-
     }
 }
-/*
-    TextView vstup;
-    @Override public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.whatever);
-        vstup = (TextView)findViewById(R.id.whatever);
-
-    }
-
-    @Override public void onSaveInstanceState(Bundle state) {
-        super.onSaveInstanceState(state);
-        state.putCharSequence(App.VSTUP, vstup.getText());
-    }
-
-    @Override public void onRestoreInstanceState(Bundle state) {
-        super.onRestoreInstanceState(state);
-        vstup.setText(state.getCharSequence(App.VSTUP));
-    }
-*/

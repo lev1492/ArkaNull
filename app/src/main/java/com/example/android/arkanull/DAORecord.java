@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 public class DAORecord {
 
+    private String TAG = "DAORecord";
     public final static String PLAYER1 = "Player1";
     public final static String PLAYER2 = "Player2";
 
@@ -119,8 +120,8 @@ public class DAORecord {
                     }
                     found = true;
                 }
-                Log.d("Game Caricamento Dati", "la variabile found è: " + found);
-                Log.d("Game Caricamento Dati", dataSnapshot.getKey() + " " +email + "  " + name + "  " + scoreD);
+                Log.d(TAG + ":SAVE_SCORE", "la variabile found è: " + found);
+                Log.d(TAG + ":SAVE_SCORE", dataSnapshot.getKey() + " " +email + "  " + name + "  " + scoreD);
 
             }
             if(!found) {
@@ -163,7 +164,7 @@ public class DAORecord {
     public HashMap<String, Record> readChalleange(@NonNull DataSnapshot snapshot, String player) {
         HashMap<String, Record> users = new HashMap<>();
         String currentUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        Log.d("READ_CHALLANGE", "Sono nella funzione read challange");
+        Log.d(TAG + ":READ_CHALLANGE", "Sono nella funzione read challange");
 
         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
             String id = String.valueOf(dataSnapshot.getKey());
@@ -175,9 +176,34 @@ public class DAORecord {
                 int score = Integer.parseInt(scoreString);
                 Record record = new Record(email, name, score);
                 users.put(id, record);
-                Log.d("READ_CHALLANGE", "Ramo if "  + id + " " + email + "  " + name + "  " + scoreString + " " + email2);
+                Log.d(TAG + ":READ_CHALLANGE", "Ramo if "  + id + " " + email + "  " + name + "  " + scoreString + " " + email2);
             }else {
-                Log.d("READ_CHALLANGE", "Ramo else " + id + " " + email + "  " + name + "  " + scoreString+ " " + email2);
+                Log.d(TAG + ":READ_CHALLANGE", "Ramo else " + id + " " + email + "  " + name + "  " + scoreString+ " " + email2);
+
+            }
+
+        }
+        return users;
+    }
+
+    public ArrayList<Challange> readHistoricalChallange(@NonNull DataSnapshot snapshot) {
+        ArrayList<Challange> users = new ArrayList<>();
+        String currentUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        Log.d(TAG + ":READ_HISTORICAL_CHALLANGE", "Sono nella funzione read challange");
+
+        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+            String email = String.valueOf(dataSnapshot.child(DAORecord.PLAYER1).child(Record.MAIL).getValue());
+            String name = String.valueOf(dataSnapshot.child(DAORecord.PLAYER1).child(Record.DISPLAY_NAME).getValue());
+            String scoreString = String.valueOf(dataSnapshot.child(DAORecord.PLAYER1).child(Record.SCORE).getValue());
+            String email2 = String.valueOf(dataSnapshot.child(DAORecord.PLAYER2).child(Record.MAIL).getValue());
+            String name2 = String.valueOf(dataSnapshot.child(DAORecord.PLAYER2).child(Record.DISPLAY_NAME).getValue());
+            String scoreString2 = String.valueOf(dataSnapshot.child(DAORecord.PLAYER2).child(Record.SCORE).getValue());
+            if(email.equals(currentUserEmail) || email2.equals(currentUserEmail)){
+                Challange challange = new Challange(name, scoreString, name2, scoreString2);
+                users.add(challange);
+                Log.d(TAG + ":READ_HISTORICAL_CHALLANGE", "Ramo if "  + email + "  " + name + "  " + scoreString + " " + email2);
+            }else {
+                Log.d(TAG + ":READ_HISTORICAL_CHALLANGE", "Ramo else " + email + "  " + name + "  " + scoreString+ " " + email2);
 
             }
 

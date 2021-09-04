@@ -4,23 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".ListaSfideActivity">
 
-
-    <TextView
-        android:id="@+id/textView"
-        style="@style/AppImpostazioniSmartphone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sfide"
-        android:layout_marginBottom="5dp"/>
-
-    <ListView
-        android:id="@+id/classifica"
-        style="@style/AppImpostazioniSmartphone"
+    <!-- da sistemare nel caso eliminare il linear layout-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/historicalChallanges"
+            style="@style/AppToolBarSmartphone"
+            android:layout_weight="1"
+            android:onClick="openHistoricalChallange"
+            android:text="@string/historicalChallenges" />
+
+
+        <Button
+            android:id="@+id/newChallange"
+            style="@style/AppToolBarSmartphone"
+            android:layout_weight="1"
+            android:onClick="openNewChallange"
+            android:text="@string/newChallange" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/AppImpostazioniSmartphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Sfide" />
+
+        <ListView
+            android:id="@+id/classifica"
+            style="@style/AppImpostazioniSmartphone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+
 </LinearLayout>

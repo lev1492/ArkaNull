@@ -13,13 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ListaSfideActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ChallangeActivity"
+            android:name=".HistoricalChallangeActivity"
             android:exported="true"
-            android:label="@string/title_activity_challange"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".ListaSfideActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".ListaSfideActivity" />
+        </activity>
+
+        <activity
+            android:name=".ListaSfideActivity"
+            android:exported="true"
+            android:parentActivityName=".GiocaActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".GiocaActivity"/>
+        </activity>
+
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +50,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuActivity" />
         </activity>
-
         <activity
             android:name=".CarrieraActivity"
             android:label="Carriera"
@@ -68,7 +77,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MenuActivity" />
         </activity>
-
         <activity
             android:name=".GiocaActivity"
             android:label="Gioca"

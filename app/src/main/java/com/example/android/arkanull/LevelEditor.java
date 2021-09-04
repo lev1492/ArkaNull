@@ -1,5 +1,6 @@
 package com.example.android.arkanull;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -57,6 +58,7 @@ public class LevelEditor extends View {
         if (extended == null) {
             extended = Bitmap.createScaledBitmap(background, size.x, size.y, false);
         }
+
         canvas.drawBitmap(extended, 0, 0, paint);
 
         paint.setColor(Color.GREEN);

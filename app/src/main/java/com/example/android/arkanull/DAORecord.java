@@ -104,7 +104,6 @@ public class DAORecord {
         } else if (user.getEmail().isEmpty()){
             Log.d("Utente Ospite", "EMPTY");
         } else {
-            Record record = new Record(user.getEmail(), user.getDisplayName(), score);
 
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                 String email = String.valueOf(dataSnapshot.child(Record.MAIL).getValue());
@@ -126,8 +125,8 @@ public class DAORecord {
             }
             if(!found) {
                 //add per il ranking
+                Record record = new Record(user.getEmail(), user.getDisplayName(), score);
                 add(record);
-
 
             }
         }

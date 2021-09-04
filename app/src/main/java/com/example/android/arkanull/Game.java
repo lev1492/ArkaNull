@@ -569,7 +569,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                         case 0:
                             break;
                         case 1:
-                            daoRecord.saveScore(snapshot.child(DAORecord.PLAYER1), user, score);
+                            daoRecord.saveScore(snapshot, user, score);
                             break;
                         case 2:
                             if(id != null) {

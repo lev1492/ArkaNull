@@ -26,6 +26,7 @@
 
         <Button
             style="@style/AppToolBarTablet"
+            android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|fill_vertical"

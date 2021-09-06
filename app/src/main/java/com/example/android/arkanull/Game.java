@@ -77,6 +77,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     boolean paused = true;
     private Random rand = new Random();
 
+    public final static int EDITOR_LEVEL = -1;
     public final static int EASY = 0;
     public final static int NORMAL = 1;
     public final static int HARD = 2;
@@ -329,7 +330,13 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
      * @param difficulty
      */
     private void generateBricks(Context context, int difficulty) {
-        if (level != BOSS_LVL) {
+
+        if(mode == EDITOR_LEVEL){
+            level = 0;
+            list = levelGenerator.generateEditorLevel(context, size);
+        }
+
+        else if (level != BOSS_LVL) {
             if (level > 5) {
                 levelGenerator.generateEndless(context, level, size, difficulty);
             } else {
@@ -627,7 +634,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
                     career();
                     break;
                 default:
-                    classic();
+                    arkanull();
                     break;
             }
         }

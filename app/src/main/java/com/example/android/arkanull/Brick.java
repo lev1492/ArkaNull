@@ -7,7 +7,9 @@ import android.graphics.Point;
 import android.view.Display;
 import android.view.View;
 
-public class Brick extends View {
+import java.io.Serializable;
+
+public class Brick extends View implements Serializable {
 
     private Bitmap brick;
     private float x;

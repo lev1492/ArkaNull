@@ -2,13 +2,17 @@ package com.example.android.arkanull;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.util.Log;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class LevelGenerator {
     private ArrayList<Brick> bricks;
     private Random rand;
+    private final String FILE_NAME = "customLevel.tmp";
 
     public LevelGenerator(){
         this.bricks = new ArrayList<Brick>();
@@ -24,6 +28,26 @@ public class LevelGenerator {
         }
         return bricks;
     }
+
+    public ArrayList<Brick> generateEditorLevel(Context context, Point size){
+     bricks.clear();
+     ArrayList<BrickData> brickDatas = new ArrayList<>();
+        try{
+            FileInputStream fis = context.openFileInput(FILE_NAME);
+            ObjectInputStream is = new ObjectInputStream(fis);
+            brickDatas = (ArrayList<BrickData>) is.readObject();
+            is.close();
+            fis.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        for(int i = 0; i < brickDatas.size(); i++){
+            BrickData bd = brickDatas.get(i);
+            bricks.add(new Brick(context, bd.getX(), bd.getY(), bd.getType()));
+        }
+        return bricks;
+    }
+
 
     public ArrayList<Brick> generateEasy(Context context, int level, Point size){
         bricks.clear();

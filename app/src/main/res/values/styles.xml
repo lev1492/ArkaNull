@@ -101,6 +101,10 @@
     </style>
 
     <style name="SwitcheTheme">
-        <item name="colorAccent">#64B5F6</item>
+        <item name="colorAccent">@color/selection</item>
+    </style>
+
+    <style name="RadioButtonTheme">
+        <item name="colorAccent">@color/selection</item>
     </style>
 </resources>

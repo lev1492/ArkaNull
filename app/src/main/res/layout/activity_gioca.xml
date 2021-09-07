@@ -9,6 +9,7 @@
 
     <Button
         android:id="@+id/livelli"
+        android:background="@drawable/background"
         style="@style/AppThemePortraitSmartphone"
         android:layout_alignParentTop="true"
         android:onClick="openLivelli"
@@ -16,6 +17,7 @@
 
     <Button
         android:id="@+id/carriera"
+        android:background="@drawable/background"
         style="@style/AppThemePortraitSmartphone"
         android:layout_centerVertical="true"
         android:onClick="openCarriera"
@@ -23,6 +25,7 @@
 
     <Button
         android:id="@+id/multiplayer"
+        android:background="@drawable/background"
         style="@style/AppThemePortraitSmartphone"
         android:layout_alignParentBottom="true"
         android:onClick="openMultiPlayer"

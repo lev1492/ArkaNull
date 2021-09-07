@@ -16,7 +16,9 @@
 
         <Button
             android:id="@+id/historicalChallanges"
+            android:background="@drawable/background"
             style="@style/AppToolBarSmartphone"
+            android:textColor="#0000FF"
             android:layout_weight="1"
             android:onClick="openHistoricalChallange"
             android:text="@string/historicalChallenges" />
@@ -24,7 +26,9 @@
 
         <Button
             android:id="@+id/newChallange"
+            android:background="@drawable/background"
             style="@style/AppToolBarSmartphone"
+            android:textColor="#0000FF"
             android:layout_weight="1"
             android:onClick="openNewChallange"
             android:text="@string/newChallange" />

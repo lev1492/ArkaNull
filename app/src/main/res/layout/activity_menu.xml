@@ -40,6 +40,8 @@
 
         <Button
             android:id="@+id/gioca"
+            android:elevation="0dp"
+            android:background="@drawable/background"
             style="@style/AppThemePortraitSmartphone"
             android:layout_alignParentTop="true"
             android:onClick="openGioca"
@@ -47,6 +49,7 @@
 
         <Button
             android:id="@+id/classifica"
+            android:background="@drawable/background"
             style="@style/AppThemePortraitSmartphone"
             android:layout_centerVertical="true"
             android:onClick="openClassifica"
@@ -54,6 +57,7 @@
 
         <Button
             android:id="@+id/impostazioni"
+            android:background="@drawable/background"
             style="@style/AppThemePortraitSmartphone"
             android:layout_alignParentBottom="true"
             android:onClick="openImpostazioni"

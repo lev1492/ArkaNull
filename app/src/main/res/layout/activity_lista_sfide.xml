@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".ListaSfideActivity">
+    tools:context="com.sms.nullpointers.arkanull.ListaSfideActivity">
 
     <!-- da sistemare nel caso eliminare il linear layout-->
     <LinearLayout

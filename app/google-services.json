@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:46349975982:android:73c13a7892000f5a75883f",
         "android_client_info": {
-          "package_name": "com.example.android.arkanull"
+          "package_name": "com.sms.nullpointers.arkanull"
         }
       },
       "oauth_client": [

@@ -99,4 +99,8 @@
     <style name="ShapeAppearanceOverlay.Material3.Button" parent="AppThemeSmartphone">
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="SwitcheTheme">
+        <item name="colorAccent">#64B5F6</item>
+    </style>
 </resources>

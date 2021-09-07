@@ -54,6 +54,7 @@
             android:onClick="onSound"
             android:switchMinWidth="56dp"
             android:text="@string/audio"
+            android:theme="@style/SwitcheTheme"
             android:textOff="OFF"
             android:textOn="ON" />
 

@@ -37,6 +37,12 @@ public class GiocaActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openCustomLevel(View view){
+        Intent intent = new Intent(this, Arkanull.class);
+        intent.putExtra("GameMode", Game.EDITOR_LEVEL);
+        startActivity(intent);
+    }
+
     public void openMultiPlayer(View view){
         Intent intent = new Intent(this , ListaSfideActivity.class);
         String gameMode = Game.GAME_MODE[Game.MULTIPLAYER];

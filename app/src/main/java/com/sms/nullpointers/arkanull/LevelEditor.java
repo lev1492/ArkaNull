@@ -118,11 +118,11 @@ public class LevelEditor extends View {
         if(motionEvent.getY() >= size.y - size.y / 6 && motionEvent.getX() <= size.x / 6){
             switch(motionEvent.getAction()){
                 case MotionEvent.ACTION_UP:
-                    if(type + 1 < 4){
-                        type++;
+                    if(type + 1 == 4){
+                        type = 0;
                     }
                     else{
-                        type = 0;
+                        type++;
                     }
                     break;
             }

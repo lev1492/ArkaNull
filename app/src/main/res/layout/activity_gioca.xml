@@ -6,22 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.sms.nullpointers.arkanull.GiocaActivity">
 
-
     <Button
         android:id="@+id/livelli"
-        android:background="@drawable/background"
         style="@style/AppThemePortraitSmartphone"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="139dp"
+        android:background="@drawable/background"
         android:onClick="openLivelli"
         android:text="@string/livelli" />
 
     <Button
         android:id="@+id/carriera"
-        android:background="@drawable/background"
         style="@style/AppThemePortraitSmartphone"
         android:layout_centerVertical="true"
+        android:background="@drawable/background"
         android:onClick="openCarriera"
-        android:text="@string/carriera" />
+        android:text="Editor" />
 
     <Button
         android:id="@+id/multiplayer"
@@ -31,4 +31,13 @@
         android:onClick="openMultiPlayer"
         android:text="@string/multiplayer" />
 
+    <Button
+        android:id="@+id/editorLevel"
+        style="@style/AppThemePortraitSmartphone"
+        android:layout_height="48dp"
+        android:layout_alignBottom="@+id/livelli"
+        android:layout_marginBottom="161dp"
+        android:background="@drawable/background"
+        android:onClick="openCustomLevel"
+        android:text="Editor Level" />
 </RelativeLayout>

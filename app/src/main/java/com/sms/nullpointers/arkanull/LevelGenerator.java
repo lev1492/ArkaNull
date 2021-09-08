@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Point;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Random;
@@ -37,6 +38,17 @@ public class LevelGenerator {
             brickDatas = (ArrayList<BrickData>) is.readObject();
             is.close();
             fis.close();
+        }catch(FileNotFoundException e){
+            int x = size.x / 6;
+            int y = size.y / 17;
+            int brick_Type = 0;
+            for (int i = 3; i < 7; i++) {
+                for (int j = 1; j < 6; j++) {
+                    bricks.add(new Brick(context, size.x - j * x , size.y /  2 - i * y , brick_Type));
+                }
+            }
+            return bricks;
+
         }catch(Exception e){
             e.printStackTrace();
         }

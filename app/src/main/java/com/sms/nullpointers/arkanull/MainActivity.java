@@ -9,12 +9,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.sms.nullpointers.arkanull.R;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.sms.nullpointers.arkanull.activity.GiocaActivity;
+import com.sms.nullpointers.arkanull.activity.ImpostazioniActivity;
+import com.sms.nullpointers.arkanull.activity.LoginActivity;
+import com.sms.nullpointers.arkanull.activity.PunteggiActivity;
+import com.sms.nullpointers.arkanull.game.Game;
+import com.sms.nullpointers.arkanull.record.DAORecord;
+import com.sms.nullpointers.arkanull.record.Record;
 
 import java.util.ArrayList;
 

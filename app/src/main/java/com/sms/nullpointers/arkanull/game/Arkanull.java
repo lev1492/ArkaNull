@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.game;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -7,6 +7,8 @@ import android.os.Message;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.sms.nullpointers.arkanull.activity.LivelliActivity;
 
 public class Arkanull extends AppCompatActivity {
 

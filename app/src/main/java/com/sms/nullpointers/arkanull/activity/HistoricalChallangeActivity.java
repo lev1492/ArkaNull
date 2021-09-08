@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.sms.nullpointers.arkanull.challenge.Challange;
+import com.sms.nullpointers.arkanull.challenge.ChallangeAdapter;
 import com.sms.nullpointers.arkanull.R;
 
 import java.util.ArrayList;

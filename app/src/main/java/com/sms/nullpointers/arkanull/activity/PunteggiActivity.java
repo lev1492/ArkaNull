@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.sms.nullpointers.arkanull.R;
+import com.sms.nullpointers.arkanull.record.Record;
+import com.sms.nullpointers.arkanull.record.RecordAdapter;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.record;
 
 import android.os.Parcel;
 import android.os.Parcelable;

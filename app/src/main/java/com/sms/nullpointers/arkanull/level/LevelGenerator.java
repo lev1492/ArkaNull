@@ -1,7 +1,10 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.level;
 
 import android.content.Context;
 import android.graphics.Point;
+
+import com.sms.nullpointers.arkanull.game.BrickData;
+import com.sms.nullpointers.arkanull.game.Brick;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

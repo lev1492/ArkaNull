@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.sms.nullpointers.arkanull.game.Arkanull;
+import com.sms.nullpointers.arkanull.game.Game;
 import com.sms.nullpointers.arkanull.R;
 
 public class LivelliActivity extends AppCompatActivity {

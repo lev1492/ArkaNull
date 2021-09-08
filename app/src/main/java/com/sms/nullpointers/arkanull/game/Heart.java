@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.game;
 
 import android.content.Context;
 import android.graphics.Bitmap;

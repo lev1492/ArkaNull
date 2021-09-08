@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +11,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.sms.nullpointers.arkanull.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.sms.nullpointers.arkanull.game.Arkanull;
+import com.sms.nullpointers.arkanull.challenge.Challange;
+import com.sms.nullpointers.arkanull.record.DAORecord;
+import com.sms.nullpointers.arkanull.game.Game;
+import com.sms.nullpointers.arkanull.R;
+import com.sms.nullpointers.arkanull.record.Record;
+import com.sms.nullpointers.arkanull.record.RecordAdapter;
 
 import java.util.ArrayList;
 

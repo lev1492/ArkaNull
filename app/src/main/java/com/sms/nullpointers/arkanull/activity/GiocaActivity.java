@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import android.content.Intent;
 
@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.sms.nullpointers.arkanull.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.sms.nullpointers.arkanull.game.Arkanull;
+import com.sms.nullpointers.arkanull.record.DAORecord;
+import com.sms.nullpointers.arkanull.game.Game;
+import com.sms.nullpointers.arkanull.R;
+import com.sms.nullpointers.arkanull.record.Record;
 
 import java.util.ArrayList;
 import java.util.HashMap;

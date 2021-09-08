@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
+import com.sms.nullpointers.arkanull.MainActivity;
 import com.sms.nullpointers.arkanull.R;
 
 //classe che apre le impostazioni del telefono

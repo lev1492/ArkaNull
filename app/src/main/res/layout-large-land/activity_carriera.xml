@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sms.nullpointers.arkanull.CarrieraActivity">
+    tools:context="com.sms.nullpointers.arkanull.activity.CarrieraActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.level;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -17,7 +17,9 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 
+import com.sms.nullpointers.arkanull.game.BrickData;
 import com.sms.nullpointers.arkanull.R;
+import com.sms.nullpointers.arkanull.game.Brick;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;

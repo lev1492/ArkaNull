@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.game;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,13 +22,21 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.sms.nullpointers.arkanull.R;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sms.nullpointers.arkanull.record.DAORecord;
+import com.sms.nullpointers.arkanull.level.LevelGenerator;
+import com.sms.nullpointers.arkanull.R;
+import com.sms.nullpointers.arkanull.record.Record;
+import com.sms.nullpointers.arkanull.settings.SoundManager;
+import com.sms.nullpointers.arkanull.activity.CarrieraActivity;
+import com.sms.nullpointers.arkanull.activity.ImpostazioniActivity;
+import com.sms.nullpointers.arkanull.activity.ListaSfideActivity;
+import com.sms.nullpointers.arkanull.activity.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;

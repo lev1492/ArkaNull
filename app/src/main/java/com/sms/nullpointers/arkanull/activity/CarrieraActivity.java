@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sms.nullpointers.arkanull.game.Arkanull;
+import com.sms.nullpointers.arkanull.level.LevelEditor;
+import com.sms.nullpointers.arkanull.game.UpdateThread;
 
 import androidx.appcompat.app.AppCompatActivity;
 

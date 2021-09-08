@@ -1,5 +1,5 @@
 
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.sms.nullpointers.arkanull.MainActivity;
 import com.sms.nullpointers.arkanull.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;

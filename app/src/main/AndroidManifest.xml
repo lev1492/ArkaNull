@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.sms.nullpointers.arkanull.MyApplication"
+        android:name="com.sms.nullpointers.arkanull.record.firebaseConnection"
         android:allowBackup="true"
         android:icon="@drawable/redball"
         android:label="ArkaNull"
@@ -15,25 +15,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.sms.nullpointers.arkanull.HistoricalChallangeActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.HistoricalChallangeActivity"
             android:label="@string/historicalChallenges"
             android:exported="true"
-            android:parentActivityName="com.sms.nullpointers.arkanull.ListaSfideActivity" >
+            android:parentActivityName="com.sms.nullpointers.arkanull.activity.ListaSfideActivity" >
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.sms.nullpointers.arkanull.ListaSfideActivity" />
+            android:value="com.sms.nullpointers.arkanull.activity.ListaSfideActivity" />
         </activity>
 
         <activity
-            android:name="com.sms.nullpointers.arkanull.ListaSfideActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.ListaSfideActivity"
             android:exported="true"
-            android:parentActivityName="com.sms.nullpointers.arkanull.GiocaActivity">
+            android:parentActivityName="com.sms.nullpointers.arkanull.activity.GiocaActivity">
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.sms.nullpointers.arkanull.GiocaActivity"/>
+            android:value="com.sms.nullpointers.arkanull.activity.GiocaActivity"/>
         </activity>
 
-        <activity android:name="com.sms.nullpointers.arkanull.SplashActivity"
+        <activity android:name="com.sms.nullpointers.arkanull.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,13 +41,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sms.nullpointers.arkanull.Arkanull" />
+        <activity android:name="com.sms.nullpointers.arkanull.game.Arkanull" />
         <activity
-            android:name="com.sms.nullpointers.arkanull.LoginActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.LoginActivity"
             android:exported="true"
             android:label="Login" />
         <activity
-            android:name="com.sms.nullpointers.arkanull.PunteggiActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.PunteggiActivity"
             android:label="@string/classifica"
             android:parentActivityName="com.sms.nullpointers.arkanull.MainActivity">
             <meta-data
@@ -55,26 +55,26 @@
                 android:value="com.sms.nullpointers.arkanull.MainActivity" />
         </activity>
         <activity
-            android:name="com.sms.nullpointers.arkanull.CarrieraActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.CarrieraActivity"
             android:label="Carriera"
-            android:parentActivityName="com.sms.nullpointers.arkanull.GiocaActivity">
+            android:parentActivityName="com.sms.nullpointers.arkanull.activity.GiocaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sms.nullpointers.arkanull.GiocaActivity" />
+                android:value="com.sms.nullpointers.arkanull.activity.GiocaActivity" />
         </activity>
         <activity
-            android:name="com.sms.nullpointers.arkanull.LivelliActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.LivelliActivity"
             android:label="Livelli"
-            android:parentActivityName="com.sms.nullpointers.arkanull.GiocaActivity">
+            android:parentActivityName="com.sms.nullpointers.arkanull.activity.GiocaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sms.nullpointers.arkanull.GiocaActivity" />
+                android:value="com.sms.nullpointers.arkanull.activity.GiocaActivity" />
         </activity>
         <activity
             android:name="com.sms.nullpointers.arkanull.MainActivity"
             android:label="Menu" />
         <activity
-            android:name="com.sms.nullpointers.arkanull.ImpostazioniActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.ImpostazioniActivity"
             android:label="Impostazioni"
             android:parentActivityName="com.sms.nullpointers.arkanull.MainActivity">
             <meta-data
@@ -82,7 +82,7 @@
                 android:value="com.sms.nullpointers.arkanull.MainActivity" />
         </activity>
         <activity
-            android:name="com.sms.nullpointers.arkanull.GiocaActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.GiocaActivity"
             android:label="Gioca"
             android:parentActivityName="com.sms.nullpointers.arkanull.MainActivity">
             <meta-data

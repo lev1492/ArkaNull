@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.game;
 
 public class Paddle {
     public final int STOPPED = 0;

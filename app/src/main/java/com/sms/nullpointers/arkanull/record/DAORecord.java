@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.record;
 
 import android.util.Log;
 
@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sms.nullpointers.arkanull.challenge.Challange;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

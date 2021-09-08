@@ -1,4 +1,4 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.settings;
 
 import android.content.Context;
 import android.media.MediaPlayer;

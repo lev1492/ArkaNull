@@ -1,9 +1,11 @@
-package com.sms.nullpointers.arkanull;
+package com.sms.nullpointers.arkanull.activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.sms.nullpointers.arkanull.activity.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

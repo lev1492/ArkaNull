@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/background"
     android:orientation="vertical"
     android:gravity="center"
     tools:context="com.sms.nullpointers.arkanull.activity.HistoricalChallangeActivity">
@@ -12,6 +12,7 @@
 
     <TextView
         android:id="@+id/textView"
+        android:textColor="@android:color/white"
         style="@style/AppImpostazioniSmartphone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/background"
     android:orientation="vertical"
     android:gravity="center"
     tools:context="com.sms.nullpointers.arkanull.activity.PunteggiActivity">
@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/classifica"
+        android:textColor="@android:color/white"
         android:layout_marginBottom="5dp"/>
 
     <ListView

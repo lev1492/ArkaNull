@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/background"
     tools:context="com.sms.nullpointers.arkanull.activity.ListaSfideActivity">
 
     <!-- da sistemare nel caso eliminare il linear layout-->
@@ -17,6 +18,7 @@
         <Button
             android:id="@+id/historicalChallanges"
             android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
             style="@style/AppToolBarSmartphone"
             android:textColor="#0000FF"
             android:layout_weight="1"
@@ -27,6 +29,7 @@
         <Button
             android:id="@+id/newChallange"
             android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
             style="@style/AppToolBarSmartphone"
             android:textColor="#0000FF"
             android:layout_weight="1"
@@ -43,6 +46,7 @@
 
         <TextView
             android:id="@+id/textView"
+            android:textColor="@android:color/white"
             style="@style/AppImpostazioniSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

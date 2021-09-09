@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context="com.sms.nullpointers.arkanull.activity.ImpostazioniActivity">
 
 
@@ -17,6 +18,7 @@
 
         <TextView
             android:id="@+id/type_input"
+            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,6 +27,7 @@
 
         <RadioButton
             android:id="@+id/acceleromter"
+            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,6 +36,7 @@
 
         <RadioButton
             android:id="@+id/touch"
+            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,6 +45,7 @@
 
         <TextView
             android:id="@+id/audioText"
+            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,6 +53,7 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/audio"
+            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

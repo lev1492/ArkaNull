@@ -63,12 +63,14 @@
     <Button
         android:id="@+id/save"
         style="@style/AppImpostazioniTablet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="99dp"
+        android:layout_height="59dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         android:onClick="onSaveSetting"
         android:text="@string/salva" />
 

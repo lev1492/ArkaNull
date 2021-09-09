@@ -12,6 +12,8 @@
         style="@style/AppThemeLandTablet"
         android:layout_alignParentStart="true"
         android:onClick="openLivelli"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         android:text="@string/livelli" />
 
     <Button
@@ -19,6 +21,8 @@
         style="@style/AppThemeLandTablet"
         android:layout_centerHorizontal="true"
         android:onClick="openCarriera"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         android:text="@string/carriera" />
 
     <Button
@@ -26,6 +30,8 @@
         style="@style/AppThemeLandTablet"
         android:layout_alignParentEnd="true"
         android:onClick="openMultiPlayer"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         android:text="@string/multiplayer" />
 
 </RelativeLayout>

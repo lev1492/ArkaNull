@@ -8,6 +8,8 @@
 
     <Button
         android:id="@+id/easy"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         style="@style/AppThemePortraitTablet"
         android:layout_alignParentTop="true"
         android:onClick="onLevel"
@@ -15,6 +17,8 @@
 
     <Button
         android:id="@+id/normal"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         style="@style/AppThemePortraitTablet"
         android:layout_centerVertical="true"
         android:onClick="onLevel"
@@ -22,6 +26,8 @@
 
     <Button
         android:id="@+id/hard"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         style="@style/AppThemePortraitTablet"
         android:layout_alignParentBottom="true"
         android:onClick="onLevel"

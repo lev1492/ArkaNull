@@ -65,6 +65,7 @@
         android:id="@+id/save"
         style="@style/AppToolBarSmartphone"
         android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         android:textColor="#0000FF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

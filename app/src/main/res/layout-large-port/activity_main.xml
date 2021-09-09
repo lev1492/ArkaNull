@@ -40,6 +40,8 @@
 
         <Button
             android:id="@+id/gioca"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
             style="@style/AppThemePortraitTablet"
             android:layout_alignParentTop="true"
             android:onClick="openGioca"
@@ -47,6 +49,8 @@
 
         <Button
             android:id="@+id/classifica"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
             style="@style/AppThemePortraitTablet"
             android:layout_centerVertical="true"
             android:onClick="openClassifica"
@@ -54,6 +58,8 @@
 
         <Button
             android:id="@+id/impostazioni"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
             style="@style/AppThemePortraitTablet"
             android:layout_alignParentBottom="true"
             android:onClick="openImpostazioni"

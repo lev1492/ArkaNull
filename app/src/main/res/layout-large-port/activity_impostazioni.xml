@@ -39,34 +39,36 @@
             android:text="@string/touch" />
 
 
-    <TextView
-        android:id="@+id/audioText"
-        style="@style/AppImpostazioniTablet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/audio" />
+        <TextView
+            android:id="@+id/audioText"
+            style="@style/AppImpostazioniTablet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/audio" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/audio"
-        style="@style/AppImpostazioniTablet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="200dp"
-        android:onClick="onSound"
-        android:switchMinWidth="56dp"
-        android:text="@string/audio"
-        android:textOff="OFF"
-        android:textOn="ON" />
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/audio"
+            style="@style/AppImpostazioniTablet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="200dp"
+            android:onClick="onSound"
+            android:switchMinWidth="56dp"
+            android:text="@string/audio"
+            android:textOff="OFF"
+            android:textOn="ON" />
     </RadioGroup>
 
     <Button
         android:id="@+id/save"
         style="@style/AppImpostazioniTablet"
-        android:layout_width="wrap_content"
+        android:layout_width="104dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="70dp"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
         android:onClick="onSaveSetting"
         android:text="@string/salva" />
 

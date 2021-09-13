@@ -40,7 +40,11 @@
     <string name="title_activity_challange" translatable="false">Challange</string>
     <string name="tab_text_1" translatable="false">Tab 1</string>
     <string name="tab_text_2" translatable="false">Tab 2</string>
+    <string name="home">Home</string>
 
+    <!-- Drawer Menu -->
+    <string name="navigation_drawer_open">Apri menu laterale</string>
+    <string name="navigation_drawer_close">Chiudi menu laterale</string>
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
 </resources>

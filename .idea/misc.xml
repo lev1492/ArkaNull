@@ -8,14 +8,37 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/drawable/ic_classifica.xml" value="0.1" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/drawable/ic_launchers_background.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/drawable/ic_menu_home.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/drawable/ic_menu_impostazioni.xml" value="0.1" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-land/activity_classifica.xml" value="0.13119143239625167" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-land/activity_gioca.xml" value="0.13119143239625167" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-land/activity_impostazioni.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-land/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-land/activity_punteggi.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-land/record_item.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-port/activity_gioca.xml" value="0.14754098360655737" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-port/activity_impostazioni.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-port/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-large-port/activity_punteggi.xml" value="0.1" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-normal-land/activity_carriera.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-normal-land/activity_gioca.xml" value="0.1728395061728395" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-normal-land/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-normal-land/activity_punteggi.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-normal-land/nav_header_home.xml" value="0.1" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_carriera.xml" value="0.25" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_classifica.xml" value="0.16576086956521738" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_gioca.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_impostazioni.xml" value="0.14" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_livelli.xml" value="0.1" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_menu.xml" value="0.16576086956521738" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/activity_punteggi.xml" value="0.18" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/app_bar_home.xml" value="0.12771739130434784" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/layout/nav_header_home.xml" value="0.12771739130434784" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/menu/activity_home_drawer.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/menu/home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Alessandro/AndroidStudioProjects/ArkaNull/app/src/main/res/xml/root_preferences.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/domen/AndroidStudioProjects/ArkaNull/app/src/main/res/drawable/ic_launchers_background.xml" value="0.119921875" />
         <entry key="..\:/Users/domen/AndroidStudioProjects/ArkaNull/app/src/main/res/layout-land/activity_carriera.xml" value="0.18775510204081633" />

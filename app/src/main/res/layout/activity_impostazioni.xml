@@ -1,59 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/drawer_layout"
     android:background="@color/background"
-    tools:context="com.sms.nullpointers.arkanull.activity.ImpostazioniActivity">
+    tools:context="com.sms.nullpointers.arkanull.activity.ImpostazioniActivity"
+    tools:openDrawer="start"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RadioGroup
         android:id="@+id/activity_impostazioni"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
         android:theme="@style/RadioButtonTheme">
 
         <TextView
             android:id="@+id/type_input"
-            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="37dp"
-            android:text="@string/type_input" />
+            android:text="@string/type_input"
+            android:textColor="@android:color/white" />
 
         <RadioButton
             android:id="@+id/acceleromter"
-            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
-            android:text="@string/accelerometro" />
+            android:text="@string/accelerometro"
+            android:textColor="@android:color/white" />
 
         <RadioButton
             android:id="@+id/touch"
-            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
-            android:text="@string/touch" />
+            android:text="@string/touch"
+            android:textColor="@android:color/white" />
 
         <TextView
             android:id="@+id/audioText"
-            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/audio" />
+            android:text="@string/audio"
+            android:textColor="@android:color/white" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/audio"
-            android:textColor="@android:color/white"
             style="@style/AppToolBarSmartphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,25 +68,44 @@
             android:onClick="onSound"
             android:switchMinWidth="56dp"
             android:text="@string/audio"
-            android:theme="@style/SwitcheTheme"
+            android:textColor="@android:color/white"
             android:textOff="OFF"
-            android:textOn="ON" />
+            android:textOn="ON"
+            android:theme="@style/SwitcheTheme" />
 
     </RadioGroup>
 
-    <Button
-        android:id="@+id/save"
-        style="@style/AppToolBarSmartphone"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
-        android:textColor="#0000FF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
-        android:onClick="onSaveSetting"
-        android:text="@string/salva" />
+        <Button
+            android:id="@+id/save"
+            style="@style/AppToolBarSmartphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
+            android:onClick="onSaveSetting"
+            android:text="@string/salva"
+            android:textColor="#0000FF" />
+
+    </RelativeLayout>
 
 
-</RelativeLayout>
+        <include
+            layout="@layout/app_bar_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header_home"
+            app:menu="@menu/activity_home_drawer" />
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

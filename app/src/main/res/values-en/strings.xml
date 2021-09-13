@@ -18,13 +18,10 @@
     <string name="newChallange">New Challange</string>
     <string name="replyChallange">Reply Challange</string>
     <string name="historicalChallenges">Historical Challange</string>
-
-
-
-
-
-
-
+    <string name="home">Home</string>
+    <!-- Drawer Menu -->
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 
 
 </resources>

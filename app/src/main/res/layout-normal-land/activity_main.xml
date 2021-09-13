@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
+    android:id="@+id/drawer_layout"
     tools:context="com.sms.nullpointers.arkanull.MainActivity">
 
 

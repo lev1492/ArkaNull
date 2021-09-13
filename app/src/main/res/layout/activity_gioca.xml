@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
+    android:id="@+id/drawer_layout"
     tools:context="com.sms.nullpointers.arkanull.activity.GiocaActivity">
+
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
     <Button
         android:id="@+id/livelli"
@@ -41,9 +46,24 @@
         style="@style/AppThemePortraitSmartphone"
         android:layout_height="48dp"
         android:layout_alignBottom="@+id/livelli"
-        android:layout_marginBottom="161dp"
+        android:layout_marginTop="?attr/actionBarSize"
         android:background="@drawable/background"
         android:backgroundTint="@color/button_background_color"
         android:onClick="openCustomLevel"
         android:text="Editor Level" />
 </RelativeLayout>
+
+    <include
+        layout="@layout/app_bar_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_home_drawer" />
+</androidx.drawerlayout.widget.DrawerLayout>

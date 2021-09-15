@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseUser;
 import com.sms.nullpointers.arkanull.MainActivity;
 import com.sms.nullpointers.arkanull.R;
 import com.sms.nullpointers.arkanull.record.Record;
@@ -21,7 +24,7 @@ import com.sms.nullpointers.arkanull.record.RecordAdapter;
 
 import java.util.ArrayList;
 
-public class PunteggiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ClassificaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
 
@@ -35,7 +38,7 @@ public class PunteggiActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_punteggi);
+        setContentView(R.layout.activity_classifica);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -46,6 +49,19 @@ public class PunteggiActivity extends AppCompatActivity implements NavigationVie
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        TextView logout = findViewById(R.id.logout);
+        FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
+        String nomeUtente = user.getDisplayName();
+        String logoutText = getResources().getString(R.string.logout);
+        if( nomeUtente == null ) {
+            nomeUtente = "";
+            logoutText = getResources().getString(R.string.login);
+            logout.setText(logoutText);
+        } else if (nomeUtente.isEmpty() ) {
+            nomeUtente = "";
+            logoutText = getResources().getString(R.string.login);
+        }
+        logout.setText(logoutText);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -54,7 +70,7 @@ public class PunteggiActivity extends AppCompatActivity implements NavigationVie
         super.onStart();
         classifica = getIntent().getParcelableArrayListExtra("classifica");
         for(Record user : classifica ){
-            Log.d("PunteggiActivity", user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
+            Log.d("ClassificaActivity", user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
         }
 
         listViewClassifica = findViewById(R.id.classifica);
@@ -108,7 +124,7 @@ public class PunteggiActivity extends AppCompatActivity implements NavigationVie
                 startActivity(home);
                 break;
             case R.id.nav_classifica:
-                Intent classifica= new Intent(this,PunteggiActivity.class);
+                Intent classifica= new Intent(this, ClassificaActivity.class);
                 startActivity(classifica);
                 break;
             case R.id.nav_impostazioni:
@@ -125,6 +141,12 @@ public class PunteggiActivity extends AppCompatActivity implements NavigationVie
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void logOut (View view) {
+        LoginActivity.logOut();
+        Intent intent = new Intent(this , LoginActivity.class);
+        startActivity(intent);
     }
 }
 

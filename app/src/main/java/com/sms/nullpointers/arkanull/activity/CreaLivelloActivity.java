@@ -15,7 +15,7 @@ import com.sms.nullpointers.arkanull.game.UpdateThread;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CarrieraActivity extends AppCompatActivity {
+public class CreaLivelloActivity extends AppCompatActivity {
 
     private static int LEVEL;
 

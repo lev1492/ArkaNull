@@ -15,17 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.sms.nullpointers.arkanull.activity.HistoricalChallangeActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.ListaSfideActivity"
             android:label="@string/historicalChallenges"
             android:exported="true"
-            android:parentActivityName="com.sms.nullpointers.arkanull.activity.ListaSfideActivity" >
+            android:parentActivityName="com.sms.nullpointers.arkanull.activity.MultiplayerActivity" >
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.sms.nullpointers.arkanull.activity.ListaSfideActivity" />
+            android:value="com.sms.nullpointers.arkanull.activity.MultiplayerActivity" />
         </activity>
 
         <activity
-            android:name="com.sms.nullpointers.arkanull.activity.ListaSfideActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.MultiplayerActivity"
+            android:label="@string/multiplayer"
             android:exported="true"
             android:parentActivityName="com.sms.nullpointers.arkanull.activity.GiocaActivity">
         <meta-data
@@ -47,7 +48,7 @@
             android:exported="true"
             android:label="Login" />
         <activity
-            android:name="com.sms.nullpointers.arkanull.activity.PunteggiActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.ClassificaActivity"
             android:label="@string/classifica"
             android:parentActivityName="com.sms.nullpointers.arkanull.MainActivity">
             <meta-data
@@ -55,7 +56,7 @@
                 android:value="com.sms.nullpointers.arkanull.MainActivity" />
         </activity>
         <activity
-            android:name="com.sms.nullpointers.arkanull.activity.CarrieraActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.CreaLivelloActivity"
             android:label="Carriera"
             android:parentActivityName="com.sms.nullpointers.arkanull.activity.GiocaActivity">
             <meta-data
@@ -63,7 +64,7 @@
                 android:value="com.sms.nullpointers.arkanull.activity.GiocaActivity" />
         </activity>
         <activity
-            android:name="com.sms.nullpointers.arkanull.activity.LivelliActivity"
+            android:name="com.sms.nullpointers.arkanull.activity.SingleGameActivity"
             android:label="Livelli"
             android:parentActivityName="com.sms.nullpointers.arkanull.activity.GiocaActivity">
             <meta-data
@@ -72,7 +73,7 @@
         </activity>
         <activity
             android:name="com.sms.nullpointers.arkanull.MainActivity"
-            android:label="Menu" />
+            android:label="Arkanull" />
         <activity
             android:name="com.sms.nullpointers.arkanull.activity.ImpostazioniActivity"
             android:label="Impostazioni"

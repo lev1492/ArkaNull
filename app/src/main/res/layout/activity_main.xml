@@ -11,49 +11,49 @@
     tools:openDrawer="start"
     tools:context="com.sms.nullpointers.arkanull.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize"
+        >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <Button
-        android:id="@+id/gioca"
-        style="@style/AppThemePortraitSmartphone"
-        android:layout_centerVertical="true"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
-        android:onClick="openGioca"
-        android:text="@string/gioca" />
-
-    </RelativeLayout>
-    <!--Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme">
-
-        <TextView
-            android:id="@+id/nomeUtente"
-            style="@style/AppToolBarSmartphone"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_gravity="left|fill_vertical"
-            android:gravity="center_vertical"
-            android:textColor="#000000" />
+        android:layout_height="match_parent"
+        android:layout_weight=".5"
+        >
 
         <Button
-            android:id="@+id/logout"
-            style="@style/AppToolBarSmartphone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|fill_vertical"
-            android:onClick="logOut"
-            android:text="@string/logout" />
-    </Toolbar-->
+            android:id="@+id/gioca"
+            style="@style/AppThemePortraitSmartphone"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
+            android:onClick="openGioca"
+            android:text="@string/gioca" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight=".5">
 
 
+    <Button
+        android:id="@+id/editorLevel"
+        style="@style/AppThemePortraitSmartphone"
+        android:background="@drawable/background"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/button_background_color"
+        android:onClick="createCustomLevel"
+        android:text="@string/crea" />
 
+    </RelativeLayout>
 
+    </LinearLayout>
 
             <include
                 layout="@layout/app_bar_home"
@@ -67,27 +67,26 @@
                 android:layout_gravity="start"
                 android:fitsSystemWindows="true"
                 app:headerLayout="@layout/nav_header_home"
-                app:menu="@menu/activity_home_drawer" />
+                app:menu="@menu/activity_home_drawer">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-
-        <!--Button
-            android:id="@+id/classifica"
-            android:background="@drawable/background"
-            android:backgroundTint="@color/button_background_color"
-            style="@style/AppThemePortraitSmartphone"
-            android:layout_centerVertical="true"
-            android:onClick="openClassifica"
-            android:text="@string/classifica" />
-
-        <Button
-            android:id="@+id/impostazioni"
-            android:background="@drawable/background"
-            android:backgroundTint="@color/button_background_color"
-            style="@style/AppThemePortraitSmartphone"
-            android:layout_alignParentBottom="true"
-            android:onClick="openImpostazioni"
-            android:text="@string/impostazioni" /-->
-
+                    <TextView
+                        android:id="@+id/logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/logout"
+                        android:onClick="logOut"
+                        android:textSize="@dimen/menu_bottom_size_text"
+                        android:clickable="true"
+                        />
+                </LinearLayout>
+            </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

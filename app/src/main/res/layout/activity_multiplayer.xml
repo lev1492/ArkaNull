@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    android:id="@+id/drawer_layout"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.sms.nullpointers.arkanull.activity.MultiplayerActivity">
+
+    <!-- da sistemare nel caso eliminare il linear layout-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        >
+
+
+        <Button
+            android:id="@+id/historicalChallanges"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
+            style="@style/AppToolBarSmartphone"
+            android:textColor="#0000FF"
+            android:layout_weight="1"
+            android:onClick="openHistoricalChallange"
+            android:text="@string/historicalChallenges" />
+
+
+        <Button
+            android:id="@+id/newChallange"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/button_background_color"
+            style="@style/AppToolBarSmartphone"
+            android:textColor="#0000FF"
+            android:layout_weight="1"
+            android:onClick="openNewChallange"
+            android:text="@string/newChallange" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="150dp"
+        >
+
+        <TextView
+            android:id="@+id/textView"
+            android:textColor="@android:color/white"
+            style="@style/AppImpostazioniSmartphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Sfide" />
+
+        <ListView
+            android:id="@+id/classifica"
+            style="@style/AppImpostazioniSmartphone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+
+    <include
+        layout="@layout/app_bar_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_home_drawer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/logout"
+                android:onClick="logOut"
+                android:textSize="@dimen/menu_bottom_size_text"
+                android:clickable="true"
+                />
+        </LinearLayout>
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

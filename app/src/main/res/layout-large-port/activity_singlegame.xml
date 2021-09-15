@@ -5,34 +5,39 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
-    android:orientation="vertical"
     android:id="@+id/drawer_layout"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
-    android:gravity="center"
-    tools:context="com.sms.nullpointers.arkanull.activity.ListaSfideActivity">
+    tools:context="com.sms.nullpointers.arkanull.activity.SingleGameActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        >
+        android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:textColor="@android:color/white"
-        style="@style/AppImpostazioniSmartphone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/classifica"
-        />
+    <Button
+        android:id="@+id/easy"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
+        style="@style/AppThemePortraitTablet"
+        android:layout_alignParentTop="true"
+        android:onClick="onLevel"
+        android:text="@string/facile" />
 
-    <ListView
-        android:id="@+id/classifica"
-        style="@style/AppImpostazioniSmartphone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <Button
+        android:id="@+id/normal"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
+        style="@style/AppThemePortraitTablet"
+        android:layout_centerVertical="true"
+        android:onClick="onLevel"
+        android:text="@string/medio" />
+
+    <Button
+        android:id="@+id/hard"
+        android:background="@drawable/background"
+        android:backgroundTint="@color/button_background_color"
+        style="@style/AppThemePortraitTablet"
+        android:layout_alignParentBottom="true"
+        android:onClick="onLevel"
+        android:text="@string/difficile" />
 
     </RelativeLayout>
 
@@ -69,5 +74,4 @@
                 />
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
-
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -33,9 +33,9 @@ import com.sms.nullpointers.arkanull.level.LevelGenerator;
 import com.sms.nullpointers.arkanull.R;
 import com.sms.nullpointers.arkanull.record.Record;
 import com.sms.nullpointers.arkanull.settings.SoundManager;
-import com.sms.nullpointers.arkanull.activity.CarrieraActivity;
+import com.sms.nullpointers.arkanull.activity.CreaLivelloActivity;
 import com.sms.nullpointers.arkanull.activity.ImpostazioniActivity;
-import com.sms.nullpointers.arkanull.activity.ListaSfideActivity;
+import com.sms.nullpointers.arkanull.activity.MultiplayerActivity;
 import com.sms.nullpointers.arkanull.activity.LoginActivity;
 
 import java.util.ArrayList;
@@ -526,7 +526,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         canvas.drawText("" + lifes, 400, 100, paint);
         canvas.drawText("" + score, 700, 100, paint);
         if ( mode == MULTIPLAYER) {
-            int score2 = ListaSfideActivity.SCORE2;
+            int score2 = MultiplayerActivity.SCORE2;
             canvas.drawText("" + score2, 1000, 100, paint);
         }
 
@@ -746,9 +746,9 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
     public void career(){
         if(list.size()==0){
             paused = true;
-            CarrieraActivity.nextLevel++;
+            CreaLivelloActivity.nextLevel++;
             Toast.makeText(this.getContext(),"Hai Vinto", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this.getContext(), CarrieraActivity.class);
+            Intent intent = new Intent(this.getContext(), CreaLivelloActivity.class);
             intent.putExtra("GameMode", CAREER);
             this.getContext().startActivity(intent);
         }
@@ -769,7 +769,7 @@ public class Game extends View implements SensorEventListener, View.OnTouchListe
         /*if(list.size()==0){
             Toast.makeText(this.getContext(),"Hai Vinto", Toast.LENGTH_SHORT).show();
             paused = true;
-            Intent intent = new Intent(this.getContext(), CarrieraActivity.class);
+            Intent intent = new Intent(this.getContext(), CreaLivelloActivity.class);
             this.getContext().startActivity(intent);
         }*/
    }

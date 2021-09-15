@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.sms.nullpointers.arkanull.activity.LivelliActivity;
+import com.sms.nullpointers.arkanull.activity.SingleGameActivity;
 
 public class Arkanull extends AppCompatActivity {
 
@@ -43,7 +43,7 @@ public class Arkanull extends AppCompatActivity {
         Log.d("idMainReplyChallange", "idMainReplyChallange" + idSfida);
 
         // create a new game
-        game = new Game(this, 3, 0, gameMode, LivelliActivity.getLEVEL());
+        game = new Game(this, 3, 0, gameMode, SingleGameActivity.getLEVEL());
 
         setContentView(game);
 

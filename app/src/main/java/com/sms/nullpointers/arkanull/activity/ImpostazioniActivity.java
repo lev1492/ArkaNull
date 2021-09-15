@@ -15,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,7 +58,6 @@ public class ImpostazioniActivity extends AppCompatActivity implements Navigatio
 
     DrawerLayout drawer;
     NavigationView navigationView;
-    Toolbar toolbar=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,19 @@ public class ImpostazioniActivity extends AppCompatActivity implements Navigatio
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        TextView logout = findViewById(R.id.logout);
+        FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
+        String nomeUtente = user.getDisplayName();
+        String logoutText = getResources().getString(R.string.logout);
+        if( nomeUtente == null ) {
+            nomeUtente = "";
+            logoutText = getResources().getString(R.string.login);
+            logout.setText(logoutText);
+        } else if (nomeUtente.isEmpty() ) {
+            nomeUtente = "";
+            logoutText = getResources().getString(R.string.login);
+        }
+        logout.setText(logoutText);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -185,7 +199,7 @@ public class ImpostazioniActivity extends AppCompatActivity implements Navigatio
     }
 
     public void openClassifica(){
-        Intent intent = new Intent(this , PunteggiActivity.class);
+        Intent intent = new Intent(this , ClassificaActivity.class);
         String gameMode = Game.GAME_MODE[Game.ARKANULL];
 
         DAORecord dao = new DAORecord(gameMode);
@@ -207,6 +221,12 @@ public class ImpostazioniActivity extends AppCompatActivity implements Navigatio
 
             }
         });
+    }
+
+    public void logOut (View view) {
+        LoginActivity.logOut();
+        Intent intent = new Intent(this , LoginActivity.class);
+        startActivity(intent);
     }
 
 }

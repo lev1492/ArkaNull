@@ -10,47 +10,39 @@
 
 <RelativeLayout
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    >
 
     <Button
-        android:id="@+id/livelli"
+        android:id="@+id/singleGame"
         style="@style/AppThemePortraitSmartphone"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="139dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/background"
         android:backgroundTint="@color/button_background_color"
-        android:onClick="openLivelli"
-        android:text="@string/livelli" />
+        android:onClick="openSingleGame"
+        android:text="@string/giocataSingola" />
 
     <Button
-        android:id="@+id/carriera"
+        android:id="@+id/customLevel"
         style="@style/AppThemePortraitSmartphone"
         android:layout_centerVertical="true"
         android:background="@drawable/background"
         android:backgroundTint="@color/button_background_color"
-        android:onClick="openCarriera"
-        android:text="Editor" />
+        android:onClick="openCustomLevel"
+        android:text="@string/tuolivello" />
 
     <Button
         android:id="@+id/multiplayer"
         android:background="@drawable/background"
         android:backgroundTint="@color/button_background_color"
-
         style="@style/AppThemePortraitSmartphone"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
         android:onClick="openMultiPlayer"
         android:text="@string/multiplayer" />
 
-    <Button
-        android:id="@+id/editorLevel"
-        style="@style/AppThemePortraitSmartphone"
-        android:layout_height="48dp"
-        android:layout_alignBottom="@+id/livelli"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
-        android:onClick="openCustomLevel"
-        android:text="Editor Level" />
 </RelativeLayout>
 
     <include
@@ -59,11 +51,31 @@
         android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_home_drawer" />
+                android:id="@+id/nav_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:fitsSystemWindows="true"
+                app:headerLayout="@layout/nav_header_home"
+                app:menu="@menu/activity_home_drawer">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/logout"
+                        android:onClick="logOut"
+                        android:textSize="@dimen/menu_bottom_size_text"
+                        android:clickable="true"
+                        />
+                </LinearLayout>
+            </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -21,6 +21,9 @@
     <string name="newChallange">Nuova Sfida</string>
     <string name="replyChallange">Rispondi Sfida</string>
     <string name="historicalChallenges">Storico Sfide</string>
+    <string name="crea">Crea Livello</string>
+    <string name="tuolivello">Il Tuo Livello</string>
+    <string name="giocataSingola">Singola Giocata</string>
 
 
     <!-- Preference Titles -->

@@ -1,7 +1,5 @@
 package com.sms.nullpointers.arkanull.activity;
 
-import android.content.Intent;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,13 +7,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,26 +26,32 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.sms.nullpointers.arkanull.MainActivity;
 import com.sms.nullpointers.arkanull.game.Arkanull;
+import com.sms.nullpointers.arkanull.challenge.Challange;
 import com.sms.nullpointers.arkanull.record.DAORecord;
 import com.sms.nullpointers.arkanull.game.Game;
 import com.sms.nullpointers.arkanull.R;
 import com.sms.nullpointers.arkanull.record.Record;
+import com.sms.nullpointers.arkanull.record.RecordAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
+public class MultiplayerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-public class GiocaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
-
-    private Button buttonLivelli;
     DrawerLayout drawer;
     NavigationView navigationView;
+
+    static ArrayList<Record> classifica = new ArrayList<>();
+    ListView listViewClassifica;
+    String[] id;
+    String selectedId;
+    Intent intent;
+    public static int SCORE2;
+    String TAG ="LISTA_SFIDE_ACTIVITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gioca);
+        setContentView(R.layout.activity_multiplayer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,40 +76,79 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
         }
         logout.setText(logoutText);
         navigationView.setNavigationItemSelectedListener(this);
+        if(savedInstanceState != null){
+            classifica = savedInstanceState.getParcelableArrayList("classifica");
+            id = savedInstanceState.getStringArray("id");
+            Log.d(TAG, ":ON_START:stampa classifica" + classifica);
+
+        }
+
     }
 
-    public void openSingleGame(View view){
-        Intent intent = new Intent(this , SingleGameActivity.class);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if ( classifica.isEmpty()) {
+            classifica = getIntent().getParcelableArrayListExtra("classifica");
+            id = getIntent().getStringArrayExtra("id");
+        }
+
+        listViewClassifica = findViewById(R.id.classifica);
+        RecordAdapter classificaAdapter = new RecordAdapter(this, classifica);
+
+        listViewClassifica.setAdapter(classificaAdapter);
+
+        listViewClassifica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Record myObject = (Record) classificaAdapter.getItem(position);
+                selectedId = id[position];
+                Toast.makeText( listViewClassifica.getContext() , id[position], Toast.LENGTH_SHORT).show();
+                if(selectedId != null) {
+                    intent.putExtra("idSfida", selectedId);
+                    SCORE2 = myObject.getScore();
+                    intent.putExtra("GameMode", Game.MULTIPLAYER);
+                    startActivity(intent);
+                }
+            }
+        });
+
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        state.putParcelableArrayList("classifica", classifica);
+        state.putStringArray("id", id);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        classifica = state.getParcelableArrayList("classifica");
+        id = state.getStringArray("id");
+
+    }
+    public void openNewChallange(View view){
+        Intent intent = new Intent(this , Arkanull.class);
+        intent.putExtra("GameMode", Game.MULTIPLAYER);
         startActivity(intent);
-        buttonLivelli = findViewById(R.id.singleGame);
     }
 
-    public void openCustomLevel(View view){
-        Intent intent = new Intent(this, Arkanull.class);
-        intent.putExtra("GameMode", Game.EDITOR_LEVEL);
-        startActivity(intent);
-    }
-
-    public void openMultiPlayer(View view){
-        Intent intent = new Intent(this , MultiplayerActivity.class);
+    public void openHistoricalChallange(View view){
+        Intent intent = new Intent(this , ListaSfideActivity.class);
         String gameMode = Game.GAME_MODE[Game.MULTIPLAYER];
+
         DAORecord dao = new DAORecord(gameMode);
         DatabaseReference mReference = dao.getDatabaseReference();
         mReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HashMap<String, Record> usersId = dao.readChalleange(snapshot, DAORecord.PLAYER1);
-                String[] id = usersId.keySet().toArray(new String[0]);
-                Record[] usersArray = usersId.values().toArray(new Record[0]);
-                ArrayList<Record> users = new ArrayList<>();
-                int i = 0;
-                for(Record user : usersArray){
-                    users.add(user);
-                    Log.d("ClassificaActivity", id[i] + " " + user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
-                    i++;
-                }
-                intent.putExtra("id", id);
-                intent.putParcelableArrayListExtra("classifica", users);
+                ArrayList<Challange> challanges = new ArrayList<>();
+                challanges = dao.readHistoricalChallange(snapshot);
+
+                intent.putParcelableArrayListExtra("challange", challanges);
                 startActivity(intent);
 
             }
@@ -111,8 +157,8 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });    }
-
+        });
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -152,16 +198,14 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
         //here is the main place where we need to work on.
         int id=item.getItemId();
         switch (id){
-
             case R.id.nav_home:
                 Intent home= new Intent(this, MainActivity.class);
                 startActivity(home);
                 break;
-
             case R.id.nav_classifica:
-                openClassifica();
+                Intent classifica= new Intent(this, ClassificaActivity.class);
+                startActivity(classifica);
                 break;
-
             case R.id.nav_impostazioni:
                 Intent impostazioni= new Intent(this,ImpostazioniActivity.class);
                 startActivity(impostazioni);
@@ -176,31 +220,6 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void openClassifica(){
-        Intent intent = new Intent(this , ClassificaActivity.class);
-        String gameMode = Game.GAME_MODE[Game.ARKANULL];
-
-        DAORecord dao = new DAORecord(gameMode);
-        DatabaseReference mReference = dao.getDatabaseReference();
-        mReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Record> users = dao.readRanking(snapshot);
-                for(Record user : users){
-                    Log.d("ClassificaActivity", user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
-                }
-                intent.putParcelableArrayListExtra("classifica", users);
-                startActivity(intent);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     public void logOut (View view) {

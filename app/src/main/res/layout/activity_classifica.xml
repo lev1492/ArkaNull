@@ -9,32 +9,23 @@
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    android:gravity="center"
-    tools:context="com.sms.nullpointers.arkanull.activity.ListaSfideActivity">
+    tools:context="com.sms.nullpointers.arkanull.activity.ClassificaActivity">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         >
-
-    <TextView
-        android:id="@+id/textView"
-        android:textColor="@android:color/white"
-        style="@style/AppImpostazioniSmartphone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/classifica"
-        />
-
-    <ListView
-        android:id="@+id/classifica"
-        style="@style/AppImpostazioniSmartphone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <ListView
+            android:id="@+id/classifica"
+            style="@style/AppImpostazioniSmartphone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </RelativeLayout>
+
 
     <include
         layout="@layout/app_bar_home"
@@ -69,5 +60,6 @@
                 />
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

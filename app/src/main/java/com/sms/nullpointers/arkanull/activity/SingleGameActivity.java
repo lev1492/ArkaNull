@@ -1,7 +1,5 @@
 package com.sms.nullpointers.arkanull.activity;
 
-import android.content.Intent;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,13 +7,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,26 +24,32 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.sms.nullpointers.arkanull.MainActivity;
 import com.sms.nullpointers.arkanull.game.Arkanull;
-import com.sms.nullpointers.arkanull.record.DAORecord;
 import com.sms.nullpointers.arkanull.game.Game;
 import com.sms.nullpointers.arkanull.R;
+import com.sms.nullpointers.arkanull.record.DAORecord;
 import com.sms.nullpointers.arkanull.record.Record;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
+public class SingleGameActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-public class GiocaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    public boolean flagGMode;
 
+    private static int LEVEL;
 
-    private Button buttonLivelli;
+    public static int getLEVEL() {
+        return LEVEL;
+    }
+
+    Intent intent;
+
     DrawerLayout drawer;
     NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gioca);
+        setContentView(R.layout.activity_singlegame);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,49 +74,33 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
         }
         logout.setText(logoutText);
         navigationView.setNavigationItemSelectedListener(this);
+        intent = new Intent(this, Arkanull.class);
     }
 
-    public void openSingleGame(View view){
-        Intent intent = new Intent(this , SingleGameActivity.class);
-        startActivity(intent);
-        buttonLivelli = findViewById(R.id.singleGame);
+    public void onLevel (View view){
+        String level = "";
+        //flag che indica la modalità di gioco aracade
+        switch (view.getId()){
+            case R.id.easy:
+                LEVEL = Game.EASY;
+                level = "Livello Easy";
+                break;
+
+            case R.id.normal:
+                LEVEL = Game.NORMAL;
+                level = "Livello Medium";
+                break;
+
+            case R.id.hard:
+                LEVEL = Game.HARD;
+                level = "Livello Hard";
+                break;
+
+        }
+        Toast.makeText( view.getContext(), level, Toast.LENGTH_SHORT).show();
+        intent.putExtra("GameMode", Game.ARKANULL);
+        this.startActivity(intent);
     }
-
-    public void openCustomLevel(View view){
-        Intent intent = new Intent(this, Arkanull.class);
-        intent.putExtra("GameMode", Game.EDITOR_LEVEL);
-        startActivity(intent);
-    }
-
-    public void openMultiPlayer(View view){
-        Intent intent = new Intent(this , MultiplayerActivity.class);
-        String gameMode = Game.GAME_MODE[Game.MULTIPLAYER];
-        DAORecord dao = new DAORecord(gameMode);
-        DatabaseReference mReference = dao.getDatabaseReference();
-        mReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HashMap<String, Record> usersId = dao.readChalleange(snapshot, DAORecord.PLAYER1);
-                String[] id = usersId.keySet().toArray(new String[0]);
-                Record[] usersArray = usersId.values().toArray(new Record[0]);
-                ArrayList<Record> users = new ArrayList<>();
-                int i = 0;
-                for(Record user : usersArray){
-                    users.add(user);
-                    Log.d("ClassificaActivity", id[i] + " " + user.getDisplayName() + " " + user.getMail() + " " + user.getScore());
-                    i++;
-                }
-                intent.putExtra("id", id);
-                intent.putParcelableArrayListExtra("classifica", users);
-                startActivity(intent);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });    }
 
     @Override
     public void onBackPressed() {
@@ -208,4 +197,5 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
         Intent intent = new Intent(this , LoginActivity.class);
         startActivity(intent);
     }
+
 }

@@ -4,55 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/background"
+    android:orientation="vertical"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context="com.sms.nullpointers.arkanull.MainActivity">
+    tools:context="com.sms.nullpointers.arkanull.activity.ClassificaActivity">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="?attr/actionBarSize"
-        >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight=".5"
-        >
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/gioca"
-            android:background="@drawable/background"
-            android:backgroundTint="@color/button_background_color"
-            style="@style/AppThemeLandTablet"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:onClick="openGioca"
-            android:text="@string/gioca" />
-    </RelativeLayout>
-    <RelativeLayout
+
+
+
+
+    <ListView
+        android:id="@+id/classifica"
+        style="@style/AppImpostazioniSmartphone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight=".5">
-
-        <Button
-            android:id="@+id/editorLevel"
-            style="@style/AppThemeLandTablet"
-            android:background="@drawable/background"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/button_background_color"
-            android:onClick="createCustomLevel"
-            android:text="@string/crea" />
-
+        android:layout_height="match_parent" />
 
     </RelativeLayout>
-    </LinearLayout>
+
 
     <include
         layout="@layout/app_bar_home"
@@ -87,6 +62,5 @@
                         />
                 </LinearLayout>
             </com.google.android.material.navigation.NavigationView>
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

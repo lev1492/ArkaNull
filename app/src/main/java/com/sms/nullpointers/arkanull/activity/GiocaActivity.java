@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -36,8 +37,11 @@ import java.util.HashMap;
 
 public class GiocaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-
     private Button buttonLivelli;
+    private Button singleGame;
+    private Button customLevel;
+    private Button multiplayer;
+    Typeface typeface = Typeface.defaultFromStyle(Typeface.BOLD);
     DrawerLayout drawer;
     NavigationView navigationView;
 
@@ -45,6 +49,9 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gioca);
+        singleGame = findViewById(R.id.singleGame);
+        customLevel = findViewById(R.id.customLevel);
+        multiplayer = findViewById(R.id.multiplayer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,6 +76,9 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
         }
         logout.setText(logoutText);
         navigationView.setNavigationItemSelectedListener(this);
+        singleGame.setTypeface(typeface);
+        customLevel.setTypeface(typeface);
+        multiplayer.setTypeface(typeface);
     }
 
     public void openSingleGame(View view){

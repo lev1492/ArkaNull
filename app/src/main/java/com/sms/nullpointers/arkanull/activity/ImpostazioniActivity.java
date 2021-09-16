@@ -9,11 +9,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -35,10 +37,12 @@ import java.util.ArrayList;
 public class ImpostazioniActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     Intent intent;
-
+    private Button save;
     private static int ACCELEROMETER_INPUT = 1;
     private static int TOUCH_INPUT = 2;
     private static boolean SOUND = false;
+    Typeface typeface = Typeface.defaultFromStyle(Typeface.BOLD);
+
 
     private static int typeInput = TOUCH_INPUT;
 
@@ -63,8 +67,10 @@ public class ImpostazioniActivity extends AppCompatActivity implements Navigatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_impostazioni);
+        save = findViewById(R.id.save);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,6 +93,7 @@ public class ImpostazioniActivity extends AppCompatActivity implements Navigatio
         }
         logout.setText(logoutText);
         navigationView.setNavigationItemSelectedListener(this);
+        save.setTypeface(typeface);
     }
 
     @Override

@@ -8,11 +8,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,11 @@ import java.util.ArrayList;
 
 public class SingleGameActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    private Button easy;
+    private Button normal;
+    private Button hard;
+    Typeface typeface = Typeface.defaultFromStyle(Typeface.BOLD);
+
     public boolean flagGMode;
 
     private static int LEVEL;
@@ -50,6 +57,12 @@ public class SingleGameActivity extends AppCompatActivity implements NavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singlegame);
+        easy = findViewById(R.id.easy);
+        normal = findViewById(R.id.normal);
+        hard = findViewById(R.id.hard);
+        easy.setTypeface(typeface);
+        normal.setTypeface(typeface);
+        hard.setTypeface(typeface);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

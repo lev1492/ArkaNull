@@ -8,12 +8,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +41,9 @@ public class MultiplayerActivity extends AppCompatActivity implements Navigation
 
     DrawerLayout drawer;
     NavigationView navigationView;
-
+    Typeface typeface = Typeface.defaultFromStyle(Typeface.BOLD);
+    private Button historicalChallanges;
+    private Button newChallange;
     static ArrayList<Record> classifica = new ArrayList<>();
     ListView listViewClassifica;
     String[] id;
@@ -54,6 +58,10 @@ public class MultiplayerActivity extends AppCompatActivity implements Navigation
         setContentView(R.layout.activity_multiplayer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        historicalChallanges = findViewById(R.id.historicalChallanges);
+        newChallange = findViewById(R.id.newChallange);
+        historicalChallanges.setTypeface(typeface);
+        newChallange.setTypeface(typeface);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

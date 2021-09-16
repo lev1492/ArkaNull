@@ -55,9 +55,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        AuthUI.getInstance().createSignInIntentBuilder().build();
         // below line is for getting instance
         // for our firebase auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -108,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                                     // we can add more providers according to our
                                     // requirement which are available in firebase.
                                     .setAvailableProviders(providers)
-
                                     // after setting our theme and logo
                                     // we are calling a build() method
                                     // to build our login screen.

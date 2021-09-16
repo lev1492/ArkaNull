@@ -23,7 +23,7 @@
     <string name="historicalChallenges">Storico Sfide</string>
     <string name="crea">Crea Livello</string>
     <string name="tuolivello">Il Tuo Livello</string>
-    <string name="giocataSingola">Singola Giocata</string>
+    <string name="giocataSingola" translatable="false">Single Player</string>
 
 
     <!-- Preference Titles -->

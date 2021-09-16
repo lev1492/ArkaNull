@@ -12,22 +12,22 @@
         android:layout_width="match_parent">
 
     <Button
-        android:id="@+id/livelli"
+        android:id="@+id/singleGame"
         style="@style/AppThemeLandTablet"
         android:layout_alignParentStart="true"
         android:onClick="openSingleGame"
         android:background="@drawable/background"
         android:backgroundTint="@color/button_background_color"
-        android:text="@string/livelli" />
+        android:text="@string/giocataSingola" />
 
     <Button
-        android:id="@+id/carriera"
+        android:id="@+id/customLevel"
         style="@style/AppThemeLandTablet"
         android:layout_centerHorizontal="true"
-        android:onClick="openCarriera"
+        android:onClick="openCustomLevel"
         android:background="@drawable/background"
         android:backgroundTint="@color/button_background_color"
-        android:text="@string/carriera" />
+        android:text="@string/tuolivello" />
 
     <Button
         android:id="@+id/multiplayer"

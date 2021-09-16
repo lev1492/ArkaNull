@@ -61,7 +61,6 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
         TextView logout = findViewById(R.id.logout);
         FirebaseUser user = LoginActivity.getmFirebaseAuth().getCurrentUser();
         String nomeUtente = user.getDisplayName();
@@ -75,6 +74,7 @@ public class GiocaActivity extends AppCompatActivity implements NavigationView.O
             logoutText = getResources().getString(R.string.login);
         }
         logout.setText(logoutText);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         singleGame.setTypeface(typeface);
         customLevel.setTypeface(typeface);

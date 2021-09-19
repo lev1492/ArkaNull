@@ -199,6 +199,10 @@ public class DAORecord {
             String name2 = String.valueOf(dataSnapshot.child(DAORecord.PLAYER2).child(Record.DISPLAY_NAME).getValue());
             String scoreString2 = String.valueOf(dataSnapshot.child(DAORecord.PLAYER2).child(Record.SCORE).getValue());
             if(email.equals(currentUserEmail) || email2.equals(currentUserEmail)){
+                if(name2 == "null"){
+                    name2 = " ";
+                    scoreString2 = " ";
+                }
                 Challange challange = new Challange(name, scoreString, name2, scoreString2);
                 users.add(challange);
                 Log.d(TAG + ":READ_HISTORICAL_CHALLANGE", "Ramo if "  + email + "  " + name + "  " + scoreString + " " + email2);

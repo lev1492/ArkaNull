@@ -18,6 +18,7 @@
     <string name="multiplayer" translatable="false">Multiplayer</string>
     <string name="scores">Punteggi</string>
     <string name="type_input">Tipo di input</string>
+    <string name="Challanges">Sfide</string>
     <string name="newChallange">Nuova Sfida</string>
     <string name="replyChallange">Rispondi Sfida</string>
     <string name="historicalChallenges">Storico Sfide</string>

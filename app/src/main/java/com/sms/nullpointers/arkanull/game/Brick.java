@@ -50,14 +50,14 @@ public class Brick extends View implements Serializable {
                 this.type = 1;
                 break;
             case 2:
-                this.brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_yellow);
-                this.hp = 0;
-                this.type = 3;
-                break;
-            case 3:
                 this.brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_red);
                 this.hp = 2;
                 this.type = 2;
+                break;
+            case 3:
+                this.brick = BitmapFactory.decodeResource(getResources(), R.drawable.brick_yellow);
+                this.hp = 0;
+                this.type = 3;
                 break;
         }
     }

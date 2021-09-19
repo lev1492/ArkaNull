@@ -96,6 +96,7 @@ public class MultiplayerActivity extends AppCompatActivity implements Navigation
     @Override
     protected void onStart() {
         super.onStart();
+        Intent intent = new Intent(this , Arkanull.class);
         if ( classifica.isEmpty()) {
             classifica = getIntent().getParcelableArrayListExtra("classifica");
             id = getIntent().getStringArrayExtra("id");

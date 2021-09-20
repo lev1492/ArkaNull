@@ -11,32 +11,26 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
-    <Button
-        android:id="@+id/singleGame"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
-        style="@style/AppThemePortraitTablet"
-        android:layout_alignParentTop="true"
-        android:onClick="openSingleGame"
-        android:text="@string/giocataSingola" />
+        <Button
+            android:id="@+id/singleGame"
+            style="@style/AppThemePortraitTablet"
+            android:layout_alignParentTop="true"
+            android:onClick="openSingleGame"
+            android:text="@string/giocataSingola" />
 
-    <Button
-        android:id="@+id/customLevel"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
-        style="@style/AppThemePortraitTablet"
-        android:layout_centerVertical="true"
-        android:onClick="openCustomLevel"
-        android:text="@string/tuolivello" />
+        <Button
+            android:id="@+id/customLevel"
+            style="@style/AppThemePortraitTablet"
+            android:layout_centerVertical="true"
+            android:onClick="openCustomLevel"
+            android:text="@string/tuolivello" />
 
-    <Button
-        android:id="@+id/multiplayer"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
-        style="@style/AppThemePortraitTablet"
-        android:layout_alignParentBottom="true"
-        android:onClick="openMultiPlayer"
-        android:text="@string/multiplayer" />
+        <Button
+            android:id="@+id/multiplayer"
+            style="@style/AppThemePortraitTablet"
+            android:layout_alignParentBottom="true"
+            android:onClick="openMultiPlayer"
+            android:text="@string/multiplayer" />
     </RelativeLayout>
 
     <include

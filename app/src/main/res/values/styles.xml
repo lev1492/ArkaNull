@@ -34,16 +34,18 @@
         <item name="android:layout_marginEnd">70dp</item>
         <item name="android:layout_marginTop">70dp</item>
         <item name="android:layout_marginBottom">70dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/background</item>
+        <item name="backgroundTint">@color/button_background_color</item>
+        <item name="backgroundTintMode">multiply</item>
     </style>
 
 
     <style name="AppThemePortraitSmartphone" parent="AppThemeSmartphone">
-        <item name="android:textColor">#0000FF</item>
         <item name="android:layout_centerHorizontal">true</item>
     </style>
 
     <style name="AppThemeLandSmartphone" parent="AppThemeSmartphone">
-        <item name="android:textColor">#0000FF</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
 
@@ -58,6 +60,10 @@
         <item name="android:layout_marginTop">140dp</item>
         <item name="android:layout_marginEnd">140dp</item>
         <item name="android:layout_marginBottom">140dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/background</item>
+        <item name="backgroundTint">@color/button_background_color</item>
+        <item name="backgroundTintMode">multiply</item>
     </style>
 
     <style name="AppToolBarTablet">
@@ -80,13 +86,11 @@
     </style>
 
     <style name="AppThemeLandTablet" parent="AppThemeTablet">
-        <item name="android:textColor">#0000FF</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
 
 
     <style name="AppThemePortraitTablet" parent="AppThemeTablet">
-        <item name="android:textColor">#0000FF</item>
         <item name="android:layout_centerHorizontal">true</item>
     </style>
 

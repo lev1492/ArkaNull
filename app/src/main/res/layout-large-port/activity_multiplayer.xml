@@ -20,7 +20,8 @@
 
         <Button
             android:id="@+id/historicalChallanges"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppToolBarTablet"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:backgroundTintMode="multiply"
             android:background="@drawable/background"
@@ -32,7 +33,8 @@
 
         <Button
             android:id="@+id/newChallange"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppToolBarTablet"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:backgroundTintMode="multiply"
             android:background="@drawable/background"
@@ -54,7 +56,7 @@
         <TextView
             android:id="@+id/textView"
             android:textColor="@android:color/white"
-            style="@style/AppImpostazioniSmartphone"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -62,7 +64,7 @@
 
         <ListView
             android:id="@+id/classifica"
-            style="@style/AppImpostazioniSmartphone"
+            style="@style/AppImpostazioniTablet"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

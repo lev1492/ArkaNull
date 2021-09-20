@@ -16,8 +16,6 @@
         style="@style/AppThemeLandTablet"
         android:layout_alignParentStart="true"
         android:onClick="openSingleGame"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
         android:text="@string/giocataSingola" />
 
     <Button
@@ -25,8 +23,6 @@
         style="@style/AppThemeLandTablet"
         android:layout_centerHorizontal="true"
         android:onClick="openCustomLevel"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
         android:text="@string/tuolivello" />
 
     <Button
@@ -34,8 +30,6 @@
         style="@style/AppThemeLandTablet"
         android:layout_alignParentEnd="true"
         android:onClick="openMultiPlayer"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
         android:text="@string/multiplayer" />
     </RelativeLayout>
 

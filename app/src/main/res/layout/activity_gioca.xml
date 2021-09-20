@@ -21,8 +21,11 @@
         android:layout_marginTop="100dp"
         android:background="@drawable/background"
         android:backgroundTint="@color/button_background_color"
+        android:backgroundTintMode="multiply"
+        android:textColor="@android:color/white"
         android:onClick="openSingleGame"
-        android:text="@string/giocataSingola" />
+        android:text="@string/giocataSingola"
+         />
 
     <Button
         android:id="@+id/customLevel"

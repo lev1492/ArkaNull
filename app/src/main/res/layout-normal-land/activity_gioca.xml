@@ -13,8 +13,6 @@
 
     <Button
         android:id="@+id/singleGame"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
         style="@style/AppThemeLandSmartphone"
         android:layout_alignParentStart="true"
         android:onClick="openSingleGame"
@@ -22,8 +20,6 @@
 
     <Button
         android:id="@+id/customLevel"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
         style="@style/AppThemeLandSmartphone"
         android:layout_centerHorizontal="true"
         android:onClick="openCustomLevel"
@@ -31,8 +27,6 @@
 
     <Button
         android:id="@+id/multiplayer"
-        android:background="@drawable/background"
-        android:backgroundTint="@color/button_background_color"
         style="@style/AppThemeLandSmartphone"
         android:layout_alignParentEnd="true"
         android:onClick="openMultiPlayer"

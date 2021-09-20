@@ -19,9 +19,9 @@
     <string name="scores">Punteggi</string>
     <string name="type_input">Tipo di input</string>
     <string name="Challanges">Sfide</string>
-    <string name="newChallange">Nuova Sfida</string>
+    <string name="newChallange">Nuova</string>
     <string name="replyChallange">Rispondi Sfida</string>
-    <string name="historicalChallenges">Storico Sfide</string>
+    <string name="historicalChallenges">Storico</string>
     <string name="crea">Crea Livello</string>
     <string name="tuolivello">Il Tuo Livello</string>
     <string name="giocataSingola" translatable="false">Single Player</string>

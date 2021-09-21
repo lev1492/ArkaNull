@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemePlus" parent="AppTheme">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/background</item>
+        <item name="backgroundTint">@color/button_background_color</item>
+        <item name="backgroundTintMode">multiply</item>
+    </style>
+
     <style name="AppImpostazioniSmartphone">
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">75dp</item>
@@ -17,7 +24,7 @@
         <item name="android:layout_marginTop">10dp</item>
     </style>
 
-    <style name="AppThemeSmartphone" parent="AppTheme">
+    <style name="AppThemeSmartphone" parent="AppThemePlus">
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">75dp</item>
         <item name="android:textSize">20sp</item>
@@ -25,10 +32,7 @@
         <item name="android:layout_marginEnd">70dp</item>
         <item name="android:layout_marginTop">70dp</item>
         <item name="android:layout_marginBottom">70dp</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/background</item>
-        <item name="backgroundTint">@color/button_background_color</item>
-        <item name="backgroundTintMode">multiply</item>
+
     </style>
 
 
@@ -43,7 +47,7 @@
 
 
 
-    <style name="AppThemeTablet" parent="AppTheme">
+    <style name="AppThemeTablet" parent="AppThemePlus">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">125dp</item>
         <item name="android:textSize">36sp</item>
@@ -51,10 +55,6 @@
         <item name="android:layout_marginTop">140dp</item>
         <item name="android:layout_marginEnd">140dp</item>
         <item name="android:layout_marginBottom">140dp</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/background</item>
-        <item name="backgroundTint">@color/button_background_color</item>
-        <item name="backgroundTintMode">multiply</item>
     </style>
 
 

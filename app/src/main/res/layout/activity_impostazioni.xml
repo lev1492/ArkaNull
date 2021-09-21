@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/type_input"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="37dp"
@@ -36,7 +36,7 @@
 
         <RadioButton
             android:id="@+id/acceleromter"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -45,7 +45,7 @@
 
         <RadioButton
             android:id="@+id/touch"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -54,7 +54,7 @@
 
         <TextView
             android:id="@+id/audioText"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/audio"
@@ -62,7 +62,7 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/audio"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="200dp"
@@ -78,7 +78,7 @@
 
         <Button
             android:id="@+id/save"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

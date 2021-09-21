@@ -20,7 +20,7 @@
 
         <Button
             android:id="@+id/historicalChallanges"
-            style="@style/AppToolBarTablet"
+            style="@style/AppImpostazioniTablet"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:backgroundTintMode="multiply"
@@ -33,7 +33,7 @@
 
         <Button
             android:id="@+id/newChallange"
-            style="@style/AppToolBarTablet"
+            style="@style/AppImpostazioniTablet"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:backgroundTintMode="multiply"

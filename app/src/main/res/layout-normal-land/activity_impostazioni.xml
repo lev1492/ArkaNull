@@ -28,7 +28,7 @@
         <TextView
             android:id="@+id/type_input"
             android:textColor="@android:color/white"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/type_input" />
@@ -36,7 +36,7 @@
         <RadioButton
             android:id="@+id/acceleromter"
             android:textColor="@android:color/white"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -45,7 +45,7 @@
         <RadioButton
             android:id="@+id/touch"
             android:textColor="@android:color/white"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onTypeInputClicked"
@@ -55,7 +55,7 @@
         <TextView
             android:id="@+id/audioText"
             android:textColor="@android:color/white"
-            style="@style/AppToolBarSmartphone"
+            style="@style/AppImpostazioniSmartphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/audio" />
@@ -64,7 +64,7 @@
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/audio"
         android:textColor="@android:color/white"
-        style="@style/AppToolBarSmartphone"
+        style="@style/AppImpostazioniSmartphone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="300dp"
@@ -81,7 +81,7 @@
         android:id="@+id/save"
         android:background="@drawable/background"
         android:backgroundTint="@color/button_background_color"
-        style="@style/AppToolBarSmartphone"
+        style="@style/AppImpostazioniSmartphone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

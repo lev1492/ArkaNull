@@ -27,8 +27,6 @@
 
         <Button
             android:id="@+id/gioca"
-            android:background="@drawable/background"
-            android:backgroundTint="@color/button_background_color"
             style="@style/AppThemePortraitTablet"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
@@ -44,9 +42,7 @@
         <Button
             android:id="@+id/editorLevel"
             style="@style/AppThemePortraitTablet"
-            android:background="@drawable/background"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="@color/button_background_color"
             android:onClick="createCustomLevel"
             android:text="@string/crea" />
 

@@ -29,8 +29,6 @@
             style="@style/AppThemePortraitSmartphone"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/background"
-            android:backgroundTint="@color/button_background_color"
             android:onClick="openGioca"
             android:text="@string/gioca" />
 
@@ -44,10 +42,8 @@
     <Button
         android:id="@+id/editorLevel"
         style="@style/AppThemePortraitSmartphone"
-        android:background="@drawable/background"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/button_background_color"
         android:onClick="createCustomLevel"
         android:text="@string/crea" />
 
